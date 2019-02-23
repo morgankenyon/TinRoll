@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\tinroll.business\tinroll.business.csproj" />
+    <ProjectReference Include="..\tinroll.data\tinroll.data.csproj" />
     <ProjectReference Include="..\tinroll.model\tinroll.model.csproj" />
     <ProjectReference Include="..\tinroll.utility\tinroll.utility.csproj" />
   </ItemGroup>
