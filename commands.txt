@@ -3,3 +3,6 @@ dotnet run -p ./tinroll.api/tinroll.api.csproj
 
 Add Migration:
 dotnet ef migrations add <MigrationName> -s ../tinroll.api/
+
+Update Database:
+dotnet ef database update -s ../tinroll.api/
