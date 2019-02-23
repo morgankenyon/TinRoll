@@ -1,0 +1,2 @@
+Start project:
+dotnet run -p ./tinroll.api/tinroll.api.csproj

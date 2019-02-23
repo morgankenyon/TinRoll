@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tinroll.api", "tinroll.api\tinroll.api.csproj", "{262FB6E5-3147-4CF1-86EA-C7A0BBF8F39A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tinroll.test", "tinroll.test\tinroll.test.csproj", "{21236200-12C2-41EE-9439-FFAADBAFB6EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,5 +18,31 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{262FB6E5-3147-4CF1-86EA-C7A0BBF8F39A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{262FB6E5-3147-4CF1-86EA-C7A0BBF8F39A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{262FB6E5-3147-4CF1-86EA-C7A0BBF8F39A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{262FB6E5-3147-4CF1-86EA-C7A0BBF8F39A}.Debug|x64.Build.0 = Debug|Any CPU
+		{262FB6E5-3147-4CF1-86EA-C7A0BBF8F39A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{262FB6E5-3147-4CF1-86EA-C7A0BBF8F39A}.Debug|x86.Build.0 = Debug|Any CPU
+		{262FB6E5-3147-4CF1-86EA-C7A0BBF8F39A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{262FB6E5-3147-4CF1-86EA-C7A0BBF8F39A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{262FB6E5-3147-4CF1-86EA-C7A0BBF8F39A}.Release|x64.ActiveCfg = Release|Any CPU
+		{262FB6E5-3147-4CF1-86EA-C7A0BBF8F39A}.Release|x64.Build.0 = Release|Any CPU
+		{262FB6E5-3147-4CF1-86EA-C7A0BBF8F39A}.Release|x86.ActiveCfg = Release|Any CPU
+		{262FB6E5-3147-4CF1-86EA-C7A0BBF8F39A}.Release|x86.Build.0 = Release|Any CPU
+		{21236200-12C2-41EE-9439-FFAADBAFB6EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21236200-12C2-41EE-9439-FFAADBAFB6EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21236200-12C2-41EE-9439-FFAADBAFB6EC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{21236200-12C2-41EE-9439-FFAADBAFB6EC}.Debug|x64.Build.0 = Debug|Any CPU
+		{21236200-12C2-41EE-9439-FFAADBAFB6EC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{21236200-12C2-41EE-9439-FFAADBAFB6EC}.Debug|x86.Build.0 = Debug|Any CPU
+		{21236200-12C2-41EE-9439-FFAADBAFB6EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21236200-12C2-41EE-9439-FFAADBAFB6EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21236200-12C2-41EE-9439-FFAADBAFB6EC}.Release|x64.ActiveCfg = Release|Any CPU
+		{21236200-12C2-41EE-9439-FFAADBAFB6EC}.Release|x64.Build.0 = Release|Any CPU
+		{21236200-12C2-41EE-9439-FFAADBAFB6EC}.Release|x86.ActiveCfg = Release|Any CPU
+		{21236200-12C2-41EE-9439-FFAADBAFB6EC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
