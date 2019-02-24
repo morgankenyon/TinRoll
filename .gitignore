@@ -32,3 +32,6 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+
+# Project Specific
+tinroll.api/tin.db

@@ -14,6 +14,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\tinroll.api\tinroll.api.csproj" />
+    <ProjectReference Include="..\tinroll.business\tinroll.business.csproj" />
+    <ProjectReference Include="..\tinroll.data\tinroll.data.csproj" />
+    <ProjectReference Include="..\tinroll.service\tinroll.service.csproj" />
   </ItemGroup>
 
 </Project>
