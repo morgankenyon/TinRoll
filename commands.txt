@@ -1,8 +1,8 @@
 Start project:
-dotnet run -p ./tinroll.api/tinroll.api.csproj
+dotnet run -p ./Tinroll.API/Tinroll.Api.csproj
 
 Add Migration:
-dotnet ef migrations add <MigrationName> -s ../tinroll.api/
+dotnet ef migrations add <MigrationName> -s ../Tinroll.Api/
 
 Update Database:
-dotnet ef database update -s ../tinroll.api/
+dotnet ef database update -s ../Tinroll.Api/

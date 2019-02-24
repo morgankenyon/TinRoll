@@ -3,9 +3,9 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using tinroll.data;
+using Tinroll.Data;
 
-namespace tinroll.data.Migrations
+namespace Tinroll.Data.Migrations
 {
     [DbContext(typeof(TinContext))]
     partial class TinContextModelSnapshot : ModelSnapshot
@@ -16,7 +16,7 @@ namespace tinroll.data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.2-servicing-10034");
 
-            modelBuilder.Entity("tinroll.data.Answer", b =>
+            modelBuilder.Entity("Tinroll.Data.Entities.Answer", b =>
                 {
                     b.Property<int>("AnswerId")
                         .ValueGeneratedOnAdd();
@@ -25,26 +25,34 @@ namespace tinroll.data.Migrations
 
                     b.Property<int?>("QuestionId");
 
+                    b.Property<int?>("UserId");
+
                     b.HasKey("AnswerId");
 
                     b.HasIndex("QuestionId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Answers");
                 });
 
-            modelBuilder.Entity("tinroll.data.Question", b =>
+            modelBuilder.Entity("Tinroll.Data.Entities.Question", b =>
                 {
                     b.Property<int>("QuestionId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("QuestionText");
 
+                    b.Property<int?>("UserId");
+
                     b.HasKey("QuestionId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("tinroll.data.User", b =>
+            modelBuilder.Entity("Tinroll.Data.Entities.User", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd();
@@ -56,11 +64,22 @@ namespace tinroll.data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("tinroll.data.Answer", b =>
+            modelBuilder.Entity("Tinroll.Data.Entities.Answer", b =>
                 {
-                    b.HasOne("tinroll.data.Question")
-                        .WithMany("Answers")
+                    b.HasOne("Tinroll.Data.Entities.Question", "Question")
+                        .WithMany()
                         .HasForeignKey("QuestionId");
+
+                    b.HasOne("Tinroll.Data.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Tinroll.Data.Entities.Question", b =>
+                {
+                    b.HasOne("Tinroll.Data.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

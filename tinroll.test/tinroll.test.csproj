@@ -13,10 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\tinroll.api\tinroll.api.csproj" />
-    <ProjectReference Include="..\tinroll.business\tinroll.business.csproj" />
-    <ProjectReference Include="..\tinroll.data\tinroll.data.csproj" />
-    <ProjectReference Include="..\tinroll.service\tinroll.service.csproj" />
+    <ProjectReference Include="..\Tinroll.Api\Tinroll.Api.csproj" />
+    <ProjectReference Include="..\Tinroll.Business\Tinroll.Business.csproj" />
+    <ProjectReference Include="..\Tinroll.Data\Tinroll.Data.csproj" />
+    <ProjectReference Include="..\Tinroll.Service\Tinroll.Service.csproj" />
+    <ProjectReference Include="..\Tinroll.Model\Tinroll.Model.csproj" />
   </ItemGroup>
 
 </Project>

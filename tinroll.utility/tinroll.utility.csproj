@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\tinroll.model\tinroll.model.csproj" />
+    <ProjectReference Include="..\Tinroll.Model\Tinroll.Model.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

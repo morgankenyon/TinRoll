@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace tinroll.api.Controllers
+namespace Tinroll.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace tinroll.test
+namespace Tinroll.Test
 {
     public class UnitTest1
     {

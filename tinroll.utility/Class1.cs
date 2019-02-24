@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace tinroll.utility
+namespace Tinroll.Utility
 {
     public class Class1
     {

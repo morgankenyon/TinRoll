@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\tinroll.service\tinroll.service.csproj" />
-    <ProjectReference Include="..\tinroll.data\tinroll.data.csproj" />
-    <ProjectReference Include="..\tinroll.model\tinroll.model.csproj" />
-    <ProjectReference Include="..\tinroll.utility\tinroll.utility.csproj" />
+    <ProjectReference Include="..\Tinroll.Service\Tinroll.Service.csproj" />
+    <ProjectReference Include="..\Tinroll.Data\Tinroll.Data.csproj" />
+    <ProjectReference Include="..\Tinroll.Model\Tinroll.Model.csproj" />
+    <ProjectReference Include="..\Tinroll.Utility\Tinroll.Utility.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

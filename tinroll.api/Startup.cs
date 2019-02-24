@@ -11,9 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using tinroll.data;
+using Tinroll.Data;
 
-namespace tinroll.api
+namespace Tinroll.Api
 {
     public class Startup
     {

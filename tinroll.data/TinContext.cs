@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Tinroll.Data.Entities;
 
-namespace tinroll.data
+namespace Tinroll.Data
 {
     public class TinContext : DbContext
     {
@@ -15,24 +16,6 @@ namespace tinroll.data
         public DbSet<User> Users {get;set;}
     }
 
-    public class Question 
-    {
-        public int QuestionId {get;set;}
-        public string QuestionText {get;set;}
-        public List<Answer> Answers {get;set;}
-    }
 
-    public class Answer
-    {
-        public int AnswerId {get;set;}
-        public string AnswerText {get;set;}
 
-    }
-
-    public class User
-    {
-        public int UserId {get;set;}
-        public string UserName {get;set;}
-        
-    }
 }
