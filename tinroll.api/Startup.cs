@@ -27,11 +27,18 @@ namespace Tinroll.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             var connection = "Data Source=tin.db";
             services.AddDbContext<TinContext>
                 (options => options.UseSqlite(connection));
+
+            //dependency injection
+            //managers
+            services.AddScoped<IQuestionManager, QuestionManager>();
+            services.AddScoped<IAnswerManager, AnswerManager>();
+
+            //repositories
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
