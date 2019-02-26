@@ -11,15 +11,22 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Tinroll.Business.Managers;
+using Tinroll.Business.Managers.Interfaces;
 using Tinroll.Data;
+using Tinroll.Data.Repositories;
+using Tinroll.Data.Repositories.Interfaces;
 
 namespace Tinroll.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private IHostingEnvironment _appHost;
+
+        public Startup(IConfiguration configuration, IHostingEnvironment appHost)
         {
             Configuration = configuration;
+            _appHost = appHost;
         }
 
         public IConfiguration Configuration { get; }
@@ -28,17 +35,25 @@ namespace Tinroll.Api
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            var mvcCoreBuilder = services.AddMvcCore();
 
-            var connection = "Data Source=tin.db";
+            mvcCoreBuilder
+                .AddFormatterMappings()
+                .AddJsonFormatters()
+                .AddCors();
+
             services.AddDbContext<TinContext>
-                (options => options.UseSqlite(connection));
+                (options => options.UseSqlite($"Filename={_appHost.ContentRootPath}/tin.db"));
 
             //dependency injection
+            
             //managers
             services.AddScoped<IQuestionManager, QuestionManager>();
             services.AddScoped<IAnswerManager, AnswerManager>();
 
             //repositories
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
+            services.AddScoped<IAnswerRepository, AnswerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

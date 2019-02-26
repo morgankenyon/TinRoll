@@ -9,7 +9,7 @@ using Tinroll.Data;
 namespace Tinroll.Data.Migrations
 {
     [DbContext(typeof(TinContext))]
-    [Migration("20190224194440_InitialCreate")]
+    [Migration("20190226022050_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
