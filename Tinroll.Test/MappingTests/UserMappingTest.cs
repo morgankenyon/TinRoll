@@ -5,6 +5,7 @@ using Xunit;
 
 namespace Tinroll.Test.MappingTests
 {
+    
     public class UserMappingTest
     {
         [Fact]
