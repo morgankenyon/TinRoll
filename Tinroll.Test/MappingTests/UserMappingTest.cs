@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Tinroll.Test.MappingTests
 {
-    
+
     public class UserMappingTest
     {
         [Fact]
@@ -17,7 +17,7 @@ namespace Tinroll.Test.MappingTests
                  UserName = "morgan"
             };
 
-            var userDto = UserMapping.ToDto(userEntity);
+            var userDto = UserMapper.ToDto(userEntity);
 
             Assert.Equal(userEntity.UserId, userDto.UserId);
             Assert.Equal(userEntity.UserName, userDto.UserName);
@@ -32,7 +32,7 @@ namespace Tinroll.Test.MappingTests
                 UserName = "morgan"
             };
 
-            var userEntity = UserMapping.ToEntity(userDto);
+            var userEntity = UserMapper.ToEntity(userDto);
 
             Assert.Equal(userDto.UserId, userEntity.UserId);
             Assert.Equal(userDto.UserName, userEntity.UserName);

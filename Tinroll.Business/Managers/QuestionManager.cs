@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tinroll.Business.Managers.Interfaces;
+using Tinroll.Business.Mapping;
 using Tinroll.Data.Entities;
 using Tinroll.Data.Repositories.Interfaces;
+using Tinroll.Model.Question;
 
 namespace Tinroll.Business.Managers {
     public class QuestionManager : IQuestionManager
@@ -11,9 +13,16 @@ namespace Tinroll.Business.Managers {
         public QuestionManager(IQuestionRepository questionRepository) {
             _questionRepo = questionRepository;
         }
-        public async Task<IEnumerable<Question>> GetAllQuestions()
+        public async Task<IEnumerable<QuestionDto>> GetAllQuestionsAsync()
         {
-            return await _questionRepo.GetAllQuestions();
+            var questions = await _questionRepo.GetAllQuestionsAsync();
+
+            var questionDtos = new List<QuestionDto>();
+            foreach(var question in questions) {
+                questionDtos.Add(QuestionMapper.ToDto(question));
+            }
+
+            return questionDtos;
         }
     }
 }

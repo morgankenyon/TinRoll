@@ -7,17 +7,17 @@ using Tinroll.Data.Entities;
 using Tinroll.Data.Repositories.Interfaces;
 
 namespace Tinroll.Data.Repositories {
-    public class QuestionRepository : IQuestionRepository
+    public class UserRepository : IUserRepository
     {
         private TinContext _tinCon;
 
-        public QuestionRepository(TinContext tinContext) {
+        public UserRepository(TinContext tinContext) {
             _tinCon = tinContext;
         }
 
-        public async Task<IEnumerable<Question>> GetAllQuestionsAsync()
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
-            return await _tinCon.Questions.ToListAsync();
+            return await _tinCon.Users.ToListAsync();
         }
     }
 }

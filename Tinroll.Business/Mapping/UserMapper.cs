@@ -3,7 +3,7 @@ using Tinroll.Model.User;
 
 namespace Tinroll.Business.Mapping
 {
-    public class UserMapping
+    public class UserMapper
     {
         public static UserDto ToDto(User user) => new UserDto()
         {

@@ -3,13 +3,13 @@ using Tinroll.Model.Question;
 
 namespace Tinroll.Business.Mapping
 {
-    public class QuestionMapping
+    public class QuestionMapper
     {
         public static QuestionDto ToDto(Question Question) => new QuestionDto
         {
             QuestionId = Question.QuestionId,
             QuestionText = Question.QuestionText,
-            User = Question.User != null ? UserMapping.ToDto(Question.User) : null
+            User = Question.User != null ? UserMapper.ToDto(Question.User) : null
         };
 
         public static Question ToEntity(QuestionDto questionDto) => new Question

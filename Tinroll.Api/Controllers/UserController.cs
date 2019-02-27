@@ -6,23 +6,24 @@ using Microsoft.AspNetCore.Mvc;
 using Tinroll.Business.Managers.Interfaces;
 using Tinroll.Data.Entities;
 using Tinroll.Model.Question;
+using Tinroll.Model.User;
 
 namespace Tinroll.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class QuestionController : ControllerBase
+    public class UserController : ControllerBase
     {
-        private IQuestionManager _questionManager;
-        public QuestionController(IQuestionManager questionManager) 
+        private IUserManager _userManager;
+        public UserController(IUserManager userManager) 
         {
-            _questionManager = questionManager;
+            _userManager = userManager;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<QuestionDto>> Get() 
+        public async Task<IEnumerable<UserDto>> Get() 
         {
-            return await _questionManager.GetAllQuestionsAsync();
+            return await _userManager.GetAllUsersAsync();
         }
         
         // // GET api/values

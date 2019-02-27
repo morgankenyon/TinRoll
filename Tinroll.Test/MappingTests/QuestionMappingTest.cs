@@ -11,14 +11,17 @@ namespace Tinroll.Test.MappingTests
         [Fact]
         public void MapQuestionToDto()
         {
+            //Arrange
             var questionEntity = new Question() 
             {
                 QuestionId = 1,
                 QuestionText = "This is the question"    
             };
 
-            var questionDto = QuestionMapping.ToDto(questionEntity);
+            //Act
+            var questionDto = QuestionMapper.ToDto(questionEntity);
 
+            //Assert
             Assert.Equal(questionEntity.QuestionId, questionDto.QuestionId);
             Assert.Equal(questionEntity.QuestionText, questionDto.QuestionText);
         }
@@ -26,14 +29,17 @@ namespace Tinroll.Test.MappingTests
         [Fact]
         public void MapQuestionToEntity()
         {
+            //Arrange
             var questionDto = new QuestionDto()
             {
                 QuestionId = 234,
                 QuestionText = "This is the best thing every"
             };
 
-            var questionEntity = QuestionMapping.ToEntity(questionDto);
+            //Act
+            var questionEntity = QuestionMapper.ToEntity(questionDto);
 
+            //Assert
             Assert.Equal(questionDto.QuestionId, questionEntity.QuestionId);
             Assert.Equal(questionDto.QuestionText, questionEntity.QuestionText);
         }
