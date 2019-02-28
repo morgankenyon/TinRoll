@@ -15,9 +15,6 @@ namespace Tinroll.Data.Repositories {
             _tinCon = tinContext;
         }
 
-        public async Task<IEnumerable<Question>> GetAllQuestionsAsync()
-        {
-            return await _tinCon.Questions.ToListAsync();
-        }
+        public async Task<IEnumerable<Question>> GetAllQuestionsAsync() => await _tinCon.Questions.ToListAsync();
     }
 }

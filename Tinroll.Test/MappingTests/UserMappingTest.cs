@@ -15,13 +15,17 @@ namespace Tinroll.Test.MappingTests
             var userEntity = new User 
             {
                  UserId = Guid.NewGuid(),
-                 UserName = "morgan"
+                 UserName = "morgan",
+                 Email = "testEmail@gmail.com",
+                 Description = "This is a test, helllo there everybody"
             };
 
             var userDto = UserMapper.ToDto(userEntity);
 
             Assert.Equal(userEntity.UserId, userDto.UserId);
             Assert.Equal(userEntity.UserName, userDto.UserName);
+            Assert.Equal(userEntity.Email, userDto.Email);
+            Assert.Equal(userEntity.Description, userDto.Description);
         }
 
         [Fact]
@@ -30,13 +34,17 @@ namespace Tinroll.Test.MappingTests
             var userDto = new UserDto
             {
                 UserId = Guid.NewGuid(),
-                UserName = "morgan"
+                UserName = "morgan",
+                 Email = "testEmail@gmail.com",
+                 Description = "This is a test, helllo there everybody"
             };
 
             var userEntity = UserMapper.ToEntity(userDto);
 
             Assert.Equal(userDto.UserId, userEntity.UserId);
             Assert.Equal(userDto.UserName, userEntity.UserName);
+            Assert.Equal(userDto.Email, userEntity.Email);
+            Assert.Equal(userDto.Description, userEntity.Description);
         }
     }
 }

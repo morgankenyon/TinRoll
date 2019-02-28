@@ -5,11 +5,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace Tinroll.Data.Entities {
-    public class User
+    public class User : BaseEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid UserId {get;set;}
-        public string UserName {get;set;}        
+        [StringLength(100)]
+        public string UserName {get;set;}  
+        [StringLength(100)]
+        public string Email {get;set;}
+        [StringLength(1000)]
+        public string Description {get;set;}      
     }
 }

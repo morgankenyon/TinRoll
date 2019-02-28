@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Tinroll.Data.Entities {
 
-    public class Answer
+    public class Answer : BaseEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

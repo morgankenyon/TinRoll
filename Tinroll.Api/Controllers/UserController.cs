@@ -33,12 +33,12 @@ namespace Tinroll.Api.Controllers
         //     return new string[] { "value1", "value2" };
         // }
 
-        // // GET api/values/5
-        // [HttpGet("{id}")]
-        // public ActionResult<string> Get(int id)
-        // {
-        //     return "value";
-        // }
+        // GET api/user/Guid
+        [HttpGet("{id}")]
+        public async Task<UserDto> Get(Guid id)
+        {
+            return await _userManager.GetUserAsync(id);
+        }
 
         // // POST api/user
         [HttpPost]
@@ -47,11 +47,12 @@ namespace Tinroll.Api.Controllers
             return await _userManager.CreateUserAsync(userDto);
         }
 
-        // // PUT api/values/5
-        // [HttpPut("{id}")]
-        // public void Put(int id, [FromBody] string value)
-        // {
-        // }
+        // PUT api/user
+        [HttpPut]
+        public async Task<UserDto> Put(UserDto userDto)
+        {
+            return await _userManager.UpdateUserAsync(userDto);
+        }
 
         // // DELETE api/values/5
         // [HttpDelete("{id}")]

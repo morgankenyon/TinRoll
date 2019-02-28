@@ -28,6 +28,13 @@ namespace Tinroll.Business.Managers {
             return userDtos;
         }
 
+        public async Task<UserDto> GetUserAsync(Guid userId) 
+        {
+            var user = await _userRepo.GetUserAsync(userId);
+
+            return UserMapper.ToDto(user);
+        }
+
         public async Task<UserDto> CreateUserAsync(UserDto userDto)
         {
             var user = UserMapper.ToEntity(userDto);
@@ -36,6 +43,15 @@ namespace Tinroll.Business.Managers {
             var createdUser = await _userRepo.CreateUserAsync(user);
 
             return UserMapper.ToDto(createdUser);
+        }
+
+        public async Task<UserDto> UpdateUserAsync(UserDto userDto)
+        {
+            var user = UserMapper.ToEntity(userDto);
+
+            var updatedUser = await _userRepo.UpdateUserAsync(user);
+
+            return UserMapper.ToDto(updatedUser);
         }
     }
 }
