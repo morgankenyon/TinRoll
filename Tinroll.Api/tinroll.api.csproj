@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tinroll.Business\Tinroll.Business.csproj" />
+    <ProjectReference Include="..\Tinroll.Data\Tinroll.Data.csproj" />
+    <ProjectReference Include="..\Tinroll.Model\Tinroll.Model.csproj" />
+    <ProjectReference Include="..\Tinroll.Utility\Tinroll.Utility.csproj" />
+  </ItemGroup>
+
+</Project>

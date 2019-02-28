@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tinroll.Service\Tinroll.Service.csproj" />
+    <ProjectReference Include="..\Tinroll.Data\Tinroll.Data.csproj" />
+    <ProjectReference Include="..\Tinroll.Model\Tinroll.Model.csproj" />
+    <ProjectReference Include="..\Tinroll.Utility\Tinroll.Utility.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+</Project>
