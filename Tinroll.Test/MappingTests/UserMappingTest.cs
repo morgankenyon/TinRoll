@@ -1,3 +1,4 @@
+using System;
 using Tinroll.Business.Mapping;
 using Tinroll.Data.Entities;
 using Tinroll.Model.User;
@@ -13,7 +14,7 @@ namespace Tinroll.Test.MappingTests
         {
             var userEntity = new User 
             {
-                 UserId = 1,
+                 UserId = Guid.NewGuid(),
                  UserName = "morgan"
             };
 
@@ -28,7 +29,7 @@ namespace Tinroll.Test.MappingTests
         {
             var userDto = new UserDto
             {
-                UserId = 1,
+                UserId = Guid.NewGuid(),
                 UserName = "morgan"
             };
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Tinroll.Data.Migrations
 {
@@ -10,8 +11,7 @@ namespace Tinroll.Data.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId = table.Column<Guid>(nullable: false),
                     UserName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -23,10 +23,9 @@ namespace Tinroll.Data.Migrations
                 name: "Questions",
                 columns: table => new
                 {
-                    QuestionId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    QuestionId = table.Column<Guid>(nullable: false),
                     QuestionText = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: true)
+                    UserId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -43,11 +42,10 @@ namespace Tinroll.Data.Migrations
                 name: "Answers",
                 columns: table => new
                 {
-                    AnswerId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    AnswerId = table.Column<Guid>(nullable: false),
                     AnswerText = table.Column<string>(nullable: true),
-                    QuestionId = table.Column<int>(nullable: true),
-                    UserId = table.Column<int>(nullable: true)
+                    QuestionId = table.Column<Guid>(nullable: true),
+                    UserId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using Tinroll.Business.Mapping;
 using Tinroll.Data.Entities;
 using Tinroll.Data.Repositories.Interfaces;
 using Tinroll.Model.Question;
+using Tinroll.Model.User;
 using Xunit;
 
 namespace Tinroll.Test.MappingTests
@@ -23,12 +25,12 @@ namespace Tinroll.Test.MappingTests
             {
                 new User() 
                 {
-                    UserId = 1,
+                    UserId = Guid.NewGuid(),
                     UserName = "joeBob"    
                 },
                 new User()
                 {
-                    UserId = 2,
+                    UserId = Guid.NewGuid(),
                     UserName = "jimmy"
                 }
             };
@@ -45,8 +47,39 @@ namespace Tinroll.Test.MappingTests
 
             //Assert
             Assert.Equal(2, userDtos.Count());
-            Assert.Equal(1, userDtos.First().UserId);
-            Assert.Equal(2, userDtos.Last().UserId);
+            Assert.Equal(users.First().UserId, userDtos.First().UserId);
+            Assert.Equal(users.Last().UserId, userDtos.Last().UserId);
+        }
+
+        [Fact]
+        public async Task CreateUserTest()
+        {
+            //Arrange
+
+            var user = new User() 
+            {
+                UserId = Guid.NewGuid(),
+                UserName = "Jimmy"
+            };
+
+            var userDto = new UserDto() 
+            {
+                UserId = Guid.NewGuid(),
+                UserName =  user.UserName
+            };
+
+            var mockRepo = new Mock<IUserRepository>();
+            mockRepo.Setup(m => m.CreateUserAsync(It.IsAny<User>()))
+                .Returns(Task.FromResult(user));
+            
+            var userManager = new UserManager(mockRepo.Object);
+            
+            //Act            
+            var createdUserDto = await userManager.CreateUserAsync(userDto);
+
+            //Assert
+            Assert.Equal(user.UserId, createdUserDto.UserId);
+            Assert.Equal("Jimmy", createdUserDto.UserName);
         }
     }
 }

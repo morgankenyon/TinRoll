@@ -40,10 +40,11 @@ namespace Tinroll.Api.Controllers
         //     return "value";
         // }
 
-        // // POST api/values
+        // // POST api/user
         [HttpPost]
-        public void Post(QuestionDto value)
+        public async Task<UserDto> Post(UserDto userDto)
         {
+            return await _userManager.CreateUserAsync(userDto);
         }
 
         // // PUT api/values/5

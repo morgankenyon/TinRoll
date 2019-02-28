@@ -19,5 +19,12 @@ namespace Tinroll.Data.Repositories {
         {
             return await _tinCon.Users.ToListAsync();
         }
+
+        public async Task<User> CreateUserAsync(User user) 
+        {
+            await _tinCon.Users.AddAsync(user);
+            await _tinCon.SaveChangesAsync();
+            return user;
+        }
     }
 }

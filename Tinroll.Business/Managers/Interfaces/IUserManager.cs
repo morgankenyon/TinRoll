@@ -7,5 +7,6 @@ using Tinroll.Model.User;
 namespace Tinroll.Business.Managers.Interfaces {
     public interface IUserManager {
         Task<IEnumerable<UserDto>> GetAllUsersAsync();
+        Task<UserDto> CreateUserAsync(UserDto userDto);
     }
 }

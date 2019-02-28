@@ -50,10 +50,12 @@ namespace Tinroll.Api
             //managers
             services.AddScoped<IQuestionManager, QuestionManager>();
             services.AddScoped<IAnswerManager, AnswerManager>();
+            services.AddScoped<IUserManager, UserManager>();
 
             //repositories
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IAnswerRepository, AnswerRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

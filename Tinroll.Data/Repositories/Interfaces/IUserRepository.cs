@@ -5,5 +5,6 @@ using Tinroll.Data.Entities;
 namespace Tinroll.Data.Repositories.Interfaces {
     public interface IUserRepository {
         Task<IEnumerable<User>> GetAllUsersAsync();
+        Task<User> CreateUserAsync(User user);
     }
 }

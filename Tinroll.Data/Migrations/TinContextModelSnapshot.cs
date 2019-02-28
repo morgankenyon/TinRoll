@@ -18,14 +18,14 @@ namespace Tinroll.Data.Migrations
 
             modelBuilder.Entity("Tinroll.Data.Entities.Answer", b =>
                 {
-                    b.Property<int>("AnswerId")
+                    b.Property<Guid>("AnswerId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("AnswerText");
 
-                    b.Property<int?>("QuestionId");
+                    b.Property<Guid?>("QuestionId");
 
-                    b.Property<int?>("UserId");
+                    b.Property<Guid?>("UserId");
 
                     b.HasKey("AnswerId");
 
@@ -38,12 +38,12 @@ namespace Tinroll.Data.Migrations
 
             modelBuilder.Entity("Tinroll.Data.Entities.Question", b =>
                 {
-                    b.Property<int>("QuestionId")
+                    b.Property<Guid>("QuestionId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("QuestionText");
 
-                    b.Property<int?>("UserId");
+                    b.Property<Guid?>("UserId");
 
                     b.HasKey("QuestionId");
 
@@ -54,7 +54,7 @@ namespace Tinroll.Data.Migrations
 
             modelBuilder.Entity("Tinroll.Data.Entities.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("UserName");

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,12 +24,12 @@ namespace Tinroll.Test.MappingTests
             {
                 new Question() 
                 {
-                    QuestionId = 1,
+                    QuestionId = Guid.NewGuid(),
                     QuestionText = "This is the question"    
                 },
                 new Question()
                 {
-                    QuestionId = 2,
+                    QuestionId = Guid.NewGuid(),
                     QuestionText = "This is the question 2"
                 }
             };
@@ -45,8 +46,8 @@ namespace Tinroll.Test.MappingTests
 
             //Assert
             Assert.Equal(2, questionDtos.Count());
-            Assert.Equal(1, questionDtos.First().QuestionId);
-            Assert.Equal(2, questionDtos.Last().QuestionId);
+            Assert.Equal(questions.First().QuestionId, questionDtos.First().QuestionId);
+            Assert.Equal(questions.Last().QuestionId, questionDtos.Last().QuestionId);
         }
     }
 }

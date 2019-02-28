@@ -1,3 +1,4 @@
+using System;
 using Tinroll.Business.Mapping;
 using Tinroll.Data.Entities;
 using Tinroll.Model.Question;
@@ -14,7 +15,7 @@ namespace Tinroll.Test.MappingTests
             //Arrange
             var questionEntity = new Question() 
             {
-                QuestionId = 1,
+                QuestionId = Guid.NewGuid(),
                 QuestionText = "This is the question"    
             };
 
@@ -32,7 +33,7 @@ namespace Tinroll.Test.MappingTests
             //Arrange
             var questionDto = new QuestionDto()
             {
-                QuestionId = 234,
+                QuestionId = Guid.NewGuid(),
                 QuestionText = "This is the best thing every"
             };
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tinroll.Business.Managers.Interfaces;
@@ -14,6 +15,7 @@ namespace Tinroll.Business.Managers {
         public UserManager(IUserRepository userRepository) {
             _userRepo = userRepository;
         }
+
         public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
         {
             var users = await _userRepo.GetAllUsersAsync();
@@ -24,6 +26,16 @@ namespace Tinroll.Business.Managers {
             }
 
             return userDtos;
+        }
+
+        public async Task<UserDto> CreateUserAsync(UserDto userDto)
+        {
+            var user = UserMapper.ToEntity(userDto);
+
+            user.UserId = Guid.Empty;
+            var createdUser = await _userRepo.CreateUserAsync(user);
+
+            return UserMapper.ToDto(createdUser);
         }
     }
 }
