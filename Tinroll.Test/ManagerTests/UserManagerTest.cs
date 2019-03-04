@@ -79,29 +79,25 @@ namespace Tinroll.Test.MappingTests
         {
             //Arrange
 
-            var user = new User() 
-            {
-                UserId = Guid.NewGuid(),
-                UserName = "Jimmy"
-            };
+            var updated = 1;
 
             var userDto = new UserDto() 
             {
                 UserId = Guid.NewGuid(),
-                UserName =  user.UserName
+                UserName =  "Morgan"
             };
 
             var mockRepo = new Mock<IUserRepository>();
             mockRepo.Setup(m => m.CreateUserAsync(It.IsAny<User>()))
-                .Returns(Task.FromResult(user));
+                .Returns(Task.FromResult(updated));
             
             var userManager = new UserManager(mockRepo.Object);
             
             //Act            
-            var createdUserDto = await userManager.CreateUserAsync(userDto);
+            var rowsUpdated = await userManager.CreateUserAsync(userDto);
 
             //Assert
-            Assert.Equal(user.UserId, createdUserDto.UserId);
+            Assert.Equal(1, rowsUpdated);
         }
 
         [Fact]
@@ -109,7 +105,7 @@ namespace Tinroll.Test.MappingTests
         {
             //Arrange
 
-            var user = new User() 
+            var userDto = new UserDto() 
             {
                 UserId = Guid.NewGuid(),
                 UserName = "Jimmy",
@@ -117,26 +113,17 @@ namespace Tinroll.Test.MappingTests
                 Description = "description test"
             };
 
-            var userDto = new UserDto() 
-            {
-                UserId = user.UserId,
-                UserName =  user.UserName,
-                Email = user.Email,
-                Description = "Worst Description"
-            };
-
             var mockRepo = new Mock<IUserRepository>();
             mockRepo.Setup(m => m.UpdateUserAsync(It.IsAny<User>()))
-                .Returns(Task.FromResult(user));
+                .Returns(Task.FromResult(1));
             
             var userManager = new UserManager(mockRepo.Object);
 
             //Act
-            var updatedUserDto = await userManager.UpdateUserAsync(userDto);
+            var rowsUpdated = await userManager.UpdateUserAsync(userDto);
 
             //Assert
-            Assert.Equal(user.UserId, updatedUserDto.UserId);
-            Assert.Equal(user.Description, updatedUserDto.Description);
+            Assert.Equal(1, rowsUpdated);
         }
     }
 }

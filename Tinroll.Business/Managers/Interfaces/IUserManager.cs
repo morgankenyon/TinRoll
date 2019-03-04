@@ -9,7 +9,7 @@ namespace Tinroll.Business.Managers.Interfaces {
     public interface IUserManager {
         Task<IEnumerable<UserDto>> GetAllUsersAsync();
         Task<UserDto> GetUserAsync(Guid userId);
-        Task<UserDto> CreateUserAsync(UserDto userDto);
-        Task<UserDto> UpdateUserAsync(UserDto userDto);
+        Task<int> CreateUserAsync(UserDto userDto);
+        Task<int> UpdateUserAsync(UserDto userDto);
     }
 }

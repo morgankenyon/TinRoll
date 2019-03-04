@@ -20,19 +20,16 @@ namespace Tinroll.Data.Repositories {
 
         public async Task<User> GetUserAsync(Guid userId) => await _tinCon.Users.FindAsync(userId);
 
-        public async Task<User> CreateUserAsync(User user) 
+        public async Task<int> CreateUserAsync(User user) 
         {
             await _tinCon.Users.AddAsync(user);
-            await _tinCon.SaveChangesAsync();
-            return user;
+            return await _tinCon.SaveChangesAsync();
         }
 
-        public async Task<User> UpdateUserAsync(User user)
+        public async Task<int> UpdateUserAsync(User user)
         {
             _tinCon.Users.Update(user);
-            await _tinCon.SaveChangesAsync();
-
-            return user;
+            return await _tinCon.SaveChangesAsync();
         }
     }
 }
