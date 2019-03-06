@@ -1,8 +1,8 @@
 using System;
 
-namespace Tinroll.Data.Entities 
+namespace Tinroll.Model.Dto.Entity 
 {
-    public class BaseEntity 
+    public class BaseEntityDto
     {
         public DateTime CreatedDate {get;set;}
         public DateTime ModifiedDate {get;set;}

@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Tinroll.Data.Entities;
+using Tinroll.Data.Entity;
 
 namespace Tinroll.Data.Repositories.Interfaces {
-    public interface IQuestionRepository : IGenericRepository<Question> 
-    {
+    public interface IQuestionRepository : IGenericRepository<Question> {
+        
     }
 }

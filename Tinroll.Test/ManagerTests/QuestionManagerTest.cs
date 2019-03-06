@@ -6,9 +6,9 @@ using Moq;
 using Tinroll.Business.Managers;
 using Tinroll.Business.Managers.Interfaces;
 using Tinroll.Business.Mapping;
-using Tinroll.Data.Entities;
+using Tinroll.Data.Entity;
 using Tinroll.Data.Repositories.Interfaces;
-using Tinroll.Model.Question;
+using Tinroll.Model.Dto.Entity;
 using Xunit;
 
 namespace Tinroll.Test.MappingTests

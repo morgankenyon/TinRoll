@@ -1,8 +1,8 @@
 using System;
 
-namespace Tinroll.Model.User 
+namespace Tinroll.Model.Dto.Entity 
 {
-    public class UserDto
+    public class UserDto : BaseEntityDto
     {
         public Guid UserId {get;set;}
         public string UserName {get;set;}

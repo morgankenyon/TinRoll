@@ -4,9 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Tinroll.Business.Managers.Interfaces;
-using Tinroll.Data.Entities;
-using Tinroll.Model.Question;
-using Tinroll.Model.User;
+using Tinroll.Data.Entity;
+using Tinroll.Model.Dto.Entity;
 
 namespace Tinroll.Api.Controllers
 {
@@ -25,13 +24,6 @@ namespace Tinroll.Api.Controllers
         {
             return await _userManager.GetAllUsersAsync();
         }
-        
-        // // GET api/values
-        // [HttpGet]
-        // public ActionResult<IEnumerable<string>> Get()
-        // {
-        //     return new string[] { "value1", "value2" };
-        // }
 
         // GET api/user/Guid
         [HttpGet("{id}")]
@@ -53,11 +45,5 @@ namespace Tinroll.Api.Controllers
         {
             await _userManager.UpdateUserAsync(userDto); //TODO: return an empty 201
         }
-
-        // // DELETE api/values/5
-        // [HttpDelete("{id}")]
-        // public void Delete(int id)
-        // {
-        // }
     }
 }

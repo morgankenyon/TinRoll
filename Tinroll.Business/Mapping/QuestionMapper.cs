@@ -1,22 +1,22 @@
-using Tinroll.Data.Entities;
-using Tinroll.Model.Question;
+using Tinroll.Data.Entity;
+using Tinroll.Model.Dto.Entity;
 
 namespace Tinroll.Business.Mapping
 {
     public class QuestionMapper
     {
-        public static QuestionDto ToDto(Question Question) => new QuestionDto
+        public static QuestionDto ToDto(Question question) => new QuestionDto
         {
-            QuestionId = Question.QuestionId,
-            QuestionText = Question.QuestionText,
-            User = Question.User != null ? UserMapper.ToDto(Question.User) : null
+            QuestionId = question.QuestionId,
+            QuestionText = question.QuestionText,
+            User = question.User != null ? UserMapper.ToDto(question.User) : null
         };
 
         public static Question ToEntity(QuestionDto questionDto) => new Question
         {
             QuestionId = questionDto.QuestionId,
             QuestionText = questionDto.QuestionText,
-            //User = QuestionDto.User != null ? UserMapping.ToEntity(QuestionDto.User) : null
+            User = questionDto.User != null ? UserMapper.ToEntity(questionDto.User) : null
         };
     }
 }

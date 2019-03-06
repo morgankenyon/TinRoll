@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace Tinroll.Data.Entities {
+namespace Tinroll.Data.Entity {
     public class User : BaseEntity
     {
         [Key]

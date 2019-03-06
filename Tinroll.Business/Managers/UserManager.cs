@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tinroll.Business.Managers.Interfaces;
 using Tinroll.Business.Mapping;
-using Tinroll.Data.Entities;
+using Tinroll.Data.Entity;
 using Tinroll.Data.Repositories.Interfaces;
-using Tinroll.Model.Question;
-using Tinroll.Model.User;
+using Tinroll.Model.Dto.Entity;
 
 namespace Tinroll.Business.Managers {
     public class UserManager : IUserManager

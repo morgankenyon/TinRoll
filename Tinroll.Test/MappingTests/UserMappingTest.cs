@@ -1,7 +1,7 @@
 using System;
 using Tinroll.Business.Mapping;
-using Tinroll.Data.Entities;
-using Tinroll.Model.User;
+using Tinroll.Data.Entity;
+using Tinroll.Model.Dto.Entity;
 using Xunit;
 
 namespace Tinroll.Test.MappingTests

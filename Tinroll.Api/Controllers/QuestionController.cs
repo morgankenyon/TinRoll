@@ -4,8 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Tinroll.Business.Managers.Interfaces;
-using Tinroll.Data.Entities;
-using Tinroll.Model.Question;
+using Tinroll.Model.Dto.Entity;
 
 namespace Tinroll.Api.Controllers
 {
