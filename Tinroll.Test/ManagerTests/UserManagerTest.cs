@@ -37,7 +37,7 @@ namespace Tinroll.Test.MappingTests
 
             var mockRepo = new Mock<IUserRepository>();
 
-            mockRepo.Setup(m => m.GetAllUsersAsync())
+            mockRepo.Setup(m => m.GetAllAsync())
                 .Returns(Task.FromResult(users));
 
             var userManager = new UserManager(mockRepo.Object);
@@ -62,7 +62,7 @@ namespace Tinroll.Test.MappingTests
 
             var mockRepo = new Mock<IUserRepository>();
 
-            mockRepo.Setup(m => m.GetUserAsync(It.IsAny<Guid>()))
+            mockRepo.Setup(m => m.GetByIdAsync(It.IsAny<Guid>()))
                 .Returns(Task.FromResult(user));
 
             var userManager = new UserManager(mockRepo.Object);
@@ -72,58 +72,6 @@ namespace Tinroll.Test.MappingTests
 
             //Assert
             Assert.Equal(user.UserId, userDto.UserId);
-        }
-
-        [Fact]
-        public async Task CreateUserTest()
-        {
-            //Arrange
-
-            var updated = 1;
-
-            var userDto = new UserDto() 
-            {
-                UserId = Guid.NewGuid(),
-                UserName =  "Morgan"
-            };
-
-            var mockRepo = new Mock<IUserRepository>();
-            mockRepo.Setup(m => m.CreateUserAsync(It.IsAny<User>()))
-                .Returns(Task.FromResult(updated));
-            
-            var userManager = new UserManager(mockRepo.Object);
-            
-            //Act            
-            var rowsUpdated = await userManager.CreateUserAsync(userDto);
-
-            //Assert
-            Assert.Equal(1, rowsUpdated);
-        }
-
-        [Fact]
-        public async Task UpdateUserTest() 
-        {
-            //Arrange
-
-            var userDto = new UserDto() 
-            {
-                UserId = Guid.NewGuid(),
-                UserName = "Jimmy",
-                Email = "morgan@gmail.com",
-                Description = "description test"
-            };
-
-            var mockRepo = new Mock<IUserRepository>();
-            mockRepo.Setup(m => m.UpdateUserAsync(It.IsAny<User>()))
-                .Returns(Task.FromResult(1));
-            
-            var userManager = new UserManager(mockRepo.Object);
-
-            //Act
-            var rowsUpdated = await userManager.UpdateUserAsync(userDto);
-
-            //Assert
-            Assert.Equal(1, rowsUpdated);
         }
     }
 }

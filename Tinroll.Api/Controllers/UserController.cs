@@ -42,16 +42,16 @@ namespace Tinroll.Api.Controllers
 
         // // POST api/user
         [HttpPost]
-        public async Task<int> Post(UserDto userDto)
+        public async Task Post(UserDto userDto)
         {
-            return await _userManager.CreateUserAsync(userDto); //TODO: return an empty 201
+            await _userManager.CreateUserAsync(userDto); //TODO: return an empty 201
         }
 
         // PUT api/user
         [HttpPut]
-        public async Task<int> Put(UserDto userDto)
+        public async Task Put(UserDto userDto)
         {
-            return await _userManager.UpdateUserAsync(userDto); //TODO: return an empty 201
+            await _userManager.UpdateUserAsync(userDto); //TODO: return an empty 201
         }
 
         // // DELETE api/values/5

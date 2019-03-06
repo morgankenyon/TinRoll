@@ -15,7 +15,7 @@ namespace Tinroll.Business.Managers {
         }
         public async Task<IEnumerable<QuestionDto>> GetAllQuestionsAsync()
         {
-            var questions = await _questionRepo.GetAllQuestionsAsync();
+            var questions = await _questionRepo.GetAllAsync();
 
             var questionDtos = new List<QuestionDto>();
             foreach(var question in questions) {

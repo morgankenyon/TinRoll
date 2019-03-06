@@ -18,7 +18,7 @@ namespace Tinroll.Business.Managers {
 
         public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
         {
-            var users = await _userRepo.GetAllUsersAsync();
+            var users = await _userRepo.GetAllAsync();
 
             var userDtos = new List<UserDto>();
             foreach(var user in users) {
@@ -30,24 +30,24 @@ namespace Tinroll.Business.Managers {
 
         public async Task<UserDto> GetUserAsync(Guid userId) 
         {
-            var user = await _userRepo.GetUserAsync(userId);
+            var user = await _userRepo.GetByIdAsync(userId);
 
             return UserMapper.ToDto(user);
         }
 
-        public async Task<int> CreateUserAsync(UserDto userDto)
+        public async Task CreateUserAsync(UserDto userDto)
         {
             var user = UserMapper.ToEntity(userDto);
 
             user.UserId = Guid.Empty;
-            return await _userRepo.CreateUserAsync(user);
+            await _userRepo.CreateAsync(user);
         }
 
-        public async Task<int> UpdateUserAsync(UserDto userDto)
+        public async Task UpdateUserAsync(UserDto userDto)
         {
             var user = UserMapper.ToEntity(userDto);
 
-            return await _userRepo.UpdateUserAsync(user);
+            await _userRepo.UpdateAsync(user);
         }
     }
 }
