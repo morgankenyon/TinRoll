@@ -124,7 +124,119 @@
 		},
 		{
 			"name": "Question",
-			"item": []
+			"item": [
+				{
+					"name": "Create Question",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"QuestionText\": \"This is my first question\",\n\t\"User\": {\n\t\t\"UserName\": \"Jimmy Johns\",\n\t\t\"Email\": \"jimmyjon@gmail.com\",\n\t\t\"Description\": \"This is a very long description, with eve nmore\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/question",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"question"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Questions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/user",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Question",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/question/15c14bec-6311-4c1a-a777-219c3cbf0a0e",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"question",
+								"15c14bec-6311-4c1a-a777-219c3cbf0a0e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Question",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"QuestionId\": \"ccde592d-0e67-4dd0-99b0-deaa296c40c2\",\n\t\"QuestionText\": \"This is my second question\",\n\t\"User\": {\n\t\t\"UserName\": \"Jimmy Johns\",\n\t\t\"Email\": \"jimmyjon@gmail.com\",\n\t\t\"Description\": \"This is a very long description, with eve nmore\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/question",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"question"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Answer",
