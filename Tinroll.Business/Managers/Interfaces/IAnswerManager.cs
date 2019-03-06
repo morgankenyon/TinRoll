@@ -7,8 +7,8 @@ namespace Tinroll.Business.Managers.Interfaces {
     public interface IAnswerManager {
         Task<IEnumerable<AnswerDto>> GetAllAnswersAsync();
         Task<AnswerDto> GetAnswerAsync(Guid answerId);
-        Task CreateUserAsync(AnswerDto userDto);
-        Task UpdateUserAsync(AnswerDto userDto);
+        Task CreateAnswerAsync(AnswerDto answerDto);
+        Task UpdateAnswerAsync(AnswerDto answerDto);
         
     }
 }

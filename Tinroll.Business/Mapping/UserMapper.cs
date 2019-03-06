@@ -5,20 +5,24 @@ namespace Tinroll.Business.Mapping
 {
     public class UserMapper
     {
-        public static UserDto ToDto(User user) => new UserDto()
+        public static UserDto ToDto(User user, bool fullMapping = true) => new UserDto()
         {
             UserId = user.UserId,
             UserName = user.UserName,
             Email = user.Email,
-            Description = user.Description
+            Description = user.Description,
+            CreatedDate = user.CreatedDate,
+            ModifiedDate = user.ModifiedDate,
         };
 
-        public static User ToEntity(UserDto userDto) => new User()
+        public static User ToEntity(UserDto userDto, bool fullMapping = true) => new User()
         {
             UserId = userDto.UserId,
             UserName = userDto.UserName,
             Email = userDto.Email,
-            Description = userDto.Description
+            Description = userDto.Description,
+            CreatedDate = userDto.CreatedDate,
+            ModifiedDate = userDto.ModifiedDate,
         };
     }
 }

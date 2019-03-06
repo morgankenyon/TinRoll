@@ -1,29 +1,54 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tinroll.Business.Managers.Interfaces;
+using Tinroll.Business.Mapping;
+using Tinroll.Data.Repositories.Interfaces;
 using Tinroll.Model.Dto.Entity;
 
 namespace Tinroll.Business.Managers {
     public class AnswerManager : IAnswerManager
     {
-        public Task CreateUserAsync(AnswerDto userDto)
+        private IAnswerRepository _answerRepo;
+
+        public AnswerManager(IAnswerRepository answerRepo)
         {
-            throw new NotImplementedException();
+            _answerRepo = answerRepo;
+        }
+        
+        public async Task CreateAnswerAsync(AnswerDto answerDto)
+        {
+            var answer = AnswerMapper.ToEntity(answerDto);
+
+            answer.AnswerId = Guid.Empty;
+            await _answerRepo.CreateAsync(answer);
         }
 
-        public Task<System.Collections.Generic.IEnumerable<AnswerDto>> GetAllAnswersAsync()
+        public async Task<IEnumerable<AnswerDto>> GetAllAnswersAsync()
         {
-            throw new NotImplementedException();
+            var answers = await _answerRepo.GetAllAsync();
+
+            var answerDtos = new List<AnswerDto>();
+            foreach(var answer in answers) 
+            {
+                answerDtos.Add(AnswerMapper.ToDto(answer));
+            }
+
+            return answerDtos;
         }
 
-        public Task<AnswerDto> GetAnswerAsync(Guid answerId)
+        public async Task<AnswerDto> GetAnswerAsync(Guid answerId)
         {
-            throw new NotImplementedException();
+            var answer = await _answerRepo.GetByIdAsync(answerId);
+
+            return AnswerMapper.ToDto(answer);
         }
 
-        public Task UpdateUserAsync(AnswerDto userDto)
+        public async Task UpdateAnswerAsync(AnswerDto answerDto)
         {
-            throw new NotImplementedException();
+            var answer = AnswerMapper.ToEntity(answerDto);
+
+            await _answerRepo.UpdateAsync(answer);
         }
     }
 }

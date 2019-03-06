@@ -5,18 +5,22 @@ namespace Tinroll.Business.Mapping
 {
     public class QuestionMapper
     {
-        public static QuestionDto ToDto(Question question) => new QuestionDto
+        public static QuestionDto ToDto(Question question, bool fullMapping = true) => new QuestionDto
         {
             QuestionId = question.QuestionId,
             QuestionText = question.QuestionText,
-            User = question.User != null ? UserMapper.ToDto(question.User) : null
+            CreatedDate = question.CreatedDate,
+            ModifiedDate = question.ModifiedDate,
+            User = fullMapping && question.User != null ? UserMapper.ToDto(question.User) : null
         };
 
-        public static Question ToEntity(QuestionDto questionDto) => new Question
+        public static Question ToEntity(QuestionDto questionDto, bool fullMapping = true) => new Question
         {
             QuestionId = questionDto.QuestionId,
             QuestionText = questionDto.QuestionText,
-            User = questionDto.User != null ? UserMapper.ToEntity(questionDto.User) : null
+            CreatedDate = questionDto.CreatedDate,
+            ModifiedDate = questionDto.ModifiedDate,
+            User = fullMapping && questionDto.User != null ? UserMapper.ToEntity(questionDto.User) : null
         };
     }
 }

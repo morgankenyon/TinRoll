@@ -6,116 +6,129 @@
 	},
 	"item": [
 		{
-			"name": "Get Users",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
+			"name": "User",
+			"item": [
+				{
+					"name": "Get Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/user",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://localhost:5001/api/user",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "5001",
-					"path": [
-						"api",
-						"user"
-					]
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"UserName\": \"Jimmy Johns\",\n\t\"Email\": \"jimmyjon@gmail.com\",\n\t\"Description\": \"This is a very long description, with eve nmore\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/user",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/user/4107b13e-4e0c-4432-b37f-ddafe73c4999",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"user",
+								"4107b13e-4e0c-4432-b37f-ddafe73c4999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"4107b13e-4e0c-4432-b37f-ddafe73c4999\",\n    \"userName\": \"Jimmy Johns\",\n    \"email\": \"jimmyEmail@gmail.com\",\n    \"description\": \"Updated description, not as long\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/user/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Create User",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"UserName\": \"Jimmy Johns\"\n}"
-				},
-				"url": {
-					"raw": "https://localhost:5001/api/user",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "5001",
-					"path": [
-						"api",
-						"user"
-					]
-				}
-			},
-			"response": []
+			"name": "Question",
+			"item": []
 		},
 		{
-			"name": "Get User",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "https://localhost:5001/api/user/fbebe0e4-6168-4edd-bca1-1d7ae19302c9",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "5001",
-					"path": [
-						"api",
-						"user",
-						"fbebe0e4-6168-4edd-bca1-1d7ae19302c9"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update User",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"userId\": \"fbebe0e4-6168-4edd-bca1-1d7ae19302c9\",\n    \"userName\": \"Jimmy Johns\",\n    \"email\": \"jimmyEmail@gmail.com\",\n    \"description\": \"Updated description\"\n}"
-				},
-				"url": {
-					"raw": "https://localhost:5001/api/user/",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "5001",
-					"path": [
-						"api",
-						"user",
-						""
-					]
-				}
-			},
-			"response": []
+			"name": "Answer",
+			"item": []
 		}
 	]
 }
