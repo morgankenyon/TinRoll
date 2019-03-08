@@ -36,7 +36,7 @@ namespace Tinroll.Test.MappingTests
 
             var mockRepo = new Mock<IUserRepository>();
 
-            mockRepo.Setup(m => m.GetAllAsync())
+            mockRepo.Setup(m => m.GetAllUsersAsync())
                 .Returns(Task.FromResult(users));
 
             var userManager = new UserManager(mockRepo.Object);
@@ -61,7 +61,7 @@ namespace Tinroll.Test.MappingTests
 
             var mockRepo = new Mock<IUserRepository>();
 
-            mockRepo.Setup(m => m.GetByIdAsync(It.IsAny<Guid>()))
+            mockRepo.Setup(m => m.GetUserAsync(It.IsAny<Guid>()))
                 .Returns(Task.FromResult(user));
 
             var userManager = new UserManager(mockRepo.Object);

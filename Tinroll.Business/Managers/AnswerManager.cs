@@ -21,12 +21,12 @@ namespace Tinroll.Business.Managers {
             var answer = AnswerMapper.ToEntity(answerDto);
 
             answer.AnswerId = Guid.Empty;
-            await _answerRepo.CreateAsync(answer);
+            await _answerRepo.CreateAnswerAsync(answer);
         }
 
         public async Task<IEnumerable<AnswerDto>> GetAllAnswersAsync()
         {
-            var answers = await _answerRepo.GetAllAsync();
+            var answers = await _answerRepo.GetAllAnswersAsync();
 
             var answerDtos = new List<AnswerDto>();
             foreach(var answer in answers) 
@@ -39,7 +39,7 @@ namespace Tinroll.Business.Managers {
 
         public async Task<AnswerDto> GetAnswerAsync(Guid answerId)
         {
-            var answer = await _answerRepo.GetByIdAsync(answerId);
+            var answer = await _answerRepo.GetAnswerAsync(answerId);
 
             return AnswerMapper.ToDto(answer);
         }
@@ -48,7 +48,7 @@ namespace Tinroll.Business.Managers {
         {
             var answer = AnswerMapper.ToEntity(answerDto);
 
-            await _answerRepo.UpdateAsync(answer);
+            await _answerRepo.UpdateAnswerAsync(answer);
         }
     }
 }

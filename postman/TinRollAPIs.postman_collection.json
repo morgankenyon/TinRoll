@@ -139,7 +139,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"QuestionText\": \"This is my first question\",\n\t\"User\": {\n\t\t\"UserName\": \"Jimmy Johns\",\n\t\t\"Email\": \"jimmyjon@gmail.com\",\n\t\t\"Description\": \"This is a very long description, with eve nmore\"\n\t}\n}"
+							"raw": "{\n\t\"QuestionText\": \"Best question ever\",\n\t\"UserId\": \"377677a0-0882-45a5-b68b-a86ca639f82c\"\n}"
 						},
 						"url": {
 							"raw": "https://localhost:5001/api/question",
@@ -240,7 +240,118 @@
 		},
 		{
 			"name": "Answer",
-			"item": []
+			"item": [
+				{
+					"name": "Create Answer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"AnswerText\": \"Best question ever\",\n\t\"QuestionId\": \"7f14fa63-28fa-47a4-bc6e-bc54f53cf2f0\",\n\t\"UserId\": \"cd88b9b9-deee-4cd2-8bc6-ca9a5fa79f39\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/answer",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"answer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Answers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/answer",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"answer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Answer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/answer",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"answer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Answer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"QuestionId\": \"ccde592d-0e67-4dd0-99b0-deaa296c40c2\",\n\t\"QuestionText\": \"This is my second question\",\n\t\"User\": {\n\t\t\"UserName\": \"Jimmy Johns\",\n\t\t\"Email\": \"jimmyjon@gmail.com\",\n\t\t\"Description\": \"This is a very long description, with eve nmore\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/question",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"question"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

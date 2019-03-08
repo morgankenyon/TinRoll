@@ -1,42 +1,38 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Tinroll.Data.Repositories.Interfaces;
+// using System;
+// using System.Collections.Generic;
+// using System.Linq;
+// using System.Threading.Tasks;
+// using Microsoft.EntityFrameworkCore;
+// using Tinroll.Data.Repositories.Interfaces;
 
-namespace Tinroll.Data.Repositories {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
-    {
-        protected readonly TinContext _tin;
+// namespace Tinroll.Data.Repositories {
+//     public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+//     {
+//         protected readonly TinContext _dbContext;
 
-        public GenericRepository(TinContext tinContext)
-        {
-            _tin = tinContext;
-        }
+//         public GenericRepository(TinContext dbContext)
+//         {
+//             _dbContext = dbContext;
+//         }
 
-        public async Task CreateAsync(TEntity entity)
-        {
-            await _tin.Set<TEntity>().AddAsync(entity);
-            await _tin.SaveChangesAsync();
-        }
+//         public abstract Task CreateAsync(TEntity entity);
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
-        {
-            return await _tin.Set<TEntity>()
-                .ToListAsync();
-        }
+//         public async Task<IEnumerable<TEntity>> GetAllAsync()
+//         {
+//             return await _dbContext.Set<TEntity>()
+//                 .ToListAsync();
+//         }
 
-        public async Task<TEntity> GetByIdAsync(Guid id)
-        {
-            return await _tin.Set<TEntity>()
-                .FindAsync(id);
-        }
+//         public async Task<TEntity> GetByIdAsync(Guid id)
+//         {
+//             return await _dbContext.Set<TEntity>()
+//                 .FindAsync(id);
+//         }
 
-        public async Task UpdateAsync(TEntity entity)
-        {
-            _tin.Set<TEntity>().Update(entity);
-            await _tin.SaveChangesAsync();
-        }
-    }
-}
+//         public async Task UpdateAsync(TEntity entity)
+//         {
+//             _dbContext.Set<TEntity>().Update(entity);
+//             await _dbContext.SaveChangesAsync();
+//         }
+//     }
+// }

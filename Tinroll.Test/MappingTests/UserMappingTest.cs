@@ -54,5 +54,21 @@ namespace Tinroll.Test.MappingTests
             Assert.Equal(userDto.CreatedDate, userEntity.CreatedDate);
             Assert.Equal(userDto.ModifiedDate, userEntity.ModifiedDate);
         }
+
+        [Fact]
+        public void MapUserToEntityWithNull()
+        {
+            var user = UserMapper.ToEntity(null);
+
+            Assert.Null(user);
+        }
+
+        [Fact]
+        public void MapUserToDtoWithNull()
+        {
+            var userDto = UserMapper.ToDto(null);
+
+            Assert.Null(userDto);
+        }
     }
 }

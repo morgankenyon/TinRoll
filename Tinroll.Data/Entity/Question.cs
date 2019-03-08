@@ -11,6 +11,7 @@ namespace Tinroll.Data.Entity {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid QuestionId {get;set;}
         public string QuestionText {get;set;}
+        public Guid UserId {get;set;}
         public User User {get;set;}
     }
 }

@@ -36,7 +36,7 @@ namespace Tinroll.Test.MappingTests
 
             var mockRepo = new Mock<IQuestionRepository>();
 
-            mockRepo.Setup(m => m.GetAllAsync())
+            mockRepo.Setup(m => m.GetAllQuestionsAsync())
                 .Returns(Task.FromResult(questions));
 
             var questionManager = new QuestionManager(mockRepo.Object);

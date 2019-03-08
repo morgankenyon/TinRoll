@@ -13,6 +13,8 @@ namespace Tinroll.Data.Entity {
         public Guid AnswerId {get;set;}
         public string AnswerText {get;set;}
         public Question Question {get;set;}
+        public Guid QuestionId {get;set;}
         public User User {get;set;}
+        public Guid UserId {get;set;}
     }
 }

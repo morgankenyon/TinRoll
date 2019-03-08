@@ -20,12 +20,12 @@ namespace Tinroll.Business.Managers {
             var question = QuestionMapper.ToEntity(questionDto);
 
             question.QuestionId = Guid.Empty;
-            await _questionRepo.CreateAsync(question);
+            await _questionRepo.CreateQuestionAsync(question);
         }
 
         public async Task<IEnumerable<QuestionDto>> GetAllQuestionsAsync()
         {
-            var questions = await _questionRepo.GetAllAsync();
+            var questions = await _questionRepo.GetAllQuestionsAsync();
 
             var questionDtos = new List<QuestionDto>();
             foreach(var question in questions) {
@@ -37,7 +37,7 @@ namespace Tinroll.Business.Managers {
 
         public async Task<QuestionDto> GetQuestionAsync(Guid questionId)
         {
-            var question = await _questionRepo.GetByIdAsync(questionId);
+            var question = await _questionRepo.GetQuestionAsync(questionId);
 
             return QuestionMapper.ToDto(question);
         }
@@ -46,7 +46,7 @@ namespace Tinroll.Business.Managers {
         {
             var question = QuestionMapper.ToEntity(questionDto);
 
-            await _questionRepo.UpdateAsync(question);
+            await _questionRepo.UpdateQuestionAsync(question);
         }
     }
 }

@@ -18,7 +18,8 @@ namespace Tinroll.Test.MappingTests
                 QuestionId = Guid.NewGuid(),
                 QuestionText = "This is the question",
                 CreatedDate = DateTime.UtcNow,
-                ModifiedDate = DateTime.UtcNow,    
+                ModifiedDate = DateTime.UtcNow, 
+                UserId = Guid.NewGuid()   
             };
 
             //Act
@@ -29,6 +30,7 @@ namespace Tinroll.Test.MappingTests
             Assert.Equal(questionEntity.QuestionText, questionDto.QuestionText);
             Assert.Equal(questionEntity.CreatedDate, questionDto.CreatedDate);
             Assert.Equal(questionEntity.ModifiedDate, questionDto.ModifiedDate);
+            Assert.Equal(questionEntity.UserId, questionDto.UserId);
         }
 
         [Fact]
@@ -41,6 +43,7 @@ namespace Tinroll.Test.MappingTests
                 QuestionText = "This is the best thing every",
                 CreatedDate = DateTime.UtcNow,
                 ModifiedDate = DateTime.UtcNow,    
+                UserId = Guid.NewGuid()
             };
 
             //Act
@@ -51,6 +54,23 @@ namespace Tinroll.Test.MappingTests
             Assert.Equal(questionDto.QuestionText, questionEntity.QuestionText);
             Assert.Equal(questionDto.CreatedDate, questionEntity.CreatedDate);
             Assert.Equal(questionDto.ModifiedDate, questionEntity.ModifiedDate);
+            Assert.Equal(questionDto.UserId, questionEntity.UserId);
+        }
+
+        [Fact]
+        public void MapQuestionToEntityWithNull()
+        {
+            var question = QuestionMapper.ToEntity(null);
+
+            Assert.Null(question);
+        }
+
+        [Fact]
+        public void MapQuestionToDtoWithNull()
+        {
+            var questionDto = QuestionMapper.ToDto(null);
+
+            Assert.Null(questionDto);
         }
     }
 }
