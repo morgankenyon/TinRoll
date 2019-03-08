@@ -33,7 +33,7 @@ namespace Tinroll.Business.Managers {
 
             return UserMapper.ToDto(user);
         }
-
+        
         public async Task CreateUserAsync(UserDto userDto)
         {
             var user = UserMapper.ToEntity(userDto);

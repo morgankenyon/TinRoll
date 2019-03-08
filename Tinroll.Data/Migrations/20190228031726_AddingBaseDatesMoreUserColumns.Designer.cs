@@ -2,21 +2,23 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tinroll.Data;
 
 namespace Tinroll.Data.Migrations
 {
     [DbContext(typeof(TinContext))]
-    partial class TinContextModelSnapshot : ModelSnapshot
+    [Migration("20190228031726_AddingBaseDatesMoreUserColumns")]
+    partial class AddingBaseDatesMoreUserColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.2-servicing-10034");
 
-            modelBuilder.Entity("Tinroll.Data.Entity.Answer", b =>
+            modelBuilder.Entity("Tinroll.Data.Entities.Answer", b =>
                 {
                     b.Property<Guid>("AnswerId")
                         .ValueGeneratedOnAdd();
@@ -27,9 +29,9 @@ namespace Tinroll.Data.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("QuestionId");
+                    b.Property<Guid?>("QuestionId");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid?>("UserId");
 
                     b.HasKey("AnswerId");
 
@@ -40,7 +42,7 @@ namespace Tinroll.Data.Migrations
                     b.ToTable("Answers");
                 });
 
-            modelBuilder.Entity("Tinroll.Data.Entity.Question", b =>
+            modelBuilder.Entity("Tinroll.Data.Entities.Question", b =>
                 {
                     b.Property<Guid>("QuestionId")
                         .ValueGeneratedOnAdd();
@@ -50,8 +52,8 @@ namespace Tinroll.Data.Migrations
                     b.Property<DateTime>("ModifiedDate");
 
                     b.Property<string>("QuestionText");
-                    
-                    b.Property<Guid>("UserId");
+
+                    b.Property<Guid?>("UserId");
 
                     b.HasKey("QuestionId");
 
@@ -60,7 +62,7 @@ namespace Tinroll.Data.Migrations
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("Tinroll.Data.Entity.User", b =>
+            modelBuilder.Entity("Tinroll.Data.Entities.User", b =>
                 {
                     b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd();
@@ -83,25 +85,22 @@ namespace Tinroll.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Tinroll.Data.Entity.Answer", b =>
+            modelBuilder.Entity("Tinroll.Data.Entities.Answer", b =>
                 {
-                    b.HasOne("Tinroll.Data.Entity.Question", "Question")
+                    b.HasOne("Tinroll.Data.Entities.Question", "Question")
                         .WithMany()
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("QuestionId");
 
-                    b.HasOne("Tinroll.Data.Entity.User", "User")
+                    b.HasOne("Tinroll.Data.Entities.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Tinroll.Data.Entity.Question", b =>
+            modelBuilder.Entity("Tinroll.Data.Entities.Question", b =>
                 {
-                    b.HasOne("Tinroll.Data.Entity.User", "User")
+                    b.HasOne("Tinroll.Data.Entities.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }
