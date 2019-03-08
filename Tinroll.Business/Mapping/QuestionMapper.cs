@@ -1,22 +1,41 @@
-using Tinroll.Data.Entities;
-using Tinroll.Model.Question;
+using Tinroll.Data.Entity;
+using Tinroll.Model.Dto.Entity;
 
 namespace Tinroll.Business.Mapping
 {
     public class QuestionMapper
     {
-        public static QuestionDto ToDto(Question Question) => new QuestionDto
+        public static QuestionDto ToDto(Question question, bool fullMapping = true) 
         {
-            QuestionId = Question.QuestionId,
-            QuestionText = Question.QuestionText,
-            User = Question.User != null ? UserMapper.ToDto(Question.User) : null
-        };
+            if (question == null) {
+                return null;
+            }
 
-        public static Question ToEntity(QuestionDto questionDto) => new Question
+            return new QuestionDto 
+            {
+                QuestionId = question.QuestionId,
+                QuestionText = question.QuestionText,
+                CreatedDate = question.CreatedDate,
+                ModifiedDate = question.ModifiedDate,
+                UserId = question.UserId,
+                User = fullMapping && question.User != null ? UserMapper.ToDto(question.User) : null
+            };
+        }
+
+        public static Question ToEntity(QuestionDto questionDto, bool fullMapping = true) 
         {
-            QuestionId = questionDto.QuestionId,
-            QuestionText = questionDto.QuestionText,
-            //User = QuestionDto.User != null ? UserMapping.ToEntity(QuestionDto.User) : null
-        };
+            if (questionDto == null) {
+                return null;
+            }
+
+            return new Question {
+                QuestionId = questionDto.QuestionId,
+                QuestionText = questionDto.QuestionText,
+                CreatedDate = questionDto.CreatedDate,
+                ModifiedDate = questionDto.ModifiedDate,
+                UserId = questionDto.UserId,
+                User = fullMapping && questionDto.User != null ? UserMapper.ToEntity(questionDto.User) : null
+            };
+        }
     }
 }

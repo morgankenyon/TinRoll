@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Tinroll.Data.Entities;
+using Tinroll.Data.Entity;
 
 namespace Tinroll.Data
 {
@@ -17,25 +17,6 @@ namespace Tinroll.Data
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<User> Users {get;set;}
-
-        // public override int SaveChanges()
-        // {
-        //     var AddedEntities = ChangeTracker.Entries<Entity>().Where(E => E.State == EntityState.Added).ToList();
-
-        //     AddedEntities.ForEach(E => 
-        //     {
-        //         E.CreatedDate = DateTime.Now;
-        //     });
-
-        //     var ModifiedEntities = ChangeTracker.Entries<Entity>().Where(E => E.State == EntityState.Modified).ToList();
-
-        //     ModifiedEntities.ForEach(E => 
-        //     {
-        //         E.ModifiedDate = DateTime.Now;
-        //     });
-
-        //     return base.SaveChanges();
-        // }
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
         {
             var AddedEntities = ChangeTracker.Entries().Where(E => E.State == EntityState.Added).ToList();

@@ -4,35 +4,32 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using Tinroll.Data.Entities;
+using Tinroll.Data.Entity;
 using Tinroll.Data.Repositories.Interfaces;
 
 namespace Tinroll.Data.Repositories {
     public class UserRepository : IUserRepository
     {
-        private TinContext _tinCon;
+        private TinContext _dbContext;
+        public UserRepository(TinContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+        
+        public async Task<IEnumerable<User>> GetAllUsersAsync() => await _dbContext.Users.ToListAsync();
 
-        public UserRepository(TinContext tinContext) {
-            _tinCon = tinContext;
+        public async Task<User> GetUserAsync(Guid userId) => await _dbContext.Users.FindAsync(userId);
+
+        public async Task<int> CreateUserAsync(User user) 
+        {
+            await _dbContext.Users.AddAsync(user);
+            return await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<User>> GetAllUsersAsync() => await _tinCon.Users.ToListAsync();
-
-        public async Task<User> GetUserAsync(Guid userId) => await _tinCon.Users.FindAsync(userId);
-
-        public async Task<User> CreateUserAsync(User user) 
+        public async Task<int> UpdateUserAsync(User user)
         {
-            await _tinCon.Users.AddAsync(user);
-            await _tinCon.SaveChangesAsync();
-            return user;
-        }
-
-        public async Task<User> UpdateUserAsync(User user)
-        {
-            _tinCon.Users.Update(user);
-            await _tinCon.SaveChangesAsync();
-
-            return user;
+            _dbContext.Users.Update(user);
+            return await _dbContext.SaveChangesAsync();
         }
     }
 }

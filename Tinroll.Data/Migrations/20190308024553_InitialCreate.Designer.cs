@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tinroll.Data;
 
 namespace Tinroll.Data.Migrations
 {
     [DbContext(typeof(TinContext))]
-    partial class TinContextModelSnapshot : ModelSnapshot
+    [Migration("20190308024553_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,7 +52,7 @@ namespace Tinroll.Data.Migrations
                     b.Property<DateTime>("ModifiedDate");
 
                     b.Property<string>("QuestionText");
-                    
+
                     b.Property<Guid>("UserId");
 
                     b.HasKey("QuestionId");

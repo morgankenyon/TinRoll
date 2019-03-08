@@ -4,9 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Tinroll.Business.Managers.Interfaces;
-using Tinroll.Data.Entities;
-using Tinroll.Model.Question;
-using Tinroll.Model.User;
+using Tinroll.Data.Entity;
+using Tinroll.Model.Dto.Entity;
 
 namespace Tinroll.Api.Controllers
 {
@@ -25,13 +24,6 @@ namespace Tinroll.Api.Controllers
         {
             return await _userManager.GetAllUsersAsync();
         }
-        
-        // // GET api/values
-        // [HttpGet]
-        // public ActionResult<IEnumerable<string>> Get()
-        // {
-        //     return new string[] { "value1", "value2" };
-        // }
 
         // GET api/user/Guid
         [HttpGet("{id}")]
@@ -42,22 +34,16 @@ namespace Tinroll.Api.Controllers
 
         // // POST api/user
         [HttpPost]
-        public async Task<UserDto> Post(UserDto userDto)
+        public async Task Post(UserDto userDto)
         {
-            return await _userManager.CreateUserAsync(userDto);
+            await _userManager.CreateUserAsync(userDto); //TODO: return an empty 201
         }
 
         // PUT api/user
         [HttpPut]
-        public async Task<UserDto> Put(UserDto userDto)
+        public async Task Put(UserDto userDto)
         {
-            return await _userManager.UpdateUserAsync(userDto);
+            await _userManager.UpdateUserAsync(userDto); //TODO: return an empty 201
         }
-
-        // // DELETE api/values/5
-        // [HttpDelete("{id}")]
-        // public void Delete(int id)
-        // {
-        // }
     }
 }

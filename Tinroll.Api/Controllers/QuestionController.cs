@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Tinroll.Business.Managers.Interfaces;
-using Tinroll.Data.Entities;
-using Tinroll.Model.Question;
+using Tinroll.Data.Entity;
+using Tinroll.Model.Dto.Entity;
 
 namespace Tinroll.Api.Controllers
 {
@@ -24,37 +24,26 @@ namespace Tinroll.Api.Controllers
         {
             return await _questionManager.GetAllQuestionsAsync();
         }
-        
-        // // GET api/values
-        // [HttpGet]
-        // public ActionResult<IEnumerable<string>> Get()
-        // {
-        //     return new string[] { "value1", "value2" };
-        // }
 
-        // // GET api/values/5
-        // [HttpGet("{id}")]
-        // public ActionResult<string> Get(int id)
-        // {
-        //     return "value";
-        // }
-
-        // // POST api/values
-        [HttpPost]
-        public void Post(QuestionDto value)
+        // GET api/question/Guid
+        [HttpGet("{id}")]
+        public async Task<QuestionDto> Get(Guid id)
         {
+            return await _questionManager.GetQuestionAsync(id);
         }
 
-        // // PUT api/values/5
-        // [HttpPut("{id}")]
-        // public void Put(int id, [FromBody] string value)
-        // {
-        // }
+        // // POST api/question
+        [HttpPost]
+        public async Task Post(QuestionDto questionDto)
+        {
+            await _questionManager.CreateQuestionAsync(questionDto); //TODO: return an empty 201
+        }
 
-        // // DELETE api/values/5
-        // [HttpDelete("{id}")]
-        // public void Delete(int id)
-        // {
-        // }
+        // PUT api/question
+        [HttpPut]
+        public async Task Put(QuestionDto questionDto)
+        {
+            await _questionManager.UpdateQuestionAsync(questionDto); //TODO: return an empty 201
+        }
     }
 }
