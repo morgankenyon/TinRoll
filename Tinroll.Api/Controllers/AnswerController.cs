@@ -32,7 +32,7 @@ namespace Tinroll.Api.Controllers
             return await _answerManager.GetAnswerAsync(id);
         }
 
-        // // POST api/answer
+        // POST api/answer
         [HttpPost]
         public async Task Post(AnswerDto answerDto)
         {

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 using Tinroll.Business.Managers;
 using Tinroll.Business.Managers.Interfaces;
 using Tinroll.Data;
@@ -21,13 +22,13 @@ namespace Tinroll.Api
 {
     public class Startup
     {
-        private IHostingEnvironment _appHost;
 
-        public Startup(IConfiguration configuration, IHostingEnvironment appHost)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _appHost = appHost;
         }
+
+        readonly string AllowedCorsOriginPolicy = "_allowedCorsOriginPolicy";
 
         public IConfiguration Configuration { get; }
 
@@ -40,10 +41,24 @@ namespace Tinroll.Api
             mvcCoreBuilder
                 .AddFormatterMappings()
                 .AddJsonFormatters()
-                .AddCors();
+                .AddCors()
+                .AddApiExplorer();
 
+            services.AddCors(o => o.AddPolicy(AllowedCorsOriginPolicy, builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
+
+            var dbConnectString = Configuration.GetConnectionString("TinDb");
             services.AddDbContext<TinContext>
-                (options => options.UseSqlite($"Filename={_appHost.ContentRootPath}/tin.db"));
+                (options => options.UseSqlite(dbConnectString));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Tinroll API", Version = "v1" });
+            });
 
             //dependency injection
             
@@ -72,7 +87,16 @@ namespace Tinroll.Api
             }
 
             app.UseHttpsRedirection();
+            app.UseCors(AllowedCorsOriginPolicy); 
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tinroll API v1");
+                c.RoutePrefix = string.Empty;
+            });
+
+
         }
     }
 }

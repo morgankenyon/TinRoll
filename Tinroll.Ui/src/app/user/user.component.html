@@ -1,0 +1,15 @@
+<h2>User List</h2>
+
+<div>
+  <button (click)="add()">
+    Add
+  </button>
+</div>
+
+<ul class="users">
+  <li *ngFor="let u of users; let i=index;">
+    <a routerLink="/user-details/{{u.userId}}">
+       {{u.userName}}
+    </a>
+  </li>
+</ul>
