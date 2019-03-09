@@ -1,0 +1,11 @@
+<div *ngIf="user" class="users">
+  <h2>{{user.userName | uppercase}}</h2>
+  <div><span>Description: </span>{{user.description}}</div>
+  <div><span>Email: </span>{{user.email}}</div>
+  <div><span>Created Date: </span>{{user.createdDate | date}}</div>
+  <div>
+    <button routerLink="/user-edit/{{user.userId}}">
+      Edit
+    </button>
+  </div>
+</div>

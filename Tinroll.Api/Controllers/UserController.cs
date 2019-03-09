@@ -32,7 +32,7 @@ namespace Tinroll.Api.Controllers
             return await _userManager.GetUserAsync(id);
         }
 
-        // // POST api/user
+        // POST api/user
         [HttpPost]
         public async Task Post(UserDto userDto)
         {

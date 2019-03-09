@@ -42,8 +42,6 @@ namespace Tinroll.Test.MappingTests
             Assert.Equal(answer.AnswerText, answerDto.AnswerText);
             Assert.Equal(answer.CreatedDate, answerDto.CreatedDate);
             Assert.Equal(answer.ModifiedDate, answerDto.ModifiedDate);
-            Assert.Equal(answer.User.UserId, answerDto.User.UserId);
-            Assert.Equal(answer.Question.QuestionId, answerDto.Question.QuestionId);
             Assert.Equal(answer.QuestionId, answerDto.QuestionId);
             Assert.Equal(answer.UserId, answerDto.UserId);
         }
@@ -58,7 +56,6 @@ namespace Tinroll.Test.MappingTests
             };
             var questionDto = new QuestionDto {
                 QuestionId = Guid.NewGuid(),
-                User = userDto
             };
 
             var answerDto = new AnswerDto
@@ -67,9 +64,7 @@ namespace Tinroll.Test.MappingTests
                 AnswerText = "Answer text",
                 CreatedDate = DateTime.Today,
                 ModifiedDate = DateTime.Today,
-                Question = questionDto,
                 QuestionId = Guid.NewGuid(),
-                User = userDto,
                 UserId = Guid.NewGuid(),
             };
 
@@ -81,8 +76,6 @@ namespace Tinroll.Test.MappingTests
             Assert.Equal(answerDto.AnswerText, answer.AnswerText);
             Assert.Equal(answerDto.CreatedDate, answer.CreatedDate);
             Assert.Equal(answerDto.ModifiedDate, answer.ModifiedDate);
-            Assert.Equal(answerDto.User.UserId, answer.User.UserId);
-            Assert.Equal(answerDto.Question.QuestionId, answer.Question.QuestionId);
             Assert.Equal(answerDto.QuestionId, answer.QuestionId);
             Assert.Equal(answerDto.UserId, answer.UserId);
         }

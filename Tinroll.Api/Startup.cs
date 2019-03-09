@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 using Tinroll.Business.Managers;
 using Tinroll.Business.Managers.Interfaces;
 using Tinroll.Data;
@@ -29,6 +30,8 @@ namespace Tinroll.Api
             _appHost = appHost;
         }
 
+        readonly string AllowedCorsOriginPolicy = "_allowedCorsOriginPolicy";
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -40,10 +43,23 @@ namespace Tinroll.Api
             mvcCoreBuilder
                 .AddFormatterMappings()
                 .AddJsonFormatters()
-                .AddCors();
+                .AddCors()
+                .AddApiExplorer();
+
+            services.AddCors(o => o.AddPolicy(AllowedCorsOriginPolicy, builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
 
             services.AddDbContext<TinContext>
                 (options => options.UseSqlite($"Filename={_appHost.ContentRootPath}/tin.db"));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Tinroll API", Version = "v1" });
+            });
 
             //dependency injection
             
@@ -72,7 +88,16 @@ namespace Tinroll.Api
             }
 
             app.UseHttpsRedirection();
+            app.UseCors(AllowedCorsOriginPolicy); 
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tinroll API v1");
+                c.RoutePrefix = string.Empty;
+            });
+
+
         }
     }
 }
