@@ -22,12 +22,10 @@ namespace Tinroll.Api
 {
     public class Startup
     {
-        private IHostingEnvironment _appHost;
 
-        public Startup(IConfiguration configuration, IHostingEnvironment appHost)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _appHost = appHost;
         }
 
         readonly string AllowedCorsOriginPolicy = "_allowedCorsOriginPolicy";
@@ -53,8 +51,9 @@ namespace Tinroll.Api
                     .AllowAnyHeader();
             }));
 
+            var dbConnectString = Configuration.GetConnectionString("TinDb");
             services.AddDbContext<TinContext>
-                (options => options.UseSqlite($"Filename={_appHost.ContentRootPath}/tin.db"));
+                (options => options.UseSqlite(dbConnectString));
 
             services.AddSwaggerGen(c =>
             {
