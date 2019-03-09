@@ -1,0 +1,18 @@
+<div>
+  <h2>User Edit</h2>
+  <div>
+    <label>UserId:
+      <input [(ngModel)]="userData.userId" placeholder="userId"/>
+    </label><br>
+    <label>UserName:
+      <input [(ngModel)]="userData.userName" placeholder="UserName"/>
+    </label><br>
+    <label>Email:
+      <input [(ngModel)]="userData.email" placeholder="Email"/>
+    </label><br>
+    <label>Description:
+      <input [(ngModel)]="userData.description" placeholder="Description"/>
+    </label><br>
+  </div>
+  <button (click)="updateUser()">Update</button>
+</div>

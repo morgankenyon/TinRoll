@@ -7,6 +7,5 @@ namespace Tinroll.Model.Dto.Entity
         public Guid QuestionId {get;set;}
         public string QuestionText {get;set;}
         public Guid UserId {get;set;}
-        public UserDto User {get;set;}
     }
 }

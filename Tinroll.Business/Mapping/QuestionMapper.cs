@@ -18,7 +18,6 @@ namespace Tinroll.Business.Mapping
                 CreatedDate = question.CreatedDate,
                 ModifiedDate = question.ModifiedDate,
                 UserId = question.UserId,
-                User = fullMapping && question.User != null ? UserMapper.ToDto(question.User) : null
             };
         }
 
@@ -34,7 +33,6 @@ namespace Tinroll.Business.Mapping
                 CreatedDate = questionDto.CreatedDate,
                 ModifiedDate = questionDto.ModifiedDate,
                 UserId = questionDto.UserId,
-                User = fullMapping && questionDto.User != null ? UserMapper.ToEntity(questionDto.User) : null
             };
         }
     }
