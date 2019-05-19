@@ -11,6 +11,7 @@ namespace TinRoll.Data
         public TinRollContext(DbContextOptions<TinRollContext> options)
             : base(options)
         { }
+
         public DbSet<User> Users { get; set; }
     }
 }
