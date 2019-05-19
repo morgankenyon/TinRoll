@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "ebe43138-c785-46dd-b550-94985a240054",
+		"name": "TinRoll_Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Email\": \"testemail2@email.com\",\n\t\"UserName\": \"TestUsername2\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44389/api/users",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44389",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44389/api/users",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44389",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "74a4c832-1bd0-473d-8be7-2759d9a12ec8",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "aecc52df-00e8-40a0-8cdf-729b7e56c4f5",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
