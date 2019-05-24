@@ -25,12 +25,12 @@
 							"raw": "{\n\t\"Email\": \"testemail2@email.com\",\n\t\"UserName\": \"TestUsername2\"\n}"
 						},
 						"url": {
-							"raw": "https://localhost:44389/api/users",
-							"protocol": "https",
+							"raw": "http://localhost:1059/api/users",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "44389",
+							"port": "1059",
 							"path": [
 								"api",
 								"users"
@@ -45,12 +45,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:44389/api/users",
-							"protocol": "https",
+							"raw": "http://localhost:1059/api/users",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "44389",
+							"port": "1059",
 							"path": [
 								"api",
 								"users"
