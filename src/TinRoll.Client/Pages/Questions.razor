@@ -1,6 +1,34 @@
 ﻿@page "/questions"
 
-<h1>Hello, Questions!</h1>
+<h2>All Questions</h2>
 
-Welcome to your new app.
 
+@for (int i = 0; i < 5; i++)
+{
+    <div class="row question-row">
+        <div class="col-1 stat-area">
+            <span class="stats">0</span>
+            <span class="stats">votes</span>
+            <span class="stats">0</span>
+            <span class="stats">answers</span>
+            <span class="stats">2 views</span>
+        </div>
+        <div class="col-11">
+            <div class="row">
+                <NavLink class="title" href="question">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </NavLink>
+            </div>
+            <div class="row">
+                Donec leo tellus, mattis eu aliquam at, faucibus id mauris. Ut ac tellus eget lectus maximus congue.
+                Pellentesque vitae ex vel velit iaculis feugiat. Quisque consectetur quis lectus non interdum.
+                Donec euismod nulla auctor nunc viverra, sed laoreet arcu tincidunt. Praesent tortor urna, dapibus
+                quis risus id, venenatis pharetra tellus. Curabitur sit amet urna vitae magna tincidunt eleifend.
+                Pellentesque sit amet tristique justo, at aliquet ex. Donec enim dui, accumsan eget est vitae,
+                pellentesque interdum ligula. Curabitur volutpat urna orci, vitae commodo tellus tempor pulvinar.
+                Vivamus eget dictum mi. Curabitur ultricies eros diam, ut varius magna aliquet in.
+            </div>
+        </div>
+    </div>
+
+}
