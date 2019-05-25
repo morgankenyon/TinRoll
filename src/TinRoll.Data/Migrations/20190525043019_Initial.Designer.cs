@@ -9,7 +9,7 @@ using TinRoll.Data;
 namespace TinRoll.Data.Migrations
 {
     [DbContext(typeof(TinRollContext))]
-    [Migration("20190524024007_Initial")]
+    [Migration("20190525043019_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,6 +19,25 @@ namespace TinRoll.Data.Migrations
                 .HasAnnotation("ProductVersion", "3.0.0-preview5.19227.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("TinRoll.Data.Entities.Question", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Text");
+
+                    b.Property<string>("Title");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Questions");
+                });
 
             modelBuilder.Entity("TinRoll.Data.Entities.User", b =>
                 {
@@ -33,6 +52,15 @@ namespace TinRoll.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("TinRoll.Data.Entities.Question", b =>
+                {
+                    b.HasOne("TinRoll.Data.Entities.User", "User")
+                        .WithMany("Questions")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

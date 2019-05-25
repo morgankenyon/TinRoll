@@ -6,10 +6,10 @@ namespace TinRoll.Data
     public class TinRollContext : DbContext
     {
         public TinRollContext(DbContextOptions<TinRollContext> options) : base(options)
-        {
-
-        }
+        { }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<Question> Questions { get; set; }
     }
 }
