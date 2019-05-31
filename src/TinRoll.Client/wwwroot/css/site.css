@@ -133,3 +133,22 @@ app {
         display: block;
     }
 }
+
+.question-row:not(:last-child) {
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.question-row .stat-area {
+    padding-top: .5em;
+}
+
+.question-row .stats {
+    display: block;
+    text-align: center;
+}
+
+.question-row .title {
+    font-size: 20px;
+}
