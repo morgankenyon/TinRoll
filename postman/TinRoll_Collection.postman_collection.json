@@ -60,6 +60,62 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Question",
+			"item": [
+				{
+					"name": "Get Questions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:1059/api/questions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1059",
+							"path": [
+								"api",
+								"questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Question",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Title\": \"How does this tutorial work again?\",\n\t\"Text\": \"Can you explain everything again? It was confusing the first time.\",\n\t\"UserId\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:1059/api/questions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1059",
+							"path": [
+								"api",
+								"questions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
