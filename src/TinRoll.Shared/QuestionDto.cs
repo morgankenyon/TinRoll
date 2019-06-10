@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TinRoll.Shared
 {
-    public class QuestionDto
+    public class QuestionDto : BaseDto
     {
         public int Id { get; set; }
         public string Title { get; set; }

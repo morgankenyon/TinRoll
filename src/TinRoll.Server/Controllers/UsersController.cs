@@ -28,7 +28,9 @@ namespace TinRoll.Server.Controllers
             {
                 Id = u.Id,
                 Email = u.Email,
-                UserName = u.UserName
+                UserName = u.UserName,
+                CreatedDate = u.CreatedDate,
+                UpdatedDate = u.UpdatedDate,
             });
 
             return dtoUsers;
