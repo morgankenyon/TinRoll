@@ -12,9 +12,9 @@ namespace TinRoll.Data
 
         public DbSet<Question> Questions { get; set; }
 
-        public Task<int> SaveChanges()
-        {
-            ChangeTracker.Entries().Where(E => E.State == EntityState.Added).ToList();
-        }
+        //public Task<int> SaveChanges()
+        //{
+        //    ChangeTracker.Entries().Where(E => E.State == EntityState.Added).ToList(); 
+        //}
     }
 }
