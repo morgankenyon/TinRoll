@@ -172,3 +172,63 @@ app {
     width: 700px;
     height: 300px;
 }
+
+/* question page css */
+#question #question-title {
+    border-bottom: 1px solid #e4e6e8;
+}
+#question #question-area {
+    border-bottom: 1px solid #e4e6e8;
+    padding-bottom:15px;
+}
+
+#question-info {
+    padding-top:20px;
+}
+
+#question-votes span {
+    display:table;
+    margin:0 auto;
+}
+
+#question-votes .votes {
+    font-size:29px;
+}
+
+#question-votes .oi {
+    cursor: pointer;
+}
+
+#question-votes .oi-caret-bottom {
+    font-size: 30px;
+}
+
+#question-votes .oi-caret-top {
+    font-size: 30px;
+}
+
+#question-votes .oi-star {
+    font-size:18px;
+    padding-top:20px;
+}
+
+#question .tags span {
+    padding: 3px 9px;
+    background-color: lightgrey;
+    border-radius: 2px;
+}
+
+#question .tags span a {
+    text-decoration:none;
+}
+#question .tags span:not(:last-child) {
+    margin-right:8px;
+}
+
+#question .user {
+    background-color: #b1ccd5; 
+    border-radius:3px;
+}
+#question .user span {
+    display: table;
+}

@@ -3,15 +3,57 @@
 @inject HttpClient Http
 
 
-@if (question == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <h2>@question.Title</h2>
-    <p>@question.Text</p>
-}
+<div id="question">
+    @if (question == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <h2 id="question-title">@question.Title</h2>
+        <div id="question-info" class="row">
+            <div id="question-votes" class="col-1">
+                <span class="oi oi-caret-top" aria-hidden="true"></span>
+                <span class="votes">0</span>
+                <span class="oi oi-caret-bottom" aria-hidden="true"></span>
+                <span class="oi oi-star" aria-hidden="true"></span>
+            </div>
+            <div id="question-area" class="col-11">
+                <div class="row">
+                    <div id="question-text" class="col-12">
+                        <p>@question.Text</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="tags col-12">
+                        <span><a href="#">C#</a></span>
+                        <span><a href="#">Azure</a></span>
+                        <span><a href="#">Go</a></span>
+                        <span><a href="#">Rust</a></span>
+                        <span><a href="#">python-3.x</a></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+
+                    </div>
+                    <div class="editer col-4">
+
+                    </div>
+                    <div class="user col-4">
+                        <div>asked Jun 21 '10 at 19:45</div>
+                        <div><a href="#">user2343</a></div>
+                        <div>20.1k 
+                            <span class="oi oi-media-record" aria-hidden="true"></span><span>39</span>
+                            <span class="oi oi-media-record" aria-hidden="true"></span><span>99</span>
+                            <span class="oi oi-media-record" aria-hidden="true"></span><span>143</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
 
 @functions {
