@@ -35,6 +35,22 @@ namespace TinRoll.Server.Controllers
             return dtoQuestions;
         }
 
+        [HttpGet("{Id}")]
+        public async Task<QuestionDto> GetQuestion(int Id)
+        {
+            var dbQuestion = await _context.Questions.Where(q => q.Id == Id).FirstOrDefaultAsync();
+            var dtoQuestion = new QuestionDto()
+            {
+                Id = dbQuestion.Id,
+                Text = dbQuestion.Text,
+                Title = dbQuestion.Title,
+                CreatedDate = dbQuestion.CreatedDate,
+                UpdatedDate = dbQuestion.UpdatedDate
+            };
+
+            return dtoQuestion;
+        }
+
 
         [HttpPost]
         public async Task<Question> CreateQuestion(Question question)

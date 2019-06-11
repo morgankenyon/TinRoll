@@ -134,6 +134,8 @@ app {
     }
 }
 
+
+/* questions css */
 .question-row:not(:last-child) {
     border-bottom: 1px solid black;
     padding-bottom: 10px;
@@ -151,4 +153,22 @@ app {
 
 .question-row .title {
     font-size: 20px;
+}
+
+
+/* create questions css */
+#create-question #title-label {
+    font-weight: bold;
+}
+
+#create-question #title {
+    width:700px;
+}
+#create-question #text-label {
+    font-weight: bold;
+    margin-top: 20px;
+}
+#create-question #text {
+    width: 700px;
+    height: 300px;
 }

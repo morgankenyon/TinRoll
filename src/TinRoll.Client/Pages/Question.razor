@@ -1,0 +1,28 @@
+﻿@page "/questions/{Id:int}"
+@using TinRoll.Shared
+@inject HttpClient Http
+
+
+@if (question == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h2>@question.Title</h2>
+    <p>@question.Text</p>
+}
+
+
+@functions {
+    [Parameter]
+    private int Id { get; set; }
+    QuestionDto question { get; set; }
+
+    
+
+    protected override async Task OnInitAsync()
+    {
+        question = await Http.GetJsonAsync<QuestionDto>($"api/questions/{Id}");
+    }
+}

@@ -4,18 +4,32 @@
 @inject IUriHelper uriHelper
 @inject HttpClient Http
 
-<h2>New Question</h2>
+<div id="create-question">
+    <h2>Ask a Question</h2>
 
-<EditForm Model="@questionDto" OnValidSubmit="@HandleValidSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
+    <EditForm Model="@questionDto" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
 
-    <InputText id="title" bind-Value="@questionDto.Title" />
+        <div>
+            <label id="title-label" for="title">Title</label>
+        </div>
+        <div>
+            <InputText id="title" bind-Value="@questionDto.Title" />
+        </div>
 
-    <InputTextArea Id="text" bind-Value="@questionDto.Text" />
 
-    <button type="submit">Submit</button>
-</EditForm>
+        <div>
+            <label id="text-label" for="text">Text</label>
+        </div>
+        <div>
+            <InputTextArea Id="text" bind-Value="@questionDto.Text" />
+        </div>
+        <div>
+            <button id="create-question-submit" type="submit">Submit</button>
+        </div>
+    </EditForm>
+</div>
 
 @functions {
     private QuestionDto questionDto = new QuestionDto();
