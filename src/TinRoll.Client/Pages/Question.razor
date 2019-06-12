@@ -34,19 +34,22 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-4">
-
+                    <div class="links col-4">
+                        <span><a href="#">share</a></span>
+                        <span><a href="#">edit</a></span>
+                        <span><a href="#">flag</a></span>
                     </div>
                     <div class="editer col-4">
 
                     </div>
                     <div class="user col-4">
-                        <div>asked Jun 21 '10 at 19:45</div>
+                        <div>asked @question.CreatedDate.ToString("MMM d \\\'yy a\t H:mm")</div>
                         <div><a href="#">user2343</a></div>
-                        <div>20.1k 
-                            <span class="oi oi-media-record" aria-hidden="true"></span><span>39</span>
-                            <span class="oi oi-media-record" aria-hidden="true"></span><span>99</span>
-                            <span class="oi oi-media-record" aria-hidden="true"></span><span>143</span>
+                        <div>
+                            20.1k
+                            <span class="oi oi-media-record gold" aria-hidden="true"></span><span>39</span>
+                            <span class="oi oi-media-record silver" aria-hidden="true"></span><span>99</span>
+                            <span class="oi oi-media-record bronze" aria-hidden="true"></span><span>143</span>
                         </div>
                     </div>
                 </div>
@@ -59,9 +62,7 @@
 @functions {
     [Parameter]
     private int Id { get; set; }
-    QuestionDto question { get; set; }
-
-    
+    QuestionDto question { get; set; }    
 
     protected override async Task OnInitAsync()
     {

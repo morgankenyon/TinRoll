@@ -23,7 +23,7 @@ else
             </div>
             <div class="col-11">
                 <div class="row">
-                    <NavLink class="title" href="@BuildQuestionLink(question.Id)">
+                    <NavLink class="title" href="@($"questions/{question.Id}")">
                         @question.Title
                     </NavLink>
                 </div>

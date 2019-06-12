@@ -197,6 +197,7 @@ app {
 
 #question-votes .oi {
     cursor: pointer;
+    color:lightgrey;
 }
 
 #question-votes .oi-caret-bottom {
@@ -225,10 +226,39 @@ app {
     margin-right:8px;
 }
 
-#question .user {
-    background-color: #b1ccd5; 
-    border-radius:3px;
+#question .tags {
+    margin-bottom: 20px;
 }
-#question .user span {
-    display: table;
+
+#question .links span:first-child {
+    margin-left:4px;
+}
+#question .links span:not(:last-child) {
+    margin-right:10px;
+}
+
+#question .links a {
+    color: #00000070;
+    text-decoration: none;
+}
+#question .links a:hover {
+    color: #0000009c;
+    text-decoration: none;
+}
+
+#question .user {
+    background-color: #dee2e6;
+    border-radius: 3px;
+}
+
+#question .user .gold {
+    color: gold;
+}
+
+#question .user .silver {
+    color: silver;
+}
+
+#question .user .bronze {
+    color: #cd7f32;
 }
