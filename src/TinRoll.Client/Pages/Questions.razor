@@ -43,9 +43,4 @@ else
     {
         questions = await Http.GetJsonAsync<QuestionDto[]>("api/questions");
     }
-
-    protected string BuildQuestionLink(int Id)
-    {
-        return $"/questions/{Id}";
-    }
 }
