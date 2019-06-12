@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TinRoll.Data;
 using TinRoll.Data.Entities;
+using TinRoll.Shared;
 
 namespace TinRoll.Server.Controllers
 {
@@ -19,9 +21,19 @@ namespace TinRoll.Server.Controllers
 
 
         [HttpGet]
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<IEnumerable<UserDto>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            var dbUsers = await _context.Users.ToListAsync();
+            var dtoUsers = dbUsers.Select(u => new UserDto()
+            {
+                Id = u.Id,
+                Email = u.Email,
+                UserName = u.UserName,
+                CreatedDate = u.CreatedDate,
+                UpdatedDate = u.UpdatedDate,
+            });
+
+            return dtoUsers;
         }
 
 

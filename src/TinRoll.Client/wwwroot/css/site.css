@@ -134,6 +134,8 @@ app {
     }
 }
 
+
+/* questions css */
 .question-row:not(:last-child) {
     border-bottom: 1px solid black;
     padding-bottom: 10px;
@@ -151,4 +153,112 @@ app {
 
 .question-row .title {
     font-size: 20px;
+}
+
+
+/* create questions css */
+#create-question #title-label {
+    font-weight: bold;
+}
+
+#create-question #title {
+    width:700px;
+}
+#create-question #text-label {
+    font-weight: bold;
+    margin-top: 20px;
+}
+#create-question #text {
+    width: 700px;
+    height: 300px;
+}
+
+/* question page css */
+#question #question-title {
+    border-bottom: 1px solid #e4e6e8;
+}
+#question #question-area {
+    border-bottom: 1px solid #e4e6e8;
+    padding-bottom:15px;
+}
+
+#question-info {
+    padding-top:20px;
+}
+
+#question-votes span {
+    display:table;
+    margin:0 auto;
+}
+
+#question-votes .votes {
+    font-size:29px;
+}
+
+#question-votes .oi {
+    cursor: pointer;
+    color:lightgrey;
+}
+
+#question-votes .oi-caret-bottom {
+    font-size: 30px;
+}
+
+#question-votes .oi-caret-top {
+    font-size: 30px;
+}
+
+#question-votes .oi-star {
+    font-size:18px;
+    padding-top:20px;
+}
+
+#question .tags span {
+    padding: 3px 9px;
+    background-color: lightgrey;
+    border-radius: 2px;
+}
+
+#question .tags span a {
+    text-decoration:none;
+}
+#question .tags span:not(:last-child) {
+    margin-right:8px;
+}
+
+#question .tags {
+    margin-bottom: 20px;
+}
+
+#question .links span:first-child {
+    margin-left:4px;
+}
+#question .links span:not(:last-child) {
+    margin-right:10px;
+}
+
+#question .links a {
+    color: #00000070;
+    text-decoration: none;
+}
+#question .links a:hover {
+    color: #0000009c;
+    text-decoration: none;
+}
+
+#question .user {
+    background-color: #dee2e6;
+    border-radius: 3px;
+}
+
+#question .user .gold {
+    color: gold;
+}
+
+#question .user .silver {
+    color: silver;
+}
+
+#question .user .bronze {
+    color: #cd7f32;
 }

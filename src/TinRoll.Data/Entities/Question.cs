@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TinRoll.Data.Entities
 {
-    public class Question
+    public class Question : BaseEntity
     {
         public int Id { get; set; }
         public string Title { get; set; }
