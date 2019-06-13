@@ -16,7 +16,7 @@ namespace TinRoll.Logic.Mapper
                 UpdatedDate = user.UpdatedDate
             };
         }
-        public static UserDto ToDb(UserDto userDto)
+        public static User ToDb(UserDto userDto)
         {
             return new User
             {
