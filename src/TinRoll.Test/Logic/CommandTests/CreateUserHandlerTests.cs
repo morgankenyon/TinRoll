@@ -10,7 +10,7 @@ namespace TinRoll.Test.Logic.CommandTests
     public class CreateUserHandlerTests
     { 
         [Fact]
-        public async Task TestCreateUserHandler()
+        public async Task TestCreateUserCommandHandler()
         {
             var options = new DbContextOptionsBuilder<TinRollContext>()
                 .UseInMemoryDatabase(databaseName: "Add_User")
@@ -22,13 +22,16 @@ namespace TinRoll.Test.Logic.CommandTests
                 UserName = "userName"
             };
 
+            int? userId = null;
             //create user in memory database
             using (var context = new TinRollContext(options))
             {
-                var createUserHandler = new CreateUserHandler(context);
-                await createUserHandler.Handle(new CreateUserCommand(newUser));
+                var createUserHandler = new CreateUserCommandHandler(context);
+                var createUserCommand = new CreateUserCommand(newUser);
+                userId = await createUserHandler.Handle(createUserCommand);
             }
 
+            Assert.NotNull(userId);
             //check to make sure it exists
             using (var context = new TinRollContext(options))
             {
