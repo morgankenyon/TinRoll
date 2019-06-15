@@ -1,37 +1,41 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using TinRoll.Data;
 using TinRoll.Data.Entities;
-using TinRoll.Logic.Commands;
+using TinRoll.Data.Repository;
 using Xunit;
 
-namespace TinRoll.Test.Logic.CommandTests
+namespace TinRoll.Test.Repository
 {
-    public class CreateUserHandlerTests
-    { 
+    public class UserRepositoryTests
+    {
+
         [Fact]
-        public async Task TestCreateUserCommandHandler()
+        public async Task Test_Create_User()
         {
             var options = new DbContextOptionsBuilder<TinRollContext>()
-                .UseInMemoryDatabase(databaseName: "Add_User")
+                .UseInMemoryDatabase(databaseName: "Create_User")
                 .Options;
-
+            
             var newUser = new User
             {
                 Email = "test@email.com",
                 UserName = "userName"
             };
-
-            int? userId = null;
+            
+            User dbUser = null;
             //create user in memory database
             using (var context = new TinRollContext(options))
             {
-                var createUserHandler = new CreateUserCommandHandler(context);
-                var createUserCommand = new CreateUserCommand(newUser);
-                userId = await createUserHandler.Handle(createUserCommand);
+                var userRepository = new UserRepository(context);
+                dbUser = await userRepository.CreateUserAsync(newUser);
             }
-
-            Assert.NotNull(userId);
+            
+            Assert.NotNull(dbUser);
+            Assert.Equal(1, dbUser.Id);
             //check to make sure it exists
             using (var context = new TinRollContext(options))
             {
