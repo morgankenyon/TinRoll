@@ -2,9 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using TinRoll.Data;
-using TinRoll.Data.Entities;
+using TinRoll.Logic.Managers.Interfaces;
 using TinRoll.Shared;
 
 namespace TinRoll.Server.Controllers
@@ -13,36 +11,27 @@ namespace TinRoll.Server.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private TinRollContext _context;
-        public UsersController(TinRollContext context)
+        private IUserManager _userManager;
+        public UsersController(IUserManager userManager)
         {
-            _context = context;
+            _userManager = userManager;
         }
 
 
         [HttpGet]
         public async Task<IEnumerable<UserDto>> GetUsers()
         {
-            var dbUsers = await _context.Users.ToListAsync();
-            var dtoUsers = dbUsers.Select(u => new UserDto()
-            {
-                Id = u.Id,
-                Email = u.Email,
-                UserName = u.UserName,
-                CreatedDate = u.CreatedDate,
-                UpdatedDate = u.UpdatedDate,
-            });
+            var users = await _userManager.GetUsersAsync();
 
-            return dtoUsers;
+            return users;
         }
 
 
         [HttpPost]
-        public async Task<User> CreateUser(User user)
+        public async Task<UserDto> CreateUser(UserDto user)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-            return user;
+            var newUser = await _userManager.CreateUserAsync(user);
+            return newUser;
         }
     }
 }

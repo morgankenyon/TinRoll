@@ -43,5 +43,38 @@ namespace TinRoll.Test.Repository
                 Assert.Equal(1, userCount);
             }
         }
+
+        [Fact]
+        public async Task Test_GetUser()
+        {
+            var options = new DbContextOptionsBuilder<TinRollContext>()
+                .UseInMemoryDatabase(databaseName: "Get_User")
+                .Options;
+
+            var userToGet = new User
+            {
+                Email = "test@gmail.com",
+                UserName = "userName"
+            };
+
+            //create user to fetch
+            using (var context = new TinRollContext(options))
+            {
+                context.Users.Add(userToGet);
+                context.SaveChanges();
+            }
+
+
+            //test get user
+            User dbUser = null;
+            using (var context = new TinRollContext(options))
+            {
+                var userRepo = new UserRepository(context);
+                dbUser = await userRepo.GetUserAsync(userToGet.Id);
+            }
+
+            Assert.NotNull(dbUser);
+            Assert.Equal(userToGet.Id, dbUser.Id);
+        }
     }
 }

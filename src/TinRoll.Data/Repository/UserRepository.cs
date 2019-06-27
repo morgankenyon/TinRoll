@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,9 @@ namespace TinRoll.Data.Repository
             return user;
         }
 
-        public Task<User> GetUserAsync(int id)
+        public async Task<User> GetUserAsync(int id)
         {
-            throw new NotImplementedException();
+            return await context.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public Task<IEnumerable<User>> GetUsersAsync()
