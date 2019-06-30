@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TinRoll.Data.Repository.Interface;
@@ -25,14 +26,17 @@ namespace TinRoll.Logic.Managers
             return UserMapper.ToDto(createduser);
         }
 
-        public Task<UserDto> GetUserAsync(int id)
+        public async Task<UserDto> GetUserAsync(int id)
         {
-            throw new NotImplementedException();
+            var dbUser = await _userRepo.GetUserAsync(id);
+            return UserMapper.ToDto(dbUser);
         }
 
-        public Task<IEnumerable<UserDto>> GetUsersAsync()
+        public async Task<IEnumerable<UserDto>> GetUsersAsync()
         {
-            throw new NotImplementedException();
+            var dbUsers = await _userRepo.GetUsersAsync();
+            var users = dbUsers.Select(u => UserMapper.ToDto(u));
+            return users;
         }
     }
 }
