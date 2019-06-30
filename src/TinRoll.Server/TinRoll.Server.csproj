@@ -28,6 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TinRoll.Client\TinRoll.Client.csproj" />
     <ProjectReference Include="..\TinRoll.Data\TinRoll.Data.csproj" />
+    <ProjectReference Include="..\TinRoll.Logic\TinRoll.Logic.csproj" />
     <ProjectReference Include="..\TinRoll.Shared\TinRoll.Shared.csproj" />
   </ItemGroup>
   

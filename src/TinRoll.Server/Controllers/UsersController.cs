@@ -22,7 +22,6 @@ namespace TinRoll.Server.Controllers
         public async Task<IEnumerable<UserDto>> GetUsers()
         {
             var users = await _userManager.GetUsersAsync();
-
             return users;
         }
 
