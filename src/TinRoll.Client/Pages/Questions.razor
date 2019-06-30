@@ -17,18 +17,27 @@ else
             <div class="col-1 stat-area">
                 <span class="stats">0</span>
                 <span class="stats">votes</span>
+            </div>
+            <div class="col-1 stat-area">
                 <span class="stats">0</span>
                 <span class="stats">answers</span>
-                <span class="stats">2 views</span>
+            </div>            
+            <div class="col-1 stat-area">
+                <span class="stats">2</span>
+                <span class="stats">views</span>
             </div>
-            <div class="col-11">
+            <div class="col-9">
                 <div class="row">
                     <NavLink class="title" href="@($"questions/{question.Id}")">
                         @question.Title
                     </NavLink>
                 </div>
-                <div class="row">
-                    @question.Text
+                <div class="row tag-preview">
+                    <span class="tag"><a href="#">c#</a></span>
+                    <span class="tag"><a href="#">azure</a></span>
+                    <span class="tag"><a href="#">go</a></span>
+                    <span class="tag"><a href="#">rust</a></span>
+                    <span class="tag"><a href="#">python-3.x</a></span>
                 </div>
             </div>
         </div>

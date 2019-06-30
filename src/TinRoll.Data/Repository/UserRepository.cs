@@ -27,9 +27,9 @@ namespace TinRoll.Data.Repository
             return await context.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
 
-        public Task<IEnumerable<User>> GetUsersAsync()
+        public async Task<IEnumerable<User>> GetUsersAsync()
         {
-            throw new NotImplementedException();
+            return await context.Users.ToListAsync();
         }
     }
 }

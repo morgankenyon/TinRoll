@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TinRoll.Data;
@@ -10,7 +11,7 @@ using Xunit;
 
 namespace TinRoll.Test.Repository
 {
-    public class UserRepositoryTests
+    public class UserRepositoryTests : RepositoryTest
     {
 
         [Fact]
@@ -75,6 +76,42 @@ namespace TinRoll.Test.Repository
 
             Assert.NotNull(dbUser);
             Assert.Equal(userToGet.Id, dbUser.Id);
+        }
+
+        [Fact]
+        public async Task Test_Get_Users()
+        {
+            var options = BuildInMemoryDatabase("Get_Users");
+
+            var userToGet = new User
+            {
+                Email = "test@gmail.com",
+                UserName = "userName"
+            };
+            var userToGet2 = new User
+            {
+                Email = "test2@gmail.com",
+                UserName = "userName"
+            };
+
+            //create questions to fetch
+            using (var context = new TinRollContext(options))
+            {
+                context.Users.Add(userToGet);
+                context.Users.Add(userToGet2);
+                context.SaveChanges();
+            }
+
+            //test get questions
+            IEnumerable<User> dbUsers = null;
+            using (var context = new TinRollContext(options))
+            {
+                var userRepo = new UserRepository(context);
+                dbUsers = await userRepo.GetUsersAsync();
+            }
+
+            Assert.NotNull(dbUsers);
+            Assert.Equal(2, dbUsers.Count());
         }
     }
 }
