@@ -10,8 +10,8 @@ using System.Linq;
 using TinRoll.Data;
 using TinRoll.Data.Repository;
 using TinRoll.Data.Repository.Interface;
-using TinRoll.Logic.Managers;
-using TinRoll.Logic.Managers.Interfaces;
+using TinRoll.Logic.Manager;
+using TinRoll.Logic.Manager.Interface;
 
 namespace TinRoll.Server
 {

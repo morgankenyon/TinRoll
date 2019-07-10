@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TinRoll.Shared;
 
-namespace TinRoll.Logic.Managers.Interfaces
+namespace TinRoll.Logic.Manager.Interface
 {
     public interface IUserManager
     {

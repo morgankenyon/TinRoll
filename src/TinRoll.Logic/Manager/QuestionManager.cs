@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using TinRoll.Data;
 using TinRoll.Data.Repository.Interface;
-using TinRoll.Logic.Managers.Interfaces;
+using TinRoll.Logic.Manager.Interface;
 using TinRoll.Logic.Mapper;
 using TinRoll.Shared;
 
-namespace TinRoll.Logic.Managers
+namespace TinRoll.Logic.Manager
 {
     public class QuestionManager : IQuestionManager
     {

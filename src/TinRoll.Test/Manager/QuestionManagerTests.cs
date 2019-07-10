@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TinRoll.Data.Entities;
 using TinRoll.Data.Repository.Interface;
-using TinRoll.Logic.Managers;
+using TinRoll.Logic.Manager;
 using TinRoll.Shared;
 using Xunit;
 

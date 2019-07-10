@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TinRoll.Logic.Managers.Interfaces;
+using TinRoll.Logic.Manager.Interface;
 using TinRoll.Shared;
 
 namespace TinRoll.Server.Controllers
