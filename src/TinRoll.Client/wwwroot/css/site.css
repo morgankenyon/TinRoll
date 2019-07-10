@@ -213,7 +213,21 @@ app {
     padding-top:20px;
 }
 
-#question .tags span {
+.tag {
+}
+
+.tag a {
+    text-decoration: none;
+    padding: 3px 9px;
+    background-color: lightgrey;
+    border-radius: 2px;
+}
+
+.tag:not(:last-child) {
+    margin-right:8px;
+}
+
+/*#question .tags span {
     padding: 3px 9px;
     background-color: lightgrey;
     border-radius: 2px;
@@ -224,7 +238,7 @@ app {
 }
 #question .tags span:not(:last-child) {
     margin-right:8px;
-}
+}*/
 
 #question .tags {
     margin-bottom: 20px;

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TinRoll.Data\TinRoll.Data.csproj" />
+    <ProjectReference Include="..\TinRoll.Shared\TinRoll.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

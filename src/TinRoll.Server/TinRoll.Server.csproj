@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="3.0.0-preview5-19227-01" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0-preview5-19227-01" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0-preview5.19227.1">
@@ -27,7 +28,14 @@
   <ItemGroup>
     <ProjectReference Include="..\TinRoll.Client\TinRoll.Client.csproj" />
     <ProjectReference Include="..\TinRoll.Data\TinRoll.Data.csproj" />
+    <ProjectReference Include="..\TinRoll.Logic\TinRoll.Logic.csproj" />
     <ProjectReference Include="..\TinRoll.Shared\TinRoll.Shared.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Watch Include="..\**\*.razor" />
+    <Watch Include="..\**\*.scss" />
+    <Watch Include="..\**\*.cs" />
   </ItemGroup>
 
 </Project>

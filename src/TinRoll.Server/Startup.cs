@@ -8,6 +8,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Linq;
 using TinRoll.Data;
+using TinRoll.Data.Repository;
+using TinRoll.Data.Repository.Interface;
+using TinRoll.Logic.Manager;
+using TinRoll.Logic.Manager.Interface;
 
 namespace TinRoll.Server
 {
@@ -28,6 +32,7 @@ namespace TinRoll.Server
             services.AddDbContext<TinRollContext>(
                 options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TinRollDb;Trusted_Connection=True;MultipleActiveResultSets=true"));
 
+            MapDependencyInjection(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +54,17 @@ namespace TinRoll.Server
             });
 
             app.UseBlazor<Client.Startup>();
+        }
+
+        private void MapDependencyInjection(IServiceCollection services)
+        {
+            //managers
+            services.AddScoped<IQuestionManager, QuestionManager>();
+            services.AddScoped<IUserManager, UserManager>();
+
+            //repos
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }
