@@ -6,10 +6,7 @@ using TinRoll.Data.Entities;
 
 namespace TinRoll.Data.Repository.Interface
 {
-    public  interface IUserRepository
+    public interface IUserRepository : IRepository<User>
     {
-        Task<User> CreateUserAsync(User user);
-        Task<User> GetUserAsync(int id);
-        Task<IEnumerable<User>> GetUsersAsync();
     }
 }

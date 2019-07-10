@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TinRoll.Data;
+using TinRoll.Data.Entities;
 using TinRoll.Data.Repository.Interface;
 using TinRoll.Logic.Manager.Interface;
 using TinRoll.Logic.Mapper;
@@ -23,21 +24,24 @@ namespace TinRoll.Logic.Manager
         public async Task<QuestionDto> CreateQuestionAsync(QuestionDto question)
         {
             var dbQuestion = QuestionMapper.ToDb(question);
-            var createdQuestion = await _questionRepo.CreateQuestionAsync(dbQuestion);
+            var createdQuestion = await _questionRepo.CreateAsync(dbQuestion);
             return QuestionMapper.ToDto(createdQuestion);
         }
 
         public async Task<QuestionDto> GetQuestionAsync(int id)
         {
-            var dbQuestion = await _questionRepo.GetQuestionAsync(id);
+            var dbQuestion = await _questionRepo.GetAsync(id);
             return QuestionMapper.ToDto(dbQuestion);
         }
 
         public async Task<IEnumerable<QuestionDto>> GetQuestionsAsync()
         {
-            var dbQuestions = await _questionRepo.GetQuestionsAsync();
-            var sortedQuestions = dbQuestions.OrderByDescending(q => q.CreatedDate);
-            var questions = sortedQuestions.Select(q => QuestionMapper.ToDto(q));
+            Func<IQueryable<Question>, IOrderedQueryable<Question>> orderByFunc = x =>
+                x.OrderByDescending(q => q.CreatedDate);
+            var dbQuestions = await _questionRepo.GetAsync(orderBy: orderByFunc);
+            //var dbQuestions = await _questionRepo.GetAsync();
+            //var sortedQuestions = dbQuestions.OrderByDescending(q => q.CreatedDate);
+            var questions = dbQuestions.Select(q => QuestionMapper.ToDto(q));
             return questions;
         }
     }

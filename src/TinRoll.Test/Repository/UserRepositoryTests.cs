@@ -32,7 +32,7 @@ namespace TinRoll.Test.Repository
             using (var context = new TinRollContext(options))
             {
                 var userRepository = new UserRepository(context);
-                dbUser = await userRepository.CreateUserAsync(newUser);
+                dbUser = await userRepository.CreateAsync(newUser);
             }
             
             Assert.NotNull(dbUser);
@@ -71,7 +71,7 @@ namespace TinRoll.Test.Repository
             using (var context = new TinRollContext(options))
             {
                 var userRepo = new UserRepository(context);
-                dbUser = await userRepo.GetUserAsync(userToGet.Id);
+                dbUser = await userRepo.GetAsync(userToGet.Id);
             }
 
             Assert.NotNull(dbUser);
@@ -107,7 +107,7 @@ namespace TinRoll.Test.Repository
             using (var context = new TinRollContext(options))
             {
                 var userRepo = new UserRepository(context);
-                dbUsers = await userRepo.GetUsersAsync();
+                dbUsers = await userRepo.GetAsync();
             }
 
             Assert.NotNull(dbUsers);

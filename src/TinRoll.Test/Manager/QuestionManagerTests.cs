@@ -24,7 +24,7 @@ namespace TinRoll.Test.Manager
 
             var mockQuestionRepo = new Mock<IQuestionRepository>();
 
-            mockQuestionRepo.Setup(u => u.CreateQuestionAsync(It.IsAny<Question>()))
+            mockQuestionRepo.Setup(u => u.CreateAsync(It.IsAny<Question>()))
                 .ReturnsAsync(mockQuestion);
 
             var questionManager = new QuestionManager(mockQuestionRepo.Object);
@@ -34,7 +34,7 @@ namespace TinRoll.Test.Manager
 
             Assert.NotNull(createdQuestion);
             Assert.Equal(1, createdQuestion.Id);
-            mockQuestionRepo.Verify(u => u.CreateQuestionAsync(It.IsAny<Question>()), Times.Once);
+            mockQuestionRepo.Verify(u => u.CreateAsync(It.IsAny<Question>()), Times.Once);
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace TinRoll.Test.Manager
 
             var mockQuestionRepo = new Mock<IQuestionRepository>();
 
-            mockQuestionRepo.Setup(u => u.GetQuestionAsync(It.Is<int>(u => u == 1)))
+            mockQuestionRepo.Setup(u => u.GetAsync(It.Is<int>(u => u == 1)))
                 .ReturnsAsync(mockQuestion);
 
             var questionManager = new QuestionManager(mockQuestionRepo.Object);
@@ -56,7 +56,7 @@ namespace TinRoll.Test.Manager
 
             Assert.NotNull(question);
             Assert.Equal(1, question.Id);
-            mockQuestionRepo.Verify(u => u.GetQuestionAsync(It.Is<int>(u => u == 1)), Times.Once);
+            mockQuestionRepo.Verify(u => u.GetAsync(It.Is<int>(u => u == 1)), Times.Once);
         }
 
         [Fact]
@@ -75,7 +75,7 @@ namespace TinRoll.Test.Manager
 
             var mockQuestionRepo = new Mock<IQuestionRepository>();
 
-            mockQuestionRepo.Setup(u => u.GetQuestionsAsync())
+            mockQuestionRepo.Setup(u => u.GetAsync(null, It.IsAny<Func<IQueryable<Question>, IOrderedQueryable<Question>>>(), ""))
                 .ReturnsAsync(mockQuestionList);
 
             var questionManager = new QuestionManager(mockQuestionRepo.Object);
@@ -113,7 +113,7 @@ namespace TinRoll.Test.Manager
 
             var mockQuestionRepo = new Mock<IQuestionRepository>();
 
-            mockQuestionRepo.Setup(u => u.GetQuestionsAsync())
+            mockQuestionRepo.Setup(u => u.GetAsync(null, It.IsAny<Func<IQueryable<Question>, IOrderedQueryable<Question>>>(), ""))
                 .ReturnsAsync(mockQuestionList);
 
             var questionManager = new QuestionManager(mockQuestionRepo.Object);

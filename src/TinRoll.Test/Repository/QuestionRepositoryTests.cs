@@ -30,7 +30,7 @@ namespace TinRoll.Test.Repository
             using (var context = new TinRollContext(options))
             {
                 var questionRepo = new QuestionRepository(context);
-                dbQuestion = await questionRepo.CreateQuestionAsync(newQuestion);
+                dbQuestion = await questionRepo.CreateAsync(newQuestion);
             }
 
             Assert.NotNull(dbQuestion);
@@ -67,7 +67,7 @@ namespace TinRoll.Test.Repository
             using (var context = new TinRollContext(options))
             {
                 var questionRepo = new QuestionRepository(context);
-                dbQuestion = await questionRepo.GetQuestionAsync(questionToGet.Id);
+                dbQuestion = await questionRepo.GetAsync(questionToGet.Id);
             }
 
             Assert.NotNull(dbQuestion);
@@ -106,7 +106,7 @@ namespace TinRoll.Test.Repository
             using (var context = new TinRollContext(options))
             {
                 var questionRepo = new QuestionRepository(context);
-                dbQuestions = await questionRepo.GetQuestionsAsync();
+                dbQuestions = await questionRepo.GetAsync();
             }
 
             Assert.NotNull(dbQuestions);
