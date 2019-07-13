@@ -52,7 +52,7 @@ namespace TinRoll.Logic.Manager
             //empty
             var dbQuestionsRegular = await _questionRepo.GetAsync();
 
-            var questions = dbQuestionsRegular.Select(q => QuestionMapper.ToDto(q));
+            var questions = dbQuestionsOrderBy.Select(q => QuestionMapper.ToDto(q));
             return questions;
         }
     }
