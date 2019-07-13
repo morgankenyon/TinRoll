@@ -8,9 +8,28 @@ using TinRoll.Data.Repository.Interface;
 
 namespace TinRoll.Data.Repository
 {
-    public class UserRepository : BaseRepository<User>, IUserRepository
+    public class UserRepository : IUserRepository
     {
-        public UserRepository(TinRollContext context) : base(context)
-        { }
+        private IRepository<User> _baseRepo;
+
+        public UserRepository(IRepository<User> baseRepo)
+        {
+            _baseRepo = baseRepo;
+        }
+
+        public async Task<User> CreateUserAsync(User user)
+        {
+            return await _baseRepo.CreateAsync(user);
+        }
+
+        public async Task<User> GetUserAsync(int id)
+        {
+            return await _baseRepo.GetAsync(id);
+        }
+
+        public async Task<IEnumerable<User>> GetUsersAsync()
+        {
+            return await _baseRepo.GetAsync();
+        }
     }
 }

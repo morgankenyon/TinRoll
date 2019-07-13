@@ -5,11 +5,12 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using TinRoll.Data.Entities;
 using TinRoll.Data.Repository.Interface;
 
 namespace TinRoll.Data.Repository
 {
-    public abstract class BaseRepository<T> : IRepository<T> where T : class
+    internal class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
         internal readonly TinRollContext context;
 

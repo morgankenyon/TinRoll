@@ -24,7 +24,7 @@ namespace TinRoll.Test.Manager
 
             var mockQuestionRepo = new Mock<IQuestionRepository>();
 
-            mockQuestionRepo.Setup(u => u.CreateAsync(It.IsAny<Question>()))
+            mockQuestionRepo.Setup(u => u.CreateQuestionAsync(It.IsAny<Question>()))
                 .ReturnsAsync(mockQuestion);
 
             var questionManager = new QuestionManager(mockQuestionRepo.Object);
@@ -34,7 +34,7 @@ namespace TinRoll.Test.Manager
 
             Assert.NotNull(createdQuestion);
             Assert.Equal(1, createdQuestion.Id);
-            mockQuestionRepo.Verify(u => u.CreateAsync(It.IsAny<Question>()), Times.Once);
+            mockQuestionRepo.Verify(u => u.CreateQuestionAsync(It.IsAny<Question>()), Times.Once);
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace TinRoll.Test.Manager
 
             var mockQuestionRepo = new Mock<IQuestionRepository>();
 
-            mockQuestionRepo.Setup(u => u.GetAsync(It.Is<int>(u => u == 1)))
+            mockQuestionRepo.Setup(u => u.GetQuestionAsync(It.Is<int>(u => u == 1)))
                 .ReturnsAsync(mockQuestion);
 
             var questionManager = new QuestionManager(mockQuestionRepo.Object);
@@ -56,7 +56,7 @@ namespace TinRoll.Test.Manager
 
             Assert.NotNull(question);
             Assert.Equal(1, question.Id);
-            mockQuestionRepo.Verify(u => u.GetAsync(It.Is<int>(u => u == 1)), Times.Once);
+            mockQuestionRepo.Verify(u => u.GetQuestionAsync(It.Is<int>(u => u == 1)), Times.Once);
         }
 
         [Fact]
@@ -75,7 +75,7 @@ namespace TinRoll.Test.Manager
 
             var mockQuestionRepo = new Mock<IQuestionRepository>();
 
-            mockQuestionRepo.Setup(u => u.GetAsync(null, It.IsAny<Func<IQueryable<Question>, IOrderedQueryable<Question>>>(), ""))
+            mockQuestionRepo.Setup(u => u.GetQuestionsAsync())
                 .ReturnsAsync(mockQuestionList);
 
             var questionManager = new QuestionManager(mockQuestionRepo.Object);
@@ -92,46 +92,6 @@ namespace TinRoll.Test.Manager
             var secondQuestion = questions.Last();
             Assert.NotNull(secondQuestion);
             Assert.Equal(2, secondQuestion.Id);
-        }
-
-        [Fact]
-        public async Task Test_Get_Questions_Sorted_Date_Descending()
-        {
-
-            var mockQuestion1 = new Question
-            {
-                Id = 1,
-                CreatedDate = DateTime.UtcNow.AddDays(-1)
-            };
-            var mockQuestion2 = new Question
-            {
-                Id = 2,
-                CreatedDate = DateTime.UtcNow
-            };
-
-            var mockQuestionList = new List<Question>() { mockQuestion1, mockQuestion2 };
-
-            var mockQuestionRepo = new Mock<IQuestionRepository>();
-
-            mockQuestionRepo.Setup(u => u.GetAsync(null, It.IsAny<Func<IQueryable<Question>, IOrderedQueryable<Question>>>(), ""))
-                .ReturnsAsync(mockQuestionList);
-
-            var questionManager = new QuestionManager(mockQuestionRepo.Object);
-
-            var questions = await questionManager.GetQuestionsAsync();
-
-            Assert.NotNull(questions);
-            Assert.Equal(2, questions.Count());
-
-            var firstQuestion = questions.First();
-            Assert.NotNull(firstQuestion);
-            Assert.Equal(2, firstQuestion.Id);
-
-            var secondQuestion = questions.Last();
-            Assert.NotNull(secondQuestion);
-            Assert.Equal(1, secondQuestion.Id);
-
-
         }
     }
 }

@@ -31,7 +31,7 @@ namespace TinRoll.Test.Manager
             var mockUserRepo = new Mock<IUserRepository>();
 
             //define what we want to happen when the CreateUserAsync method is called
-            mockUserRepo.Setup(u => u.CreateAsync(It.IsAny<User>()))
+            mockUserRepo.Setup(u => u.CreateUserAsync(It.IsAny<User>()))
                 .ReturnsAsync(mockUser);
 
             //create UserManager with that Mock object
@@ -48,7 +48,7 @@ namespace TinRoll.Test.Manager
             //Assert
             Assert.NotNull(createdUser);
             Assert.Equal(1, createdUser.Id);
-            mockUserRepo.Verify(u => u.CreateAsync(It.IsAny<User>()), Times.Once);
+            mockUserRepo.Verify(u => u.CreateUserAsync(It.IsAny<User>()), Times.Once);
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace TinRoll.Test.Manager
 
             var mockUserRepo = new Mock<IUserRepository>();
 
-            mockUserRepo.Setup(u => u.GetAsync(It.Is<int>(u => u == 1)))
+            mockUserRepo.Setup(u => u.GetUserAsync(It.Is<int>(u => u == 1)))
                 .ReturnsAsync(mockUser);
 
             var userManager = new UserManager(mockUserRepo.Object);
@@ -72,7 +72,7 @@ namespace TinRoll.Test.Manager
 
             Assert.NotNull(user);
             Assert.Equal(1, user.Id);
-            mockUserRepo.Verify(u => u.GetAsync(It.Is<int>(u => u == 1)), Times.Once);
+            mockUserRepo.Verify(u => u.GetUserAsync(It.Is<int>(u => u == 1)), Times.Once);
         }
 
         [Fact]
@@ -94,7 +94,7 @@ namespace TinRoll.Test.Manager
 
             var mockUserRepo = new Mock<IUserRepository>();
 
-            mockUserRepo.Setup(u => u.GetAsync(null, null, ""))
+            mockUserRepo.Setup(u => u.GetUsersAsync())
                 .ReturnsAsync(mockUserList);
 
             var userManager = new UserManager(mockUserRepo.Object);

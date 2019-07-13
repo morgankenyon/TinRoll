@@ -25,34 +25,20 @@ namespace TinRoll.Logic.Manager
         public async Task<QuestionDto> CreateQuestionAsync(QuestionDto question)
         {
             var dbQuestion = QuestionMapper.ToDb(question);
-            var createdQuestion = await _questionRepo.CreateAsync(dbQuestion);
+            var createdQuestion = await _questionRepo.CreateQuestionAsync(dbQuestion);
             return QuestionMapper.ToDto(createdQuestion);
         }
 
         public async Task<QuestionDto> GetQuestionAsync(int id)
         {
-            var dbQuestion = await _questionRepo.GetAsync(id);
+            var dbQuestion = await _questionRepo.GetQuestionAsync(id);
             return QuestionMapper.ToDto(dbQuestion);
         }
 
         public async Task<IEnumerable<QuestionDto>> GetQuestionsAsync()
         {
-            //using OrderBy
-            Func<IQueryable<Question>, IOrderedQueryable<Question>> orderByFunc = x =>
-                x.OrderByDescending(q => q.CreatedDate);
-            var dbQuestionsOrderBy = await _questionRepo.GetAsync(orderBy: orderByFunc);
-
-            //using Filter
-            Expression<Func<Question, bool>> filter = x => x.CreatedDate > DateTime.UtcNow.AddDays(-7);
-            var dbQuestionsFilter = await _questionRepo.GetAsync(filter: filter);
-
-            //using Include
-            var dbQuestionsInclude = await _questionRepo.GetAsync(includeProperties: "User");
-
-            //empty
-            var dbQuestionsRegular = await _questionRepo.GetAsync();
-
-            var questions = dbQuestionsOrderBy.Select(q => QuestionMapper.ToDto(q));
+            var dbQuestions = await _questionRepo.GetQuestionsByDateDescendingAsync();
+            var questions = dbQuestions.Select(q => QuestionMapper.ToDto(q));
             return questions;
         }
     }

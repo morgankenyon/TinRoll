@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TinRoll.Data.Entities;
@@ -8,9 +10,50 @@ using TinRoll.Data.Repository.Interface;
 
 namespace TinRoll.Data.Repository
 {
-    public class QuestionRepository : BaseRepository<Question>, IQuestionRepository
+    public class QuestionRepository : IQuestionRepository
     {
-        public QuestionRepository(TinRollContext context) : base(context)
-        { }
+        private IRepository<Question> _baseRepo;
+
+        public QuestionRepository(IRepository<Question> baseRepo)
+        {
+            _baseRepo = baseRepo;
+        }
+
+        public async Task<Question> CreateQuestionAsync(Question question)
+        {
+            return await _baseRepo.CreateAsync(question);
+        }
+
+        public async Task<Question> GetQuestionAsync(int id)
+        {
+            return await _baseRepo.GetAsync(id);
+        }
+
+        public async Task<IEnumerable<Question>> GetQuestionsAndUsersAsync()
+        {
+            var dbQuestions = await _baseRepo.GetAsync(includeProperties: "User");
+            return dbQuestions;
+        }
+
+        public async Task<IEnumerable<Question>> GetQuestionsAsync()
+        {
+            var dbQuestions = await _baseRepo.GetAsync();
+            return dbQuestions;
+        }
+
+        public async Task<IEnumerable<Question>> GetQuestionsByDateDescendingAsync()
+        {
+            Func<IQueryable<Question>, IOrderedQueryable<Question>> orderByFunc = x =>
+                x.OrderByDescending(q => q.CreatedDate);
+            var dbQuestions = await _baseRepo.GetAsync(orderBy: orderByFunc);
+            return dbQuestions;
+        }
+
+        public async Task<IEnumerable<Question>> GetRecentQuestionsAsync()
+        {
+            Expression<Func<Question, bool>> filter = x => x.CreatedDate > DateTime.UtcNow.AddDays(-7);
+            var dbQuestions = await _baseRepo.GetAsync(filter: filter);
+            return dbQuestions;
+        }
     }
 }

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using TinRoll.Data.Entities;
 
 namespace TinRoll.Data.Repository.Interface
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<T> where T : BaseEntity
     {
-        Task<T> CreateAsync(T user);
+        Task<T> CreateAsync(T entity);
 
         Task<T> GetAsync(int id);
 
