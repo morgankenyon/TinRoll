@@ -15,7 +15,7 @@
             <label id="title-label" for="title">Title</label>
         </div>
         <div>
-            <InputText id="title" bind-Value="@questionDto.Title" />
+            <InputText id="title" @bind-Value="@questionDto.Title" />
         </div>
 
 
@@ -23,7 +23,7 @@
             <label id="text-label" for="text">Text</label>
         </div>
         <div>
-            <InputTextArea Id="text" bind-Value="@questionDto.Text" />
+            <InputTextArea Id="text" @bind-Value="@questionDto.Text" />
         </div>
         <div>
             <button id="create-question-submit" type="submit">Submit</button>
@@ -31,7 +31,7 @@
     </EditForm>
 </div>
 
-@functions {
+@code {
     private QuestionDto questionDto = new QuestionDto();
 
     private async Task HandleValidSubmit()
