@@ -1,5 +1,5 @@
 # TinRoll
-A stackoverflow clone
+A stackoverflow clone built with Microsoft technology and currently no JavaScript. Blazor for UI + Web API = C# everywhere! Right now it's very feature bare. You can ask text only questions and can view them in a list. 
 
 # Articles
 
