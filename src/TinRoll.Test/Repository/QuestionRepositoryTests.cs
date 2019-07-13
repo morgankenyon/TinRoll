@@ -28,7 +28,7 @@ namespace TinRoll.Test.Repository
                 Text = "Question Text"
             };
 
-            var mockBaseRepo = new Mock<IRepository<Question>>();
+            var mockBaseRepo = new Mock<IBaseRepository<Question>>();
 
             mockBaseRepo.Setup(m => m.CreateAsync(It.IsAny<Question>()))
                 .ReturnsAsync(newQuestion);
@@ -51,7 +51,7 @@ namespace TinRoll.Test.Repository
                 Text = "Question Text"
             };
 
-            var mockBaseRepo = new Mock<IRepository<Question>>();
+            var mockBaseRepo = new Mock<IBaseRepository<Question>>();
 
             mockBaseRepo.Setup(m => m.GetAsync(It.IsAny<int>()))
                 .ReturnsAsync(questionToGet);
@@ -82,7 +82,7 @@ namespace TinRoll.Test.Repository
             };
             var questions = new List<Question>() { questionToGet, questionToGet2 };
 
-            var mockBaseRepo = new Mock<IRepository<Question>>();
+            var mockBaseRepo = new Mock<IBaseRepository<Question>>();
 
             mockBaseRepo.Setup(m => m.GetAsync(null, null, null))
                 .ReturnsAsync(questions);

@@ -7,7 +7,7 @@ using TinRoll.Data.Entities;
 
 namespace TinRoll.Data.Repository.Interface
 {
-    public interface IRepository<T> where T : BaseEntity
+    public interface IBaseRepository<T> where T : BaseEntity
     {
         Task<T> CreateAsync(T entity);
 

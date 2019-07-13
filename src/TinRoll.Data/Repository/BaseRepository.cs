@@ -10,7 +10,7 @@ using TinRoll.Data.Repository.Interface;
 
 namespace TinRoll.Data.Repository
 {
-    internal class BaseRepository<T> : IRepository<T> where T : BaseEntity
+    internal class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
         internal readonly TinRollContext context;
 

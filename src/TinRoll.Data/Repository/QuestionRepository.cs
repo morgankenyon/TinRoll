@@ -12,9 +12,9 @@ namespace TinRoll.Data.Repository
 {
     public class QuestionRepository : IQuestionRepository
     {
-        private IRepository<Question> _baseRepo;
+        private IBaseRepository<Question> _baseRepo;
 
-        public QuestionRepository(IRepository<Question> baseRepo)
+        public QuestionRepository(IBaseRepository<Question> baseRepo)
         {
             _baseRepo = baseRepo;
         }

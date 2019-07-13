@@ -10,9 +10,9 @@ namespace TinRoll.Data.Repository
 {
     public class UserRepository : IUserRepository
     {
-        private IRepository<User> _baseRepo;
+        private IBaseRepository<User> _baseRepo;
 
-        public UserRepository(IRepository<User> baseRepo)
+        public UserRepository(IBaseRepository<User> baseRepo)
         {
             _baseRepo = baseRepo;
         }

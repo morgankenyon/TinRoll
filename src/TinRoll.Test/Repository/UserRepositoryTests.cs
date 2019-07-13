@@ -27,7 +27,7 @@ namespace TinRoll.Test.Repository
                 UserName = "userName"
             };
 
-            var mockBaseRepo = new Mock<IRepository<User>>();
+            var mockBaseRepo = new Mock<IBaseRepository<User>>();
 
             mockBaseRepo.Setup(m => m.CreateAsync(It.IsAny<User>()))
                 .ReturnsAsync(newUser);
@@ -49,7 +49,7 @@ namespace TinRoll.Test.Repository
                 UserName = "userName"
             };
 
-            var mockBaseRepo = new Mock<IRepository<User>>();
+            var mockBaseRepo = new Mock<IBaseRepository<User>>();
 
             mockBaseRepo.Setup(m => m.GetAsync(It.IsAny<int>()))
                 .ReturnsAsync(userToGet);
@@ -77,7 +77,7 @@ namespace TinRoll.Test.Repository
             var usersToGet = new List<User>() { userToGet, userToGet2 };
 
 
-            var mockBaseRepo = new Mock<IRepository<User>>();
+            var mockBaseRepo = new Mock<IBaseRepository<User>>();
 
             mockBaseRepo.Setup(m => m.GetAsync(null, null, null))
                 .ReturnsAsync(usersToGet);
