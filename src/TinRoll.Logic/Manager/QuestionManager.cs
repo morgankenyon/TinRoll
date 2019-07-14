@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TinRoll.Data;
+using TinRoll.Data.Entities;
 using TinRoll.Data.Repository.Interface;
 using TinRoll.Logic.Manager.Interface;
 using TinRoll.Logic.Mapper;
@@ -36,8 +38,7 @@ namespace TinRoll.Logic.Manager
         public async Task<IEnumerable<QuestionDto>> GetQuestionsAsync()
         {
             var dbQuestions = await _questionRepo.GetQuestionsAsync();
-            var sortedQuestions = dbQuestions.OrderByDescending(q => q.CreatedDate);
-            var questions = sortedQuestions.Select(q => QuestionMapper.ToDto(q));
+            var questions = dbQuestions.Select(q => QuestionMapper.ToDto(q));
             return questions;
         }
     }

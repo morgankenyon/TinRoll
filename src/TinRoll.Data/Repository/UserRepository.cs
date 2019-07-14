@@ -10,26 +10,26 @@ namespace TinRoll.Data.Repository
 {
     public class UserRepository : IUserRepository
     {
-        readonly TinRollContext context;
-        public UserRepository(TinRollContext context)
+        private IBaseRepository<User> _baseRepo;
+
+        public UserRepository(IBaseRepository<User> baseRepo)
         {
-            this.context = context;
+            _baseRepo = baseRepo;
         }
+
         public async Task<User> CreateUserAsync(User user)
         {
-            await context.AddAsync(user);
-            await context.SaveChangesAsync();
-            return user;
+            return await _baseRepo.CreateAsync(user);
         }
 
         public async Task<User> GetUserAsync(int id)
         {
-            return await context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            return await _baseRepo.GetAsync(id);
         }
 
         public async Task<IEnumerable<User>> GetUsersAsync()
         {
-            return await context.Users.ToListAsync();
+            return await _baseRepo.GetAsync();
         }
     }
 }

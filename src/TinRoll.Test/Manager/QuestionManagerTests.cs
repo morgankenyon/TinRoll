@@ -93,45 +93,5 @@ namespace TinRoll.Test.Manager
             Assert.NotNull(secondQuestion);
             Assert.Equal(2, secondQuestion.Id);
         }
-
-        [Fact]
-        public async Task Test_Get_Questions_Sorted_Date_Descending()
-        {
-
-            var mockQuestion1 = new Question
-            {
-                Id = 1,
-                CreatedDate = DateTime.UtcNow.AddDays(-1)
-            };
-            var mockQuestion2 = new Question
-            {
-                Id = 2,
-                CreatedDate = DateTime.UtcNow
-            };
-
-            var mockQuestionList = new List<Question>() { mockQuestion1, mockQuestion2 };
-
-            var mockQuestionRepo = new Mock<IQuestionRepository>();
-
-            mockQuestionRepo.Setup(u => u.GetQuestionsAsync())
-                .ReturnsAsync(mockQuestionList);
-
-            var questionManager = new QuestionManager(mockQuestionRepo.Object);
-
-            var questions = await questionManager.GetQuestionsAsync();
-
-            Assert.NotNull(questions);
-            Assert.Equal(2, questions.Count());
-
-            var firstQuestion = questions.First();
-            Assert.NotNull(firstQuestion);
-            Assert.Equal(2, firstQuestion.Id);
-
-            var secondQuestion = questions.Last();
-            Assert.NotNull(secondQuestion);
-            Assert.Equal(1, secondQuestion.Id);
-
-
-        }
     }
 }
