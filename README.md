@@ -27,4 +27,5 @@ Features I'm planning on implementing, somewhat in the order I envision things w
 * Search
 * wysiwyg editor
 * user profile
+* Multi Tenant
 * ???
