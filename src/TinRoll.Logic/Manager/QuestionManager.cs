@@ -37,7 +37,7 @@ namespace TinRoll.Logic.Manager
 
         public async Task<IEnumerable<QuestionDto>> GetQuestionsAsync()
         {
-            var dbQuestions = await _questionRepo.GetQuestionsByDateDescendingAsync();
+            var dbQuestions = await _questionRepo.GetQuestionsAsync();
             var questions = dbQuestions.Select(q => QuestionMapper.ToDto(q));
             return questions;
         }
