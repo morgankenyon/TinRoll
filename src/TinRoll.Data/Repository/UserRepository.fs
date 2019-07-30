@@ -1,20 +1,53 @@
 ﻿namespace TinRoll.Data.Repository
 
 open TinRoll.Data
+open Microsoft.EntityFrameworkCore
+open System.Linq
 
-//type IUserRepository =
-//    abstract member GetAsync : int -> User
-//    abstract member CreateAsync : User -> User
+type IUserRepository =
+    interface
+        abstract member GetUserAsync : TinRollContext -> int -> User
+        abstract member GetUsersAsync : TinRollContext -> User IQueryable
+        abstract member CreateUserAsync : TinRollContext -> User -> Async<User>
+    end
+    
 
-module UserRepository =
-    let getUserAsync (context: TinRollContext) id =
-        query {
-            for user in context.Users do
-                where (user.Id = id)
-                select user
-                exactlyOne
-        } |> (fun x -> if box x = null then None else Some x)
+type UserRepository =
+    interface IUserRepository with
+        member this.GetUserAsync context id =
+            query {
+                for user in context.Users do
+                    where (user.Id = id)
+                    select user
+                    exactlyOne
+            }
+        member this.GetUsersAsync context =
+            //DbSet.toList context.Users
+            query {
+                for user in context.Users do 
+                    select user
+            }
 
-    let getUsersAsync (context: TinRollContext) =
-        context.Users
-            
+        member this.CreateUserAsync context entity =
+            async {
+                context.Users.Add(entity) |> ignore
+                let! _ = context.SaveChangesAsync true |> Async.AwaitTask
+                return entity
+            }
+    //member GetUserAsync (context: TinRollContext) id =
+    //    query {
+    //        for user in context.Users do
+    //            where (user.Id = id)
+    //            select user
+    //            exactlyOne
+    //    } 
+
+    //let GetUsersAsync (context: TinRollContext) =
+    //    context.Users
+         
+    //let CreateUserAsync (context: TinRollContext) (entity: User) =
+    //    async {
+    //        context.Users.Add(entity) |> ignore
+    //        let! _ = context.SaveChangesAsync true |> Async.AwaitTask
+    //        return entity
+    //    }
