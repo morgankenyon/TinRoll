@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TinRoll.Data\TinRoll.Data.csproj" />
+    <ProjectReference Include="..\TinRoll.Data\TinRoll.Data.fsproj" />
     <ProjectReference Include="..\TinRoll.Shared\TinRoll.Shared.csproj" />
   </ItemGroup>
 
