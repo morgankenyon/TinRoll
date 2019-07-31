@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FSharp.Core" Version="4.6.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.0.0-preview5.19227.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
     <PackageReference Include="Moq" Version="4.12.0" />
@@ -17,6 +18,12 @@
   <ItemGroup>
     <ProjectReference Include="..\TinRoll.Data\TinRoll.Data.csproj" />
     <ProjectReference Include="..\TinRoll.Logic\TinRoll.Logic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="TinRoll.Data">
+      <HintPath>..\TinRoll.Data\bin\Debug\netstandard2.0\TinRoll.Data.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

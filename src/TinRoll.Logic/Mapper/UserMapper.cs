@@ -1,4 +1,4 @@
-﻿using TinRoll.Data.Entities;
+﻿using TinRoll.Data;
 using TinRoll.Shared;
 
 namespace TinRoll.Logic.Mapper

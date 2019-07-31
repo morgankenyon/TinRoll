@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using TinRoll.Data.Entities;
+using TinRoll.Data;
 using TinRoll.Shared;
 
 namespace TinRoll.Logic.Mapper

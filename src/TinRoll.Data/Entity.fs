@@ -11,7 +11,7 @@ type [<CLIMutable>] Question =
         UserId : int
         User : User
         CreatedDate : DateTime
-        UpdateDate : DateTime
+        UpdatedDate : DateTime
     }
 and [<CLIMutable>] User =
     {
@@ -20,5 +20,5 @@ and [<CLIMutable>] User =
         UserName : string
         Questions : Question list
         CreatedDate : DateTime
-        UpdateDate : DateTime
+        UpdatedDate : DateTime
     }

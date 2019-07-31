@@ -9,7 +9,6 @@ using Newtonsoft.Json.Serialization;
 using System.Linq;
 using TinRoll.Data;
 using TinRoll.Data.Repository;
-using TinRoll.Data.Repository.Interface;
 using TinRoll.Logic.Manager;
 using TinRoll.Logic.Manager.Interface;
 
@@ -66,7 +65,7 @@ namespace TinRoll.Server
             //repos
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            //services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
         }
     }
 }
