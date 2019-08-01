@@ -30,6 +30,7 @@
     <ProjectReference Include="..\TinRoll.Data\TinRoll.Data.csproj" />
     <ProjectReference Include="..\TinRoll.Data\TinRoll.Data.fsproj" />
     <ProjectReference Include="..\TinRoll.Logic\TinRoll.Logic.csproj" />
+    <ProjectReference Include="..\TinRoll.Migrations\TinRoll.Migrations.csproj" />
     <ProjectReference Include="..\TinRoll.Shared\TinRoll.Shared.csproj" />
   </ItemGroup>
   

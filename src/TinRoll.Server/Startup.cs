@@ -29,7 +29,7 @@ namespace TinRoll.Server
                     new[] { "application/octet-stream" });
             });
             services.AddDbContext<TinRollContext>(
-                options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TinRollDb;Trusted_Connection=True;MultipleActiveResultSets=true"));
+                options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TinRollDb;Trusted_Connection=True;MultipleActiveResultSets=true", b => b.MigrationsAssembly("TinRoll.Migrations")));
 
             MapDependencyInjection(services);
         }
