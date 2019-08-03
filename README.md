@@ -11,6 +11,8 @@ Here are the blog posts that have been written over TinRoll as an app.
 
 [TinRoll #3: Building Out the API Layer](https://medium.com/@morgankenyon/tinroll-3-building-out-the-api-layer-e5a404d5fd64)
 
+[TinRoll #4: Creating a Generic Repository](https://medium.com/@morgankenyon/tinroll-4-creating-a-generic-repository-9846c72e11ec)
+
 # RoadMap
 
 Features I'm planning on implementing, somewhat in the order I envision things will get implemented.
