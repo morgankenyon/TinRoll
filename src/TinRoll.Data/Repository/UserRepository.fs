@@ -17,7 +17,7 @@ type UserRepository(context: TinRollContext) =
                 for user in context.Users do
                     where (user.Id = id)
                     select user
-                    exactlyOne
+                    exactlyOneOrDefault
             }
         member this.GetUsers () =
             query {

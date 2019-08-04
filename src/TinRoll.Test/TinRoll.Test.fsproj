@@ -8,8 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="RepositoryTests.fs" />
-    <Compile Include="Program.fs" />
+    <Compile Include="RepositoryTests\RepositoryTests.fs" />
+    <Compile Include="RepositoryTests\QuestionRepositoryTests.fs" />
+    <Compile Include="RepositoryTests\UserRepositoryTests.fs" />
   </ItemGroup>
 
   <ItemGroup>
