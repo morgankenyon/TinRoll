@@ -3,6 +3,7 @@
 open Microsoft.EntityFrameworkCore
 open TinRoll.Data
 open System
+open System.Linq
 
 let BuildInMemoryDatabase dbName =
     DbContextOptionsBuilder<TinRollContext>()
@@ -10,4 +11,4 @@ let BuildInMemoryDatabase dbName =
         .Options
 
 let GetTestUser () =
-    {Id = 0; Email = "testEmail"; UserName = "userName"; Questions = List.empty<Question>; CreatedDate = DateTime.Now; UpdatedDate = DateTime.Now}
+    {Id = 0; Email = "testEmail"; UserName = "userName"; Questions = new System.Collections.Generic.List<Question>(); CreatedDate = DateTime.Now; UpdatedDate = DateTime.Now}

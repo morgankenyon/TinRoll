@@ -17,7 +17,7 @@ type QuestionRepository(context: TinRollContext) =
                 for question in context.Questions do
                     where (question.Id = id)
                     select question
-                    exactlyOne
+                    exactlyOneOrDefault
             }
         member this.GetQuestions () =
             query {
@@ -27,5 +27,5 @@ type QuestionRepository(context: TinRollContext) =
 
         member this.CreateQuestion entity =
             context.Questions.Add(entity) |> ignore
-            context.SaveChanges true |> ignore
+            context.SaveChanges() |> ignore
             entity

@@ -7,7 +7,7 @@
   <ItemGroup>
     <Compile Include="Entity.fs" />
     <Compile Include="TinRollContext.fs" />
-    <Compile Include="QuestionRepository.fs" />
+    <Compile Include="Repository\QuestionRepository.fs" />
     <Compile Include="Repository\UserRepository.fs" />
   </ItemGroup>
 

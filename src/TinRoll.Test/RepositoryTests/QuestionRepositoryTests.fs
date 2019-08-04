@@ -27,3 +27,34 @@ let ``Test Create Question`` () =
 
     Assert.NotNull(createdQuestion)
     Assert.Equal(1, createdQuestion.Id)
+
+[<Fact>]
+let ``Test Get Question`` () =
+    let question = GetTestQuestion()
+    let questionRepo = GetIQuestionRepo "Test_Get_Question"
+    let createdQuestion = questionRepo.CreateQuestion(question)
+
+    let searchedQuestion = questionRepo.GetQuestion createdQuestion.Id
+
+    Assert.NotNull(createdQuestion)
+    Assert.Equal(1, searchedQuestion.Id)
+
+[<Fact>]
+let ``Test Get Questions`` () =
+    let firstQuestion = GetTestQuestion()
+    let secondQuestion = GetTestQuestion()
+    let questionRepo = GetIQuestionRepo "Test_Get_Questions"
+    questionRepo.CreateQuestion firstQuestion |> ignore
+    questionRepo.CreateQuestion secondQuestion |> ignore
+
+    let questions = questionRepo.GetQuestions()
+
+    Assert.Equal(2, questions.Length)
+
+[<Fact>]
+let ``Test Get Question Fail`` () =
+    let questionRepo = GetIQuestionRepo "Test_Get_Question_Fail"
+    
+    let searchedQuestion = questionRepo.GetQuestion 23
+
+    Assert.Null(searchedQuestion)

@@ -1,6 +1,7 @@
 ﻿namespace TinRoll.Data
 
 open System
+open System.Collections.Generic
 
 
 type [<CLIMutable>] Question = 
@@ -18,7 +19,7 @@ and [<CLIMutable>] User =
         Id : int
         Email : string
         UserName : string
-        Questions : Question list
+        Questions : System.Collections.Generic.List<Question>
         CreatedDate : DateTime
         UpdatedDate : DateTime
     }
