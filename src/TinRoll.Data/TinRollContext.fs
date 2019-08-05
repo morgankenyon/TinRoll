@@ -8,8 +8,6 @@ open System
 type TinRollContext(options : DbContextOptions<TinRollContext>) =
     inherit DbContext(options)
 
-//    override SaveChangesAsync(Cancellation)
-    //override __.SaveChangesAsync CancellationToken
     override x.SaveChangesAsync cancellationToken =
         let AddedQuestions = x.ChangeTracker.Entries<Question>() |> Seq.where (fun q -> q.State = EntityState.Added) |> Seq.toList //.Where(e => e.State == EntityState.Added).ToList()
 
@@ -18,21 +16,27 @@ type TinRollContext(options : DbContextOptions<TinRollContext>) =
         base.SaveChangesAsync()
 
     override x.SaveChanges () =
-        let AddedQuestions = x.ChangeTracker.Entries<Question>() |> Seq.where (fun q -> q.State = EntityState.Added) |> Seq.toList //.Where(e => e.State == EntityState.Added).ToList()
-                    
+        let AddedQuestions = x.ChangeTracker.Entries<Question>() |> Seq.where (fun q -> q.State = EntityState.Added) |> Seq.toList
+        
         for addedQuestion in AddedQuestions do
-            let createdDateProperty = addedQuestion.Property(Question.CreatedDate)
-            createdDateProperty.CurrentValue = DateTime.UtcNow
-            createdDateProperty.IsModified = true
+            
+            let mutable createdDate = addedQuestion.Property(fun q -> q.CreatedDate)
+            createdDate.CurrentValue <- DateTime.UtcNow
+            createdDate.IsModified <- true
 
-            addedQuestion.Property(p.CreatedDate).CurrentValue = DateTime.UtcNow
+            let mutable updatedDate = addedQuestion.Property(fun q -> q.UpdatedDate)
+            updatedDate.CurrentValue <- DateTime.UtcNow
+            updatedDate.IsModified <- true
+
+        let UpdatedQuestions = x.ChangeTracker.Entries<Question>() |> Seq.where (fun q -> q.State = EntityState.Modified) |> Seq.toList
+
+        for updatedQuestion in UpdatedQuestions do
+            let mutable updatedDate = updatedQuestion.Property(fun q -> q.UpdatedDate)
+            updatedDate.CurrentValue <- DateTime.UtcNow
+            updatedDate.IsModified <- true
+            
 
         base.SaveChanges()
-
-    //override x.SaveChanges acceptAllChangesOnSuccess =
-    //    let AddedQuestions = x.ChangeTracker.Entries<Question>() |> Seq.where (fun q -> q.State = EntityState.Added) |> Seq.toList //.Where(e => e.State == EntityState.Added).ToList()
-                    
-    //    base.SaveChanges acceptAllChangesOnSuccess
 
 
     [<DefaultValue>]
