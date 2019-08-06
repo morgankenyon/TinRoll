@@ -28,7 +28,7 @@ type Question (id: int, title: string, text: string, userId: int, user: User, cr
     member x.User with get() = _user and set v = _user <- v
     new() = Question(0, "", "", 0, new User(), DateTime.MinValue, DateTime.MinValue)
 
-and User (id: int, email: string, username: string, questions: ICollection<Question>, createdDate: DateTime, updatedDate: DateTime) =
+and User (id: int, email: string, username: string, questions: IEnumerable<Question>, createdDate: DateTime, updatedDate: DateTime) =
     inherit BaseEntity(createdDate, updatedDate)
     let mutable _id = id
     let mutable _email = email

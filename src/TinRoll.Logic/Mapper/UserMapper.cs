@@ -12,6 +12,7 @@ namespace TinRoll.Logic.Mapper
                 Id = user.Id,
                 Email = user.Email,
                 UserName = user.Username,
+                Questions = user.Questions,
                 CreatedDate = user.CreatedDate,
                 UpdatedDate = user.UpdatedDate
             };

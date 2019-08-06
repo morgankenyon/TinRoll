@@ -1,4 +1,4 @@
-﻿module RepositoryTests
+﻿module Data.Repository.RepositoryTests
 
 open Microsoft.EntityFrameworkCore
 open TinRoll.Data

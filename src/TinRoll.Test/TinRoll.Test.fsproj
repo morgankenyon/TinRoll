@@ -8,20 +8,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="RepositoryTests\RepositoryTests.fs" />
-    <Compile Include="RepositoryTests\QuestionRepositoryTests.fs" />
-    <Compile Include="RepositoryTests\UserRepositoryTests.fs" />
+    <Compile Include="Logic\Mapper\UserMapperTests.fs" />
+    <Compile Include="Data\Repository\RepositoryTests.fs" />
+    <Compile Include="Data\Repository\QuestionRepositoryTests.fs" />
+    <Compile Include="Data\Repository\UserRepositoryTests.fs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.0.0-preview5.19227.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
+    <PackageReference Include="NFluent" Version="2.5.0" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TinRoll.Data\TinRoll.Data.fsproj" />
+    <ProjectReference Include="..\TinRoll.Logic\TinRoll.Logic.csproj" />
   </ItemGroup>
 
 </Project>

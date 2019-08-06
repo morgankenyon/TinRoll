@@ -9,6 +9,6 @@ namespace TinRoll.Shared
         public int Id { get; set; }
         public string Email { get; set; }
         public string UserName { get; set; }
-        public List<QuestionDto> Questions { get; set; }
+        public IEnumerable<QuestionDto> Questions { get; set; }
     }
 }

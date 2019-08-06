@@ -1,4 +1,4 @@
-﻿module QuestionRepositoryTests
+﻿module Data.Repository.QuestionRepositoryTests
 
 open TinRoll.Data
 open TinRoll.Data.Repository
