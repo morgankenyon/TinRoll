@@ -17,7 +17,8 @@ namespace TinRoll.Logic.Mapper
                 Text = question.Text,
                 CreatedDate = question.CreatedDate,
                 UpdatedDate = question.UpdatedDate,
-                UserId = question.UserId
+                UserId = question.UserId,
+                User = UserMapper.ToDto(question.User)
             };
         }
 

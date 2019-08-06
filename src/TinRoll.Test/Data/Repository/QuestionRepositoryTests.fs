@@ -12,7 +12,7 @@ let GetIQuestionRepo dbName =
 
 
 let GetTestQuestion () =
-    new Question(0, "Test Title", "Test Text", 0, new User(), DateTime.Now, DateTime.Now)
+    new Question(0, "Test Title", "Test Text", 0, DateTime.Now, DateTime.Now)
 
 [<Fact>]
 let ``Test Create Question`` () =

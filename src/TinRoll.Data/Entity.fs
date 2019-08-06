@@ -13,20 +13,20 @@ type BaseEntity (createdDate: DateTime, updatedDate: DateTime) =
     new() = BaseEntity(DateTime.MinValue, DateTime.MinValue)
 
 
-type Question (id: int, title: string, text: string, userId: int, user: User, createdDate: DateTime, updatedDate: DateTime) =
+type Question (id: int, title: string, text: string, userId: int, createdDate: DateTime, updatedDate: DateTime) =
     inherit BaseEntity(createdDate, updatedDate)
     let mutable _id = id
     let mutable _title = title
     let mutable _text = text
     let mutable _userId = userId
-    let mutable _user = user
+    [<DefaultValue>] val mutable _user : User
     
     member x.Id with get() = _id and set v = _id <- v
     member x.Title with get() = _title and set v = _title <- v
     member x.Text with get() = _text and set v = _text <- v
     member x.UserId with get() = _userId and set v = _userId <- v
-    member x.User with get() = _user and set v = _user <- v
-    new() = Question(0, "", "", 0, new User(), DateTime.MinValue, DateTime.MinValue)
+    member x.User with get() = x._user and set v = x._user <- v
+    new() = Question(0, "", "", 0, DateTime.MinValue, DateTime.MinValue)
 
 and User (id: int, email: string, username: string, questions: IEnumerable<Question>, createdDate: DateTime, updatedDate: DateTime) =
     inherit BaseEntity(createdDate, updatedDate)

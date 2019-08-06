@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Logic\Mapper\QuestionMapperTests.fs" />
     <Compile Include="Logic\Mapper\UserMapperTests.fs" />
     <Compile Include="Data\Repository\RepositoryTests.fs" />
     <Compile Include="Data\Repository\QuestionRepositoryTests.fs" />

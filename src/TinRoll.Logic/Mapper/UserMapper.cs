@@ -11,8 +11,8 @@ namespace TinRoll.Logic.Mapper
             {
                 Id = user.Id,
                 Email = user.Email,
-                UserName = user.Username,
-                Questions = user.Questions,
+                Username = user.Username,
+                //Questions = user.Questions,
                 CreatedDate = user.CreatedDate,
                 UpdatedDate = user.UpdatedDate
             };
@@ -23,7 +23,7 @@ namespace TinRoll.Logic.Mapper
             {
                 Id = userDto.Id,
                 Email = userDto.Email,
-                Username = userDto.UserName,
+                Username = userDto.Username,
                 CreatedDate = userDto.CreatedDate,
                 UpdatedDate = userDto.UpdatedDate
             };
