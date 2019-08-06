@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TinRoll.Data.Repository.Interface;
+using TinRoll.Data.Repository;
 using TinRoll.Logic.Manager.Interface;
 using TinRoll.Logic.Mapper;
 using TinRoll.Shared;
@@ -22,19 +22,19 @@ namespace TinRoll.Logic.Manager
         public async Task<UserDto> CreateUserAsync(UserDto user)
         {
             var dbUser = UserMapper.ToDb(user);
-            var createduser = await _userRepo.CreateUserAsync(dbUser);
+            var createduser = _userRepo.CreateUser(dbUser);
             return UserMapper.ToDto(createduser);
         }
 
         public async Task<UserDto> GetUserAsync(int id)
         {
-            var dbUser = await _userRepo.GetUserAsync(id);
+            var dbUser = _userRepo.GetUser(id);
             return UserMapper.ToDto(dbUser);
         }
 
         public async Task<IEnumerable<UserDto>> GetUsersAsync()
         {
-            var dbUsers = await _userRepo.GetUsersAsync();
+            var dbUsers = _userRepo.GetUsers();
             var users = dbUsers.Select(u => UserMapper.ToDto(u));
             return users;
         }

@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TinRoll.Data;
 
-namespace TinRoll.Data.Migrations
+namespace TinRoll.Migrations.Migrations
 {
     [DbContext(typeof(TinRollContext))]
-    [Migration("20190610010950_AddingDateFields")]
-    partial class AddingDateFields
+    [Migration("20190806004843_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace TinRoll.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("TinRoll.Data.Entities.Question", b =>
+            modelBuilder.Entity("TinRoll.Data.Question", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,7 +44,7 @@ namespace TinRoll.Data.Migrations
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("TinRoll.Data.Entities.User", b =>
+            modelBuilder.Entity("TinRoll.Data.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -56,16 +56,16 @@ namespace TinRoll.Data.Migrations
 
                     b.Property<DateTime>("UpdatedDate");
 
-                    b.Property<string>("UserName");
+                    b.Property<string>("Username");
 
                     b.HasKey("Id");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("TinRoll.Data.Entities.Question", b =>
+            modelBuilder.Entity("TinRoll.Data.Question", b =>
                 {
-                    b.HasOne("TinRoll.Data.Entities.User", "User")
+                    b.HasOne("TinRoll.Data.User", "User")
                         .WithMany("Questions")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

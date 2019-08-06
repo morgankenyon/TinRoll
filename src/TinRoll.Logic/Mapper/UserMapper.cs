@@ -1,4 +1,4 @@
-﻿using TinRoll.Data.Entities;
+﻿using TinRoll.Data;
 using TinRoll.Shared;
 
 namespace TinRoll.Logic.Mapper
@@ -11,7 +11,7 @@ namespace TinRoll.Logic.Mapper
             {
                 Id = user.Id,
                 Email = user.Email,
-                UserName = user.UserName,
+                UserName = user.Username,
                 CreatedDate = user.CreatedDate,
                 UpdatedDate = user.UpdatedDate
             };
@@ -22,7 +22,7 @@ namespace TinRoll.Logic.Mapper
             {
                 Id = userDto.Id,
                 Email = userDto.Email,
-                UserName = userDto.UserName,
+                Username = userDto.UserName,
                 CreatedDate = userDto.CreatedDate,
                 UpdatedDate = userDto.UpdatedDate
             };
