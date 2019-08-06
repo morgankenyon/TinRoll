@@ -12,9 +12,7 @@ let GetIQuestionRepo dbName =
 
 
 let GetTestQuestion () =
-    let user = RepositoryTests.GetTestUser()
-    user.Id = 0
-    {Id = 0; Title = "Test Title"; Text = "Test Text"; UserId = 0; User = user; CreatedDate = DateTime.Now; UpdatedDate = DateTime.Now}
+    new Question(0, "Test Title", "Test Text", 0, new User(), DateTime.Now, DateTime.Now)
 
 [<Fact>]
 let ``Test Create Question`` () =
