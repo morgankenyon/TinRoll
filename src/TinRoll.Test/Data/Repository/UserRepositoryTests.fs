@@ -1,4 +1,4 @@
-﻿module UserRepositoryTests
+﻿module Data.Repository.UserRepositoryTests
 
 open Xunit
 open TinRoll.Data
