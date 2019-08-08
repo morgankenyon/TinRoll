@@ -9,7 +9,6 @@
     <Compile Include="Mapper\UserMapper.fs" />
     <Compile Include="Manager\QuestionManager.fs" />
     <Compile Include="Manager\UserManager.fs" />
-    <Compile Include="Library.fs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -18,7 +18,7 @@ let ``Test Question db to dto`` () =
     Check.That(dto.Title).Equals(db.Title) |> ignore
     Check.That(dto.Text).Equals(db.Text) |> ignore
     Check.That(dto.UserId).Equals(db.UserId) |> ignore
-    //Check.That(dto.User.Id).Equals(db.User.Id) |> ignore
+    //Check.That(dto.User.Id).Equals(db.User.Id) |> ignore //Need to write mapper that maps a user object
     Check.That(dto.CreatedDate).Equals(db.CreatedDate) |> ignore
     Check.That(dto.UpdatedDate).Equals(db.UpdatedDate) |> ignore
 
