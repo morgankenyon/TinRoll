@@ -25,7 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TinRoll.Data\TinRoll.Data.fsproj" />
-    <ProjectReference Include="..\TinRoll.Logic\TinRoll.Logic.csproj" />
+    <ProjectReference Include="..\TinRoll.Logic\TinRoll.Logic.fsproj" />
   </ItemGroup>
 
 </Project>

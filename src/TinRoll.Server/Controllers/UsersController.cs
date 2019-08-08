@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TinRoll.Logic.Manager.Interface;
+using TinRoll.Logic.Manager;
 using TinRoll.Shared;
 
 namespace TinRoll.Server.Controllers
@@ -18,17 +18,17 @@ namespace TinRoll.Server.Controllers
 
 
         [HttpGet]
-        public async Task<IEnumerable<UserDto>> GetUsers()
+        public IEnumerable<UserDto> GetUsers()
         {
-            var users = await _userManager.GetUsersAsync();
+            var users = _userManager.GetUsers();
             return users;
         }
 
 
         [HttpPost]
-        public async Task<UserDto> CreateUser(UserDto user)
+        public UserDto CreateUser(UserDto user)
         {
-            var newUser = await _userManager.CreateUserAsync(user);
+            var newUser = _userManager.CreateUser(user);
             return newUser;
         }
     }

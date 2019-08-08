@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Mapper\QuestionMapper.fs" />
+    <Compile Include="Mapper\UserMapper.fs" />
+    <Compile Include="Manager\QuestionManager.fs" />
+    <Compile Include="Manager\UserManager.fs" />
+    <Compile Include="Library.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TinRoll.Data\TinRoll.Data.fsproj" />
+    <ProjectReference Include="..\TinRoll.Shared\TinRoll.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

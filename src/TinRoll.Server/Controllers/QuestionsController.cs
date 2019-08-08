@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Mvc;
-using TinRoll.Logic.Manager.Interface;
+
+using TinRoll.Logic.Manager;
 using TinRoll.Shared;
 
 namespace TinRoll.Server.Controllers
@@ -19,24 +21,24 @@ namespace TinRoll.Server.Controllers
 
 
         [HttpGet]
-        public async Task<IEnumerable<QuestionDto>> GetQuestions()
+        public IEnumerable<QuestionDto> GetQuestions()
         {
-            var questions = await _questionManager.GetQuestionsAsync();
+            var questions = _questionManager.GetQuestions();
             return questions;
         }
 
         [HttpGet("{Id}")]
-        public async Task<QuestionDto> GetQuestion(int Id)
+        public QuestionDto GetQuestion(int Id)
         {
-            var question = await _questionManager.GetQuestionAsync(Id);
+            var question = _questionManager.GetQuestion(Id);
             return question;
         }
 
 
         [HttpPost]
-        public async Task<QuestionDto> CreateQuestion(QuestionDto question)
+        public QuestionDto CreateQuestion(QuestionDto question)
         {
-            var newQuestion = await _questionManager.CreateQuestionAsync(question);
+            var newQuestion = _questionManager.CreateQuestion(question);
             return newQuestion;
         }
     }
