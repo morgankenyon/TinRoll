@@ -25,11 +25,6 @@ type QuestionRepository(context: TinRollContext) =
             }
 
         member this.CreateQuestionAsync entity =
-            //async {
-            //    let createdQuestion = context.Questions.Add(entity)
-            //    context.SaveChanges() |> ignore
-            //    return createdQuestion.Entity.Id
-            //}
             async {
                 context.Questions.Add(entity) |> ignore
                 context.SaveChangesAsync()
@@ -38,6 +33,3 @@ type QuestionRepository(context: TinRollContext) =
                     |> ignore
                 return entity.Id
             }
-            //context.Questions.Add(entity) |> ignore
-            //context.SaveChanges() |> ignore
-            //entity.Id

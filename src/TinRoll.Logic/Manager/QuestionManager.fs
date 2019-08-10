@@ -40,6 +40,3 @@ type QuestionManager(questionRepo: IQuestionRepository) =
                        |> Async.RunSynchronously
             }
             Async.StartAsTask(asyncOp)
-            //let dbQuestion = QuestionMapper.ToDb question
-            //questionRepo.CreateQuestionAsync dbQuestion
-            //    |> Async.RunSynchronously
