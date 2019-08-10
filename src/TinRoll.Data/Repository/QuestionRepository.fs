@@ -4,28 +4,40 @@ open TinRoll.Data
 
 type IQuestionRepository =
     interface
-        abstract member GetQuestion : int -> Question
-        abstract member GetQuestions : unit -> Question list
-        abstract member CreateQuestion : Question -> Question
+        abstract member GetQuestionAsync : int -> Async<Question option>
+        abstract member GetQuestionsAsync : unit -> Async<Question list>
+        abstract member CreateQuestionAsync : Question -> int Async
     end
 
 
 type QuestionRepository(context: TinRollContext) =
     interface IQuestionRepository with
-        member this.GetQuestion id =
-            query {
-                for question in context.Questions do
-                    where (question.Id = id)
-                    select question
-                    exactlyOneOrDefault
+        member this.GetQuestionAsync id =
+            async {
+                let question = context.Questions
+                               |> Seq.tryFind (fun q -> q.Id = id)
+                return question
             }
-        member this.GetQuestions () =
-            query {
-                for question in context.Questions do 
-                    select question
-            } |> Seq.toList
+            
+        member this.GetQuestionsAsync () =
+            async {
+                return context.Questions |> Seq.toList
+            }
 
-        member this.CreateQuestion entity =
-            context.Questions.Add(entity) |> ignore
-            context.SaveChanges() |> ignore
-            entity
+        member this.CreateQuestionAsync entity =
+            //async {
+            //    let createdQuestion = context.Questions.Add(entity)
+            //    context.SaveChanges() |> ignore
+            //    return createdQuestion.Entity.Id
+            //}
+            async {
+                context.Questions.Add(entity) |> ignore
+                context.SaveChangesAsync()
+                    |> Async.AwaitTask
+                    |> Async.RunSynchronously
+                    |> ignore
+                return entity.Id
+            }
+            //context.Questions.Add(entity) |> ignore
+            //context.SaveChanges() |> ignore
+            //entity.Id

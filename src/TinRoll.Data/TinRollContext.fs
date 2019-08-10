@@ -9,9 +9,10 @@ type TinRollContext(options : DbContextOptions<TinRollContext>) =
     inherit DbContext(options)
 
     member t.UpdateDate () =
-        let AddedQuestions = t.ChangeTracker.Entries<BaseEntity>() 
-                             |> Seq.where (fun q -> q.State = EntityState.Added)
-                             |> Seq.toList        
+        let AddedQuestions = 
+            t.ChangeTracker.Entries<BaseEntity>() 
+            |> Seq.where (fun q -> q.State = EntityState.Added)
+            |> Seq.toList        
         
         for addedQuestion in AddedQuestions do
             
@@ -23,7 +24,10 @@ type TinRollContext(options : DbContextOptions<TinRollContext>) =
             updatedDate.CurrentValue <- DateTime.UtcNow
             updatedDate.IsModified <- true
             
-        let UpdatedQuestions = t.ChangeTracker.Entries<Question>() |> Seq.where (fun q -> q.State = EntityState.Modified) |> Seq.toList
+        let UpdatedQuestions = 
+            t.ChangeTracker.Entries<Question>() 
+            |> Seq.where (fun q -> q.State = EntityState.Modified) 
+            |> Seq.toList
             
         for updatedQuestion in UpdatedQuestions do
             let mutable updatedDate = updatedQuestion.Property(fun q -> q.UpdatedDate)
