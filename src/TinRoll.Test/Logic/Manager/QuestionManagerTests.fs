@@ -25,9 +25,10 @@ let ``Test Get Questions`` () =
     mock.Setup(fun qRepo -> qRepo.GetQuestionsAsync()).Returns(dbQuestions) |> ignore
 
     let questionManager = new QuestionManager(mock.Object) :> IQuestionManager
-    let questions = questionManager.GetQuestionsAsync()
-                    |> Async.AwaitTask
-                    |> Async.RunSynchronously
+    let questions = 
+        questionManager.GetQuestionsAsync()
+        |> Async.AwaitTask
+        |> Async.RunSynchronously
 
     Check.That(questions.Length).IsEqualTo(1) |> ignore
     Check.That(questions.Head.Id).IsEqualTo(1) |> ignore
@@ -42,16 +43,16 @@ let ``Test Get Question`` () =
     mock.Setup(fun qRepo -> qRepo.GetQuestionAsync(It.IsAny<int>())).Returns(dbQuestion) |> ignore
     
     let questionManager = new QuestionManager(mock.Object) :> IQuestionManager
-    let question = questionManager.GetQuestionAsync 1
-                   |> Async.AwaitTask
-                   |> Async.RunSynchronously
+    let question = 
+        questionManager.GetQuestionAsync 1
+        |> Async.AwaitTask
+        |> Async.RunSynchronously
 
     Check.That(question).IsNotNull() |> ignore
     Check.That(question.Id).IsEqualTo(1) |> ignore
 
 [<Fact>]
 let ``Test CreateQuestion`` () =
-    let dbQuestion = GetTestDbQuestion()
     let dtoQuestion = GetTestDtoQuestion()
 
     let questionId = async {
@@ -62,8 +63,9 @@ let ``Test CreateQuestion`` () =
     mock.Setup(fun qRepo -> qRepo.CreateQuestionAsync(It.IsAny<Question>())).Returns(questionId) |> ignore
     
     let questionManager = new QuestionManager(mock.Object) :> IQuestionManager
-    let questionId = questionManager.CreateQuestionAsync dtoQuestion
-                     |> Async.AwaitTask
-                     |> Async.RunSynchronously
+    let questionId = 
+        questionManager.CreateQuestionAsync dtoQuestion
+        |> Async.AwaitTask
+        |> Async.RunSynchronously
 
     Check.That(questionId).IsEqualTo(1) |> ignore

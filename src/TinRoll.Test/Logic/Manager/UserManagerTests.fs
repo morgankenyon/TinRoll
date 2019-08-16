@@ -53,7 +53,6 @@ let ``Test Get User`` () =
 
 [<Fact>]
 let ``Test Create User`` () =
-    let dbUser = GetTestDbUser()
     let dtoUser = GetTestDtoUser()
 
     let userId = async {

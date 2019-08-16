@@ -18,10 +18,8 @@ let GetTestQuestion () =
 [<Fact>]
 let ``Test Create Question`` () =
 
-    //let user = RepositoryTests.GetTestUser()
     let question = GetTestQuestion()
     let questionRepo = GetIQuestionRepo "Test_Create_Question"
-    //let createdUser = userRepo.CreateUser(user)
     let createdQuestionId = Async.RunSynchronously (questionRepo.CreateQuestionAsync(question))
 
     Assert.NotNull(1, createdQuestionId)
@@ -41,12 +39,7 @@ let ``Test Get Questions`` () =
     let firstQuestion = GetTestQuestion()
     let secondQuestion = GetTestQuestion()
     let questionRepo = GetIQuestionRepo "Test_Get_Questions"
-    //let asyncCreate = async {    
-    //    questionRepo.CreateQuestionAsync firstQuestion |> ignore
-    //    questionRepo.CreateQuestionAsync secondQuestion |> ignore
-    //}
 
-    //Async.RunSynchronously(asyncCreate)
     Async.RunSynchronously(questionRepo.CreateQuestionAsync firstQuestion) |> ignore
     Async.RunSynchronously(questionRepo.CreateQuestionAsync secondQuestion) |> ignore
 
