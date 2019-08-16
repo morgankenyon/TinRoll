@@ -18,17 +18,17 @@ namespace TinRoll.Server.Controllers
 
 
         [HttpGet]
-        public IEnumerable<UserDto> GetUsers()
+        public async Task<IEnumerable<UserDto>> GetUsers()
         {
-            var users = _userManager.GetUsers();
+            var users = await _userManager.GetUsersAsync();
             return users;
         }
 
 
         [HttpPost]
-        public UserDto CreateUser(UserDto user)
+        public async Task<int> CreateUser(UserDto user)
         {
-            var newUser = _userManager.CreateUser(user);
+            var newUser = await _userManager.CreateUserAsync(user);
             return newUser;
         }
     }

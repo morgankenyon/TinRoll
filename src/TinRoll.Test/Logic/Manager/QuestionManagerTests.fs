@@ -8,6 +8,7 @@ open TinRoll.Data.Repository
 open TinRoll.Logic.Manager
 open NFluent
 open TinRoll.Shared
+open System.Threading.Tasks
 
 let GetTestDbQuestion () =
     new Question(1, "Test Title", "Test Text", 1, DateTime.Now, DateTime.Now)
@@ -16,40 +17,55 @@ let GetTestDtoQuestion () =
 
 [<Fact>] 
 let ``Test Get Questions`` () =
-    let dbQuestions = [GetTestDbQuestion()]
+    let dbQuestions = async { 
+        return [GetTestDbQuestion()]
+    }
 
     let mock = Mock<IQuestionRepository>()
-    mock.Setup(fun qRepo -> qRepo.GetQuestions()).Returns(dbQuestions) |> ignore
+    mock.Setup(fun qRepo -> qRepo.GetQuestionsAsync()).Returns(dbQuestions) |> ignore
 
     let questionManager = new QuestionManager(mock.Object) :> IQuestionManager
-    let questions = questionManager.GetQuestions()
+    let questions = 
+        questionManager.GetQuestionsAsync()
+        |> Async.AwaitTask
+        |> Async.RunSynchronously
 
     Check.That(questions.Length).IsEqualTo(1) |> ignore
     Check.That(questions.Head.Id).IsEqualTo(1) |> ignore
 
 [<Fact>]
 let ``Test Get Question`` () =
-    let dbQuestion = GetTestDbQuestion()
+    let dbQuestion = async {
+        return Some (GetTestDbQuestion())
+    }
 
     let mock = new Mock<IQuestionRepository>()
-    mock.Setup(fun qRepo -> qRepo.GetQuestion(It.IsAny<int>())).Returns(dbQuestion) |> ignore
+    mock.Setup(fun qRepo -> qRepo.GetQuestionAsync(It.IsAny<int>())).Returns(dbQuestion) |> ignore
     
     let questionManager = new QuestionManager(mock.Object) :> IQuestionManager
-    let question = questionManager.GetQuestion 1
+    let question = 
+        questionManager.GetQuestionAsync 1
+        |> Async.AwaitTask
+        |> Async.RunSynchronously
 
     Check.That(question).IsNotNull() |> ignore
     Check.That(question.Id).IsEqualTo(1) |> ignore
 
 [<Fact>]
 let ``Test CreateQuestion`` () =
-    let dbQuestion = GetTestDbQuestion()
     let dtoQuestion = GetTestDtoQuestion()
 
+    let questionId = async {
+        return 1
+    }
+
     let mock = Mock<IQuestionRepository>()
-    mock.Setup(fun qRepo -> qRepo.CreateQuestion(It.IsAny<Question>())).Returns(dbQuestion) |> ignore
+    mock.Setup(fun qRepo -> qRepo.CreateQuestionAsync(It.IsAny<Question>())).Returns(questionId) |> ignore
     
     let questionManager = new QuestionManager(mock.Object) :> IQuestionManager
-    let question = questionManager.CreateQuestion dtoQuestion
+    let questionId = 
+        questionManager.CreateQuestionAsync dtoQuestion
+        |> Async.AwaitTask
+        |> Async.RunSynchronously
 
-    Check.That(question).IsNotNull() |> ignore
-    Check.That(question.Id).IsEqualTo(1) |> ignore
+    Check.That(questionId).IsEqualTo(1) |> ignore

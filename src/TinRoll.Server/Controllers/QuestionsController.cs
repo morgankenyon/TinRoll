@@ -21,25 +21,25 @@ namespace TinRoll.Server.Controllers
 
 
         [HttpGet]
-        public IEnumerable<QuestionDto> GetQuestions()
+        public async Task<IEnumerable<QuestionDto>> GetQuestions()
         {
-            var questions = _questionManager.GetQuestions();
+            var questions = await _questionManager.GetQuestionsAsync();
             return questions;
         }
 
         [HttpGet("{Id}")]
-        public QuestionDto GetQuestion(int Id)
+        public async Task<QuestionDto> GetQuestion(int Id)
         {
-            var question = _questionManager.GetQuestion(Id);
+            var question = await _questionManager.GetQuestionAsync(Id);
             return question;
         }
 
 
         [HttpPost]
-        public QuestionDto CreateQuestion(QuestionDto question)
+        public async Task<int> CreateQuestion(QuestionDto question)
         {
-            var newQuestion = _questionManager.CreateQuestion(question);
-            return newQuestion;
+            var questionId = await _questionManager.CreateQuestionAsync(question);
+            return questionId;
         }
     }
 }

@@ -37,7 +37,7 @@
     private async Task HandleValidSubmit()
     {
         questionDto.UserId = 1;
-        var createdQuestion = await Http.SendJsonAsync<QuestionDto>(HttpMethod.Post, "api/questions", questionDto);
-        uriHelper.NavigateTo("/questions");
+        var id = await Http.SendJsonAsync<int>(HttpMethod.Post, "api/questions", questionDto);
+        uriHelper.NavigateTo($"/questions/{id}");
     }
 }

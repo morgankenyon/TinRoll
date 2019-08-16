@@ -4,6 +4,7 @@ open Xunit
 open TinRoll.Data
 open System
 open TinRoll.Data.Repository
+open NFluent
 
 
 let GetIUserRepo dbName =
@@ -17,28 +18,35 @@ let ``Test Create User`` () =
 
     let user = RepositoryTests.GetTestUser()
     let userRepo = GetIUserRepo "Test_Create_User"
-    let createdUser = userRepo.CreateUser(user)
+    let createdUserId = userRepo.CreateUserAsync(user)
+                      |> Async.RunSynchronously
 
-    Assert.NotNull(createdUser)
-    Assert.Equal(1, createdUser.Id)
+    Assert.Equal(1, createdUserId)
     
 [<Fact>]
 let ``Test Get User Success`` () =
     let userRepo = GetIUserRepo "Test_Get_User_Success"
     let user = RepositoryTests.GetTestUser()
-    let createdUser = userRepo.CreateUser user
+    let createdUserId = 
+        userRepo.CreateUserAsync user
+        |> Async.RunSynchronously
+                    
     
     
-    let searchedUser = userRepo.GetUser createdUser.Id
+    let searchedUser = 
+        userRepo.GetUserAsync createdUserId
+        |> Async.RunSynchronously
     
     Assert.NotNull(searchedUser)
-    Assert.Equal(1, searchedUser.Id)
+    Check.That(Option.isSome searchedUser) |> ignore
         
 [<Fact>]
 let ``Test Get User Fail`` () =
     let userRepo = GetIUserRepo "Test_Get_User_Fail"
         
         
-    let searchedUser = userRepo.GetUser 1
+    let searchedUser = 
+        userRepo.GetUserAsync 1
+        |> Async.RunSynchronously
         
-    Assert.Null(searchedUser) ///needs to return an option type at some point
+    Check.That(Option.isNone searchedUser)

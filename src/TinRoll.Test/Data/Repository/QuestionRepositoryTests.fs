@@ -4,6 +4,7 @@ open TinRoll.Data
 open TinRoll.Data.Repository
 open System
 open Xunit
+open NFluent
 
 let GetIQuestionRepo dbName =
     let options = RepositoryTests.BuildInMemoryDatabase dbName
@@ -17,35 +18,32 @@ let GetTestQuestion () =
 [<Fact>]
 let ``Test Create Question`` () =
 
-    //let user = RepositoryTests.GetTestUser()
     let question = GetTestQuestion()
     let questionRepo = GetIQuestionRepo "Test_Create_Question"
-    //let createdUser = userRepo.CreateUser(user)
-    let createdQuestion = questionRepo.CreateQuestion(question)
+    let createdQuestionId = Async.RunSynchronously (questionRepo.CreateQuestionAsync(question))
 
-    Assert.NotNull(createdQuestion)
-    Assert.Equal(1, createdQuestion.Id)
+    Assert.NotNull(1, createdQuestionId)
 
 [<Fact>]
 let ``Test Get Question`` () =
     let question = GetTestQuestion()
     let questionRepo = GetIQuestionRepo "Test_Get_Question"
-    let createdQuestion = questionRepo.CreateQuestion(question)
+    let createdQuestionId = Async.RunSynchronously (questionRepo.CreateQuestionAsync(question))
 
-    let searchedQuestion = questionRepo.GetQuestion createdQuestion.Id
+    let searchedQuestion = Async.RunSynchronously (questionRepo.GetQuestionAsync createdQuestionId)
 
-    Assert.NotNull(createdQuestion)
-    Assert.Equal(1, searchedQuestion.Id)
+    Check.That(Option.isSome searchedQuestion) |> ignore
 
 [<Fact>]
 let ``Test Get Questions`` () =
     let firstQuestion = GetTestQuestion()
     let secondQuestion = GetTestQuestion()
     let questionRepo = GetIQuestionRepo "Test_Get_Questions"
-    questionRepo.CreateQuestion firstQuestion |> ignore
-    questionRepo.CreateQuestion secondQuestion |> ignore
 
-    let questions = questionRepo.GetQuestions()
+    Async.RunSynchronously(questionRepo.CreateQuestionAsync firstQuestion) |> ignore
+    Async.RunSynchronously(questionRepo.CreateQuestionAsync secondQuestion) |> ignore
+
+    let questions = Async.RunSynchronously(questionRepo.GetQuestionsAsync())
 
     Assert.Equal(2, questions.Length)
 
@@ -53,6 +51,6 @@ let ``Test Get Questions`` () =
 let ``Test Get Question Fail`` () =
     let questionRepo = GetIQuestionRepo "Test_Get_Question_Fail"
     
-    let searchedQuestion = questionRepo.GetQuestion 23
+    let searchedQuestion = Async.RunSynchronously(questionRepo.GetQuestionAsync 23)
 
-    Assert.Null(searchedQuestion)
+    Check.That(Option.isNone searchedQuestion) |> ignore

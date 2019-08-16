@@ -17,39 +17,55 @@ let GetTestDtoUser () =
 
 [<Fact>]
 let ``Test Get Users`` () =
-    let dbUsers = [GetTestDbUser()]
+    let dbUsers = async {
+        return [GetTestDbUser()]
+    }
     let mock = Mock<IUserRepository>();
-    mock.Setup(fun userRepo -> userRepo.GetUsers()).Returns(dbUsers) |> ignore
+    mock.Setup(fun ur -> ur.GetUsersAsync()).Returns(dbUsers) |> ignore
 
     let userManager = new UserManager(mock.Object) :> IUserManager
-    let users = userManager.GetUsers()
+    let users = 
+        userManager.GetUsersAsync()
+        |> Async.AwaitTask
+        |> Async.RunSynchronously
+
 
     Check.That(users.Length).IsEqualTo(1) |> ignore
     Check.That(users.Head.Id).IsEqualTo(1) |> ignore
 
 [<Fact>]
 let ``Test Get User`` () =
-    let dbUser = GetTestDbUser()
+    let dbUser = async {
+        return Some (GetTestDbUser())
+    }
 
     let mock = Mock<IUserRepository>();
-    mock.Setup(fun userRepo -> userRepo.GetUser(It.IsAny<int>())).Returns(dbUser) |> ignore
+    mock.Setup(fun userRepo -> userRepo.GetUserAsync(It.IsAny<int>())).Returns(dbUser) |> ignore
 
     let userManager = new UserManager(mock.Object) :> IUserManager
-    let user = userManager.GetUser 1
+    let user = 
+        userManager.GetUserAsync 1
+        |> Async.AwaitTask
+        |> Async.RunSynchronously
 
     Check.That(user).IsNotNull() |> ignore
     Check.That(user.Id).IsEqualTo(1) |> ignore
 
 [<Fact>]
 let ``Test Create User`` () =
-    let dbUser = GetTestDbUser()
     let dtoUser = GetTestDtoUser()
 
+    let userId = async {
+        return 1
+    }
+
     let mock = Mock<IUserRepository>();
-    mock.Setup(fun userRepo -> userRepo.CreateUser(It.IsAny<User>())).Returns(dbUser) |> ignore
+    mock.Setup(fun userRepo -> userRepo.CreateUserAsync(It.IsAny<User>())).Returns(userId) |> ignore
     
     let userManager = new UserManager(mock.Object) :> IUserManager
-    let createdDtoUser = userManager.CreateUser dtoUser
+    let userId = 
+        userManager.CreateUserAsync dtoUser
+        |> Async.AwaitTask
+        |> Async.RunSynchronously
     
-    Check.That(createdDtoUser).IsNotNull() |> ignore
-    Check.That(createdDtoUser.Id).IsEqualTo(1) |> ignore
+    Check.That(userId).IsEqualTo(1) |> ignore
