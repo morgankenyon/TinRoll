@@ -35,3 +35,4 @@ msbuild.wrn
 
 # Project Specific
 tinroll.api/tin.db
+.ionide/
