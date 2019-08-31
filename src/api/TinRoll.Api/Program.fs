@@ -1,15 +1,17 @@
-﻿open System
+﻿
+open System
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Hosting
 open Microsoft.Extensions.DependencyInjection
+open Microsoft.AspNetCore.Http
+open Microsoft.EntityFrameworkCore
 open Giraffe
+open Models
+open QuestionsRepository
+open TinRollContext
+open Microsoft.Extensions.Logging
 
-type Question =
-    {
-        Title : string
-        Content : string
-        CreatedDate : DateTime
-    }
+
 type Message =
     {
         Text : string
@@ -18,14 +20,18 @@ type Message =
 let helloWorld =
     {Text = "Hello World"}
 
+let questionsHandler =
+    fun (next : HttpFunc) (ctx : HttpContext) ->
+        let context = ctx.RequestServices.GetService(typeof<TinRollContext>) :?> TinRollContext
+        getAll context |> ctx.WriteJsonAsync
 let getQuestions =
     [
-        { Title = "Question #1"; Content = "Can you help me figure this out?"; CreatedDate = DateTime.UtcNow.AddDays(-1.0)};
-        { Title = "Question #2"; Content = "Can you help me figure this out?"; CreatedDate = DateTime.UtcNow.AddDays(-2.0)};
-        { Title = "Question #3"; Content = "Can you help me figure this out?"; CreatedDate = DateTime.UtcNow.AddDays(-3.0)};
-        { Title = "Question #4"; Content = "Can you help me figure this out?"; CreatedDate = DateTime.UtcNow.AddDays(-4.0)};
-        { Title = "Question #5"; Content = "Can you help me figure this out?"; CreatedDate = DateTime.UtcNow.AddDays(-5.0)};
-        { Title = "Question #6"; Content = "Can you help me figure this out?"; CreatedDate = DateTime.UtcNow.AddDays(-6.0)}
+        { Id = 1; Title = "Question #1"; Content = "Can you help me figure this out?"; CreatedDate = DateTime.UtcNow.AddDays(-1.0)};
+        { Id = 2; Title = "Question #2"; Content = "Can you help me figure this out?"; CreatedDate = DateTime.UtcNow.AddDays(-2.0)};
+        { Id = 3; Title = "Question #3"; Content = "Can you help me figure this out?"; CreatedDate = DateTime.UtcNow.AddDays(-3.0)};
+        { Id = 4; Title = "Question #4"; Content = "Can you help me figure this out?"; CreatedDate = DateTime.UtcNow.AddDays(-4.0)};
+        { Id = 5; Title = "Question #5"; Content = "Can you help me figure this out?"; CreatedDate = DateTime.UtcNow.AddDays(-5.0)};
+        { Id = 6; Title = "Question #6"; Content = "Can you help me figure this out?"; CreatedDate = DateTime.UtcNow.AddDays(-6.0)}
     ]
 
 // let questionsHandler = 
@@ -51,7 +57,14 @@ let configureApp (app : IApplicationBuilder) =
 
 let configureServices (services : IServiceCollection) =
     // Add Giraffe dependencies
+    services.AddDbContext<TinRollContext>
+        (fun (options : DbContextOptionsBuilder) ->
+            options.UseSqlServer(@"Server=(localdb)\\mssqllocaldb;Database=TinRollDb;Trusted_Connection=True;MultipleActiveResultSets=true", fun f -> f.MigrationsAssembly("TinRoll.Migrations") |> ignore) |> ignore) |> ignore
     services.AddGiraffe() |> ignore
+
+let configureLogging (builder : ILoggingBuilder) =
+    let filter (l : LogLevel) = l.Equals LogLevel.Error
+    builder.AddFilter(filter).AddConsole().AddDebug() |> ignore
 
 [<EntryPoint>]
 let main _ =
@@ -59,6 +72,7 @@ let main _ =
         .UseKestrel()
         .Configure(Action<IApplicationBuilder> configureApp)
         .ConfigureServices(configureServices)
+        .ConfigureLogging(configureLogging)
         .Build()
         .Run()
     0
