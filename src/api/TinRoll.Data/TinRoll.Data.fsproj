@@ -6,7 +6,8 @@
 
   <ItemGroup>
     <Compile Include="Models.fs" />	
-    <Compile Include="TinRollContext.fs" />
+    <Compile Include="TinRollContext.fs" />	
+    <Compile Include="AnswerRepository.fs" />
     <Compile Include="QuestionsRepository.fs" />
   </ItemGroup>
 

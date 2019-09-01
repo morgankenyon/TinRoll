@@ -11,7 +11,6 @@ open FSharp.Control.Tasks
 open Microsoft.AspNetCore.Cors.Infrastructure
 
 
-
 let getQuestions =
     fun (next : HttpFunc) (ctx : HttpContext) ->
         let context = ctx.RequestServices.GetService(typeof<TinRollContext>) :?> TinRollContext
@@ -26,14 +25,35 @@ let addQuestion =
                     |> Async.RunSynchronously
                     |> function 
                     | Some l -> (setStatusCode 200 >=> json l) next ctx
-                    | None -> (setStatusCode 400 >=> json "Label not added") next ctx
+                    | None -> (setStatusCode 400 >=> json "Question not added") next ctx
         }
+
+let getAnswers =
+    fun (next : HttpFunc) (ctx : HttpContext) ->
+        let context = ctx.RequestServices.GetService(typeof<TinRollContext>) :?> TinRollContext
+        AnswerRepo.getAll context |> ctx.WriteJsonAsync
+        
+let addAnswer = 
+    fun (next : HttpFunc) (ctx : HttpContext) -> 
+        task { 
+            use context = ctx.RequestServices.GetService(typeof<TinRollContext>) :?> TinRollContext
+            let! answer = ctx.BindJsonAsync<Answer>()
+            return! AnswerRepo.addAnswerAsync context answer
+                    |> Async.RunSynchronously
+                    |> function 
+                    | Some l -> (setStatusCode 200 >=> json l) next ctx
+                    | None -> (setStatusCode 400 >=> json "Question not added") next ctx
+        }
+    
     
 let webApp =
     choose [
         GET >=> choose [
-                route "/api/questions" >=> getQuestions ]
-        POST >=> route "/api/questions" >=> addQuestion
+                route "/api/questions" >=> getQuestions
+                route "/api/answers" >=> getAnswers ]
+        POST >=> choose [
+                route "/api/questions" >=> addQuestion 
+                route "/api/answers" >=> addAnswer ]
     ]
 
 let configureCors (builder : CorsPolicyBuilder) =

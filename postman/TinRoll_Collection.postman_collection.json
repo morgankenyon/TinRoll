@@ -70,12 +70,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:1059/api/questions",
+							"raw": "http://localhost:5000/api/questions",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "1059",
+							"port": "5000",
 							"path": [
 								"api",
 								"questions"
@@ -98,18 +98,81 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"Title\": \"How does this tutorial work again?\",\n\t\"Text\": \"Can you explain everything again? It was confusing the first time.\",\n\t\"UserId\": 1\n}"
+							"raw": "{\n\t\"Title\": \"How does this tutorial work again?\",\n\t\"Content\": \"Can you explain everything again? It was confusing the first time.\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:1059/api/questions",
+							"raw": "http://localhost:5000/api/questions",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "1059",
+							"port": "5000",
 							"path": [
 								"api",
 								"questions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Answer",
+			"item": [
+				{
+					"name": "Create Answer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Content\": \"This is the body of the answer\",\n\t\"QuestionId\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/answers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"answers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Answers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/answers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"answers"
 							]
 						}
 					},
