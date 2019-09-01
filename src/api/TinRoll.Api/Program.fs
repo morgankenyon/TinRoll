@@ -16,6 +16,14 @@ let getQuestions =
         let context = ctx.RequestServices.GetService(typeof<TinRollContext>) :?> TinRollContext
         QuestionRepo.getAll context |> ctx.WriteJsonAsync
 
+let getQuestion (questionId : int) =
+    fun (next : HttpFunc) (ctx : HttpContext) ->
+        let context = ctx.RequestServices.GetService(typeof<TinRollContext>) :?> TinRollContext
+        match QuestionRepo.getQuestion context questionId with
+        | Some q -> ctx.WriteJsonAsync q
+        | None -> (setStatusCode 400 >=> json "Question not found") next ctx
+
+
 let addQuestion = 
     fun (next : HttpFunc) (ctx : HttpContext) -> 
         task { 
@@ -50,6 +58,7 @@ let webApp =
     choose [
         GET >=> choose [
                 route "/api/questions" >=> getQuestions
+                routef "/api/questions/%i" getQuestion
                 route "/api/answers" >=> getAnswers ]
         POST >=> choose [
                 route "/api/questions" >=> addQuestion 

@@ -114,6 +114,27 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get Question",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/questions/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"questions",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
