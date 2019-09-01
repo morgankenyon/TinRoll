@@ -1,2 +1,13 @@
-#tinApp {
+#tinAppGrid {
+    display:grid;
+    grid-template-rows: auto;
+    grid-template-columns:1fr 4fr;
+}
+
+#tinAppFirst {
+    padding:5px;
+}
+
+#tinAppSecond {
+    padding:5px;
 }
