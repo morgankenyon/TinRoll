@@ -9,3 +9,11 @@ type Question =
         Content : string
         CreatedDate : DateTime
     }
+and [<CLIMutable>] Answer =
+    {
+        Id : int
+        Content : string
+        CreatedDate : DateTime
+        QuestionId : int
+        Question : Question
+    }

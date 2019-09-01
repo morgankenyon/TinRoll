@@ -11,4 +11,10 @@ type TinRollContext(options : DbContextOptions<TinRollContext>) =
         with get() = x.questions
         and set v = x.questions <- v
 
+    [<DefaultValue>]
+    val mutable answers:DbSet<Answer>
+    member x.Answers
+        with get() = x.answers
+        and set v = x.answers <- v
+
    
