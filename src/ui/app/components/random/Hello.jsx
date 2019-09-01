@@ -11,9 +11,9 @@ class Hello extends React.Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         let endpoint = `localhost:5000/hello`
-        let response = getDataObject(endpoint)
+        let response = await getDataObject(endpoint)
         console.log(response)
     }
 
