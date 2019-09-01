@@ -1,7 +1,6 @@
-module TinRollContext
+namespace TinRoll.Data
 
 open Microsoft.EntityFrameworkCore
-open Models
 
 type TinRollContext(options : DbContextOptions<TinRollContext>) =
     inherit DbContext(options)

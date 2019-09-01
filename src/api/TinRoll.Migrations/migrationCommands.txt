@@ -1,0 +1,5 @@
+//Add Migration
+dotnet ef migrations add Initial -s ..\TinRoll.Api\ -c TinRollContext -v
+
+//Update Database
+dotnet ef database update -s ..\TinRoll.Api\ -c TinRollContext -v

@@ -1,4 +1,4 @@
-module Models
+namespace TinRoll.Data
 open System
 
 [<CLIMutable>]
