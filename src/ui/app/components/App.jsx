@@ -6,6 +6,7 @@ import Landing from './landing/Landing'
 import Hello from './random/Hello'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+
 import './app.css'
 
 class App extends React.Component {
@@ -20,6 +21,7 @@ class App extends React.Component {
                     <Route path='/hello' component={Hello} />
                 </div>
             </Router>
+
         )
     }
 }
