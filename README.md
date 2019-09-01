@@ -1,5 +1,29 @@
 # TinRoll
-A stackoverflow clone built with Microsoft technology and currently no JavaScript. Blazor for UI + Web API = C# everywhere! Right now it's very feature bare. You can ask text only questions and can view them in a list. 
+A stackoverflow clone built with F# + Giraffe for the backend and React for the front end. Right now it's very feature bare. You can ask text only questions and can view them in a list. 
+
+
+# Running Locally
+
+DB Setup: 
+
+1. Install Sql Server
+2. Right now TinRoll is defaulted to use localdb instance. 
+3. Run src/api/TinRoll.Migrations/updateDatabase.ps1 script to create local database.
+4. If that fails, try logging into sql server instance through SSMS and creating the `TinRollDb` manually then rerunning the script. Some versions of LocalDb have a bug around creating databases.
+
+API Setup:
+
+1. Download Visual Studio Code
+2. Open up the API folder in Visual Studio Code.
+3. You should be prompted to install some extensions, the ionide plugin allowing F# support.
+4. Edit the API to your heart's content.
+5. You can either run the project from Visual Studio Code, or un the src/api/run.ps1 script to launch the API.
+
+UI Setup:
+
+1. In src/ui folder, run `npm install`.
+2. Run `npm run start`
+3. Navigate browser to `localhost:8080` to access the UI.
 
 # Articles
 
@@ -15,7 +39,7 @@ Here are the blog posts that have been written over TinRoll as an app.
 
 # RoadMap
 
-Features I'm planning on implementing, somewhat in the order I envision things will get implemented.
+Things that might get done if time permits. 
 
 * Answers
 * User accounts (some type of basic authentication)
