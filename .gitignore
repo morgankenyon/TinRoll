@@ -36,3 +36,6 @@ msbuild.wrn
 # Project Specific
 tinroll.api/tin.db
 .ionide/
+
+# React Frontend
+node_modules/
