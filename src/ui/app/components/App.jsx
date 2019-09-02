@@ -5,7 +5,7 @@ import Landing from './landing/Landing'
 
 import Hello from './random/Hello'
 
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { HashRouter as Router, Route } from 'react-router-dom'
 
 import './app.css'
 
