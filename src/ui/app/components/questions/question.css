@@ -1,0 +1,34 @@
+#tinQuestions {
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    grid-gap:3px;
+    margin:5px;
+}
+
+#tinQuestions > div {
+    padding:5px;
+}
+
+#tinQuestionsHeader {
+    border:1px solid palevioletred;
+}
+
+#tinQuestionsList {
+    border:1px solid navy;
+    display:flex;
+    flex-direction:column;
+    padding:5px;
+}
+
+#tinQuestionsList > a {
+    margin-bottom:5px;
+    text-decoration:none;
+    margin-left:10px;
+    align-items:flex-start;
+}
+
+
+#tinSingleQuestion {
+    display:flex;
+    flex-direction:column;
+}

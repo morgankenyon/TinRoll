@@ -1,14 +1,15 @@
 const axios = require('axios')
+const uuidv4 = require('uuid/v4')
 
 const dummyQuestions = [
     {
-        Id: 23423,
+        Id: uuidv4(),
         Title: 'Javascript Help',
         Content: 'I can\'t get my javascript to work',
         CreatedDate: new Date()
     },
     {
-        Id:51513,
+        Id:uuidv4(),
         Title: 'CSS Help',
         Content: 'My CSS skills are garbage',
         CreatedDate: new Date()
@@ -24,9 +25,18 @@ const getDataObject = function(endpoint) {
 }
 
 
-const getDataObjectDummy = function(id) {
+const getQuestionDummy = function(id) {
     const result = dummyQuestions.find(question => question.Id === id)
     return result
 }
 
-export { getDataObject, getDataObjectDummy }
+const getQuestionsDummy = function() {
+    return dummyQuestions
+}
+
+const postDummyQuestion = function(question) {
+    dummyQuestions.push(question)
+    console.log(dummyQuestions)
+}
+
+export { getDataObject, getQuestionDummy, getQuestionsDummy, postDummyQuestion }

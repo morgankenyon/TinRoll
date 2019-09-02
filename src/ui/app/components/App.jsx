@@ -2,8 +2,10 @@ import React from 'react'
 
 import Nav from './nav/Nav'
 import Landing from './landing/Landing'
+import Footer from './footer/Footer'
 
-import Hello from './random/Hello'
+import Questions from './questions/Questions'
+import SingleQuestion from './questions/SingleQuestion'
 
 import { HashRouter as Router, Route } from 'react-router-dom'
 
@@ -14,11 +16,14 @@ class App extends React.Component {
         return (
             <Router>
                 <div id='tinApp'>
-                    <Nav/>
+                    <Nav />
 
 
                     <Route exact path='/' component={Landing} />
-                    <Route path='/hello' component={Hello} />
+                    <Route path='/questions' component={Questions} />
+                    <Route path={`/question/:titleId`} component={SingleQuestion} />
+
+                    <Footer />
                 </div>
             </Router>
 
