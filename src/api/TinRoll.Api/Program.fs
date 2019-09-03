@@ -1,4 +1,5 @@
 ﻿open System
+open Microsoft.AspNetCore.Cors
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Hosting
 open Microsoft.Extensions.DependencyInjection
@@ -69,6 +70,8 @@ let configureCors (builder : CorsPolicyBuilder) =
     builder.WithOrigins("http://localhost:8080").AllowAnyMethod().AllowAnyHeader() |> ignore
 
 let configureApp (app : IApplicationBuilder) =
+    // Configure CORS
+    app.UseCors(fun b -> configureCors(b)) |> ignore
     // Add Giraffe to the ASP.NET Core pipeline
     app.UseGiraffe webApp
 
