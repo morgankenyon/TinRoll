@@ -1,5 +1,5 @@
 # TinRoll
-A stackoverflow clone built with F# + Giraffe for the backend and React for the front end. Right now it's very feature bare. You can ask text only questions and can view them in a list. 
+A stackoverflow clone built with C# + EF Core for the backend and React for the front end. Right now it's very feature bare. You can ask text only questions and can view them in a list. 
 
 
 # Running Locally
