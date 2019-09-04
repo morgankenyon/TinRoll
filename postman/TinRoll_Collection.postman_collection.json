@@ -22,15 +22,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"Email\": \"testemail2@email.com\",\n\t\"UserName\": \"TestUsername2\"\n}"
+							"raw": "{\n\t\"Email\": \"testemail2@email.com\",\n\t\"Username\": \"TestUsername2\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:1059/api/users",
+							"raw": "http://localhost:1076/api/users",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "1059",
+							"port": "1076",
 							"path": [
 								"api",
 								"users"
@@ -45,12 +45,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:1059/api/users",
+							"raw": "http://localhost:1076/api/users",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "1059",
+							"port": "1076",
 							"path": [
 								"api",
 								"users"
@@ -70,12 +70,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/questions",
+							"raw": "http://localhost:1076/api/questions",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5000",
+							"port": "1076",
 							"path": [
 								"api",
 								"questions"
@@ -98,15 +98,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"Title\": \"How does this tutorial work again?\",\n\t\"Content\": \"Can you explain everything again? It was confusing the first time.\"\n}"
+							"raw": "{\n\t\"Title\": \"How does this tutorial work again?\",\n\t\"Content\": \"Can you explain everything again? It was confusing the first time.\",\n\t\"UserId\": 1\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/questions",
+							"raw": "http://localhost:1076/api/questions",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5000",
+							"port": "1076",
 							"path": [
 								"api",
 								"questions"
@@ -121,12 +121,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/questions/1",
+							"raw": "http://localhost:1076/api/questions/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5000",
+							"port": "1076",
 							"path": [
 								"api",
 								"questions",
