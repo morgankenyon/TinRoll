@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinRoll.Api", "TinRoll.Api\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinRoll.Data", "TinRoll.Data\TinRoll.Data.csproj", "{7F4B54A3-1B24-4DA8-BB44-D0B7D97C37E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinRoll.Shared", "TinRoll.Shared\TinRoll.Shared.csproj", "{07D7FBA3-67D1-45D3-BBA0-0D476C28AF61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinRoll.Logic", "TinRoll.Logic\TinRoll.Logic.csproj", "{55EB2022-00C2-457A-BBAF-25ED4AF92960}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{7F4B54A3-1B24-4DA8-BB44-D0B7D97C37E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F4B54A3-1B24-4DA8-BB44-D0B7D97C37E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F4B54A3-1B24-4DA8-BB44-D0B7D97C37E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07D7FBA3-67D1-45D3-BBA0-0D476C28AF61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07D7FBA3-67D1-45D3-BBA0-0D476C28AF61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07D7FBA3-67D1-45D3-BBA0-0D476C28AF61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07D7FBA3-67D1-45D3-BBA0-0D476C28AF61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55EB2022-00C2-457A-BBAF-25ED4AF92960}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55EB2022-00C2-457A-BBAF-25ED4AF92960}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55EB2022-00C2-457A-BBAF-25ED4AF92960}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55EB2022-00C2-457A-BBAF-25ED4AF92960}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

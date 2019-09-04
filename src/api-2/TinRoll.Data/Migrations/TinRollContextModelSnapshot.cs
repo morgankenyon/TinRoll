@@ -96,7 +96,7 @@ namespace TinRoll.Data.Migrations
                     b.HasOne("TinRoll.Data.Entities.User", "User")
                         .WithMany("Answers")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("TinRoll.Data.Entities.Question", b =>

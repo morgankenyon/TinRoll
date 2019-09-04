@@ -1,1 +1,1 @@
-dotnet ef migrations remove -s ..\TinRoll.Api\ -c TinRollContext -v
+dotnet ef migrations remove -s ..\TinRoll.Api\ -v

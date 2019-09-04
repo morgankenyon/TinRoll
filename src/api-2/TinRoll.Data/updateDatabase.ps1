@@ -1,1 +1,1 @@
-dotnet ef database update -s ..\TinRoll.Api\ -c TinRollContext -v
+dotnet ef database update -s ..\TinRoll.Api\ -v

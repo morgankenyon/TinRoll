@@ -10,7 +10,7 @@ using TinRoll.Data;
 namespace TinRoll.Data.Migrations
 {
     [DbContext(typeof(TinRollContext))]
-    [Migration("20190904003740_Initial")]
+    [Migration("20190904011006_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,7 +98,7 @@ namespace TinRoll.Data.Migrations
                     b.HasOne("TinRoll.Data.Entities.User", "User")
                         .WithMany("Answers")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("TinRoll.Data.Entities.Question", b =>
