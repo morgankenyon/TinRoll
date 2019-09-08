@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TinRoll.Data;
 
-namespace TinRoll.Migrations.Migrations
+namespace TinRoll.Data.Migrations
 {
     [DbContext(typeof(TinRollContext))]
-    [Migration("20190901193200_AddAnswer")]
-    partial class AddAnswer
+    [Migration("20190904011006_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace TinRoll.Migrations.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("TinRoll.Data.Answer", b =>
+            modelBuilder.Entity("TinRoll.Data.Entities.Answer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,14 +33,20 @@ namespace TinRoll.Migrations.Migrations
 
                     b.Property<int>("QuestionId");
 
+                    b.Property<DateTime>("UpdatedDate");
+
+                    b.Property<int>("UserId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("QuestionId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Answers");
                 });
 
-            modelBuilder.Entity("TinRoll.Data.Question", b =>
+            modelBuilder.Entity("TinRoll.Data.Entities.Question", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,16 +58,54 @@ namespace TinRoll.Migrations.Migrations
 
                     b.Property<string>("Title");
 
+                    b.Property<DateTime>("UpdatedDate");
+
+                    b.Property<int>("UserId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("TinRoll.Data.Answer", b =>
+            modelBuilder.Entity("TinRoll.Data.Entities.User", b =>
                 {
-                    b.HasOne("TinRoll.Data.Question", "Question")
-                        .WithMany()
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Email");
+
+                    b.Property<DateTime>("UpdatedDate");
+
+                    b.Property<string>("Username");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("TinRoll.Data.Entities.Answer", b =>
+                {
+                    b.HasOne("TinRoll.Data.Entities.Question", "Question")
+                        .WithMany("Answers")
                         .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TinRoll.Data.Entities.User", "User")
+                        .WithMany("Answers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("TinRoll.Data.Entities.Question", b =>
+                {
+                    b.HasOne("TinRoll.Data.Entities.User", "User")
+                        .WithMany("Questions")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
