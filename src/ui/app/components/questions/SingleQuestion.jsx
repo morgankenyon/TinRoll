@@ -2,6 +2,8 @@ import React from 'react'
 
 import { getQuestionDummy } from '../../utils/apiCalls'
 
+import Answer from '../answer/Answer'
+
 import './question.css'
 
 class SingleQuestion extends React.Component {
@@ -33,18 +35,23 @@ class SingleQuestion extends React.Component {
     render() {
         return (
             <div id='tinSingleQuestion'>
-                {
-                    this.state.message !== '' &&
-                    <p>{this.state.message}</p>
-                }
+                <div id='tinSingleQuestionTop'>
+                    {
+                        this.state.message !== '' &&
+                        <p>{this.state.message}</p>
+                    }
 
-                {
-                    this.state.question.Title &&
-                    <div id='tinQuestionSingle'>
-                        <h3>{this.state.question.Title}</h3>
-                        <p>{this.state.question.Content}</p>
-                    </div>
-                } 
+                    {
+                        this.state.question.Title &&
+                        <div id='tinQuestionSingle'>
+                            <h3>{this.state.question.Title}</h3>
+                            <p>{this.state.question.Content}</p>
+                        </div>
+                    } 
+                </div>
+                <div id='tinSingleQuestionBottom'>
+                    <Answer />
+                </div>
             </div>
         )
     }
