@@ -36,17 +36,7 @@ namespace TinRoll.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TinRoll API", Version = "v1" });
             });
 
-            services.AddCors(c =>
-            {
-                c.AddPolicy(SpecificOrigins,
-                    builder =>
-                    {
-                        builder.WithOrigins("http://localhost:8080")
-                            .AllowAnyHeader()
-                            .AllowAnyMethod();
-                    });
-            });
-
+            services.AddCors();
             MapDependencyInjection(services);
         }
 
@@ -69,6 +59,7 @@ namespace TinRoll.Api
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "TinRoll API V1");
             });
+            app.UseCors(builder => builder.WithOrigins("http://localhost:8080"));
             app.UseMvc();
 
         }
@@ -78,10 +69,12 @@ namespace TinRoll.Api
             //managers
             services.AddScoped<IQuestionManager, QuestionManager>();
             services.AddScoped<IUserManager, UserManager>();
+            services.AddScoped<IAnswerManager, AnswerManager>();
 
             //repos
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAnswerRepository, AnswerRepository>();
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
         }
     }
