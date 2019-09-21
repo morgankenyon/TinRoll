@@ -29,23 +29,25 @@ namespace TinRoll.Api
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<TinRollContext>(
-                options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TinRollDb;Trusted_Connection=True;MultipleActiveResultSets=true"));
+                options => options.UseSqlServer(@"Server=DESKTOP-P0PO0N5\MSSQLLOCALDB;Database=TinRollDb;Trusted_Connection=True;MultipleActiveResultSets=true"));
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TinRoll API", Version = "v1" });
             });
 
-            services.AddCors(c =>
-            {
-                c.AddPolicy(SpecificOrigins,
-                    builder =>
-                    {
-                        builder.WithOrigins("http://localhost:8080")
-                            .AllowAnyHeader()
-                            .AllowAnyMethod();
-                    });
-            });
+            // services.AddCors(c =>
+            // {
+            //     c.AddPolicy(SpecificOrigins,
+            //         builder =>
+            //         {
+            //             builder.AllowAnyOrigin()//.WithOrigins("http://localhost:8080")
+            //                 .AllowAnyHeader()
+            //                 .AllowAnyMethod();
+            //         });
+            // });
+
+            services.AddCors();
 
             MapDependencyInjection(services);
         }
@@ -69,6 +71,7 @@ namespace TinRoll.Api
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "TinRoll API V1");
             });
+            app.UseCors(builder => builder.WithOrigins("http://localhost:8080"));
             app.UseMvc();
 
         }

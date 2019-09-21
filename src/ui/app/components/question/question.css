@@ -1,0 +1,22 @@
+.t-question {
+    display:flex;
+    flex-direction:row;
+}
+
+.t-q-discover {
+    flex:1;
+    padding:5px;
+}
+
+.t-q-d-questions {
+    display:flex;
+    flex-direction:column;
+}
+
+.t-q-d-questions a {
+    padding:3px 10px;
+}
+
+.t-q-ask {
+    flex:3;
+}

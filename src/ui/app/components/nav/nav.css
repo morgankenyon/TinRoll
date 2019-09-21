@@ -1,5 +1,18 @@
-#tinNav {
+.tin-nav {
     display:flex;
     flex-direction:row;
     justify-content:space-between;
+    padding:5px;
+}
+
+.tin-nav-part a {
+    padding:5px;
+    text-decoration:none;
+    color:black;
+    border-bottom:1px solid transparent;
+}
+
+.tin-nav-part a:hover {
+    border-bottom:1px solid rgba(0, 0, 0, 0.6);
+    opacity:0.6;
 }

@@ -1,14 +1,13 @@
 import React from 'react'
 
 import './footer.css'
-class Footer extends React.Component {
-    render() {
-        return (
-            <div id='tinFooter'>
-                <p>KenyonTwinsDev</p>
-            </div>
-        )
-    }
+
+const Footer = () => {
+    return (
+        <div className='tin-footer'>
+            <h4>kenyonbrodev</h4>
+        </div>
+    )
 }
 
 export default Footer

@@ -1,20 +1,23 @@
 import React from 'react'
 
-import { Link } from 'react-router-dom'
-
 import './nav.css'
 
-const Landing = () => {
+import { Link } from 'react-router-dom'
 
-    return <div id='tinNav'>
-        <div id='tinNavLeft'>
-            <Link to='/'>TinRoll</Link>
-            <Link to='/questions'>Questions</Link>
+const Nav = () => {
+    return (
+        <div className='tin-nav'>
+            
+            <div className='tin-nav-part'>
+                <Link to='/'>Home</Link>
+                <Link to='/question'>Question</Link>
+            </div>
+
+            <div className='tin-nav-part'>
+                <Link to='/profile'>Profile</Link>
+            </div>
         </div>
-        <div id='tinNavRight'>
-            <Link to='/profile'>Profile</Link>
-        </div>
-    </div>
+    )
 }
 
-export default Landing
+export default Nav
