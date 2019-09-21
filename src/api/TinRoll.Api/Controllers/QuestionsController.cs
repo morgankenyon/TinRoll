@@ -19,7 +19,6 @@ namespace TinRoll.Api.Controllers
             _questionManager = questionManager;
         }
 
-
         [HttpGet]
         public async Task<IEnumerable<QuestionDto>> GetQuestions()
         {

@@ -36,6 +36,7 @@ namespace TinRoll.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TinRoll API", Version = "v1" });
             });
 
+<<<<<<< HEAD
             // services.AddCors(c =>
             // {
             //     c.AddPolicy(SpecificOrigins,
@@ -49,6 +50,9 @@ namespace TinRoll.Api
 
             services.AddCors();
 
+=======
+            services.AddCors();
+>>>>>>> upstream/master
             MapDependencyInjection(services);
         }
 
@@ -81,10 +85,12 @@ namespace TinRoll.Api
             //managers
             services.AddScoped<IQuestionManager, QuestionManager>();
             services.AddScoped<IUserManager, UserManager>();
+            services.AddScoped<IAnswerManager, AnswerManager>();
 
             //repos
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAnswerRepository, AnswerRepository>();
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
         }
     }

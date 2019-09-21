@@ -155,15 +155,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"Content\": \"This is the body of the answer\",\n\t\"QuestionId\": 1\n}"
+							"raw": "{\n\t\"Content\": \"This is the body of the answer\",\n\t\"QuestionId\": 1,\n\t\"UserId\": 1\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/answers",
+							"raw": "http://localhost:1076/api/answers",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5000",
+							"port": "1076",
 							"path": [
 								"api",
 								"answers"
@@ -185,12 +185,12 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:5000/api/answers",
+							"raw": "http://localhost:1076/api/answers",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5000",
+							"port": "1076",
 							"path": [
 								"api",
 								"answers"
