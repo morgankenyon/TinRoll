@@ -1,6 +1,8 @@
 import React from 'react'
 import '@babel/polyfill'
 
+import './single.css'
+
 import { getObjectData } from '../../../utils/apiCalls'
 
 export default class SingleQuestion extends React.Component {
@@ -26,6 +28,10 @@ export default class SingleQuestion extends React.Component {
         this.setState({question:question.data})
     }
 
+    componentDidUpdate() {
+        console.log('update single')
+    }
+
     componentWillUnmount() {
         console.log('unmount single')
     }
@@ -42,7 +48,7 @@ export default class SingleQuestion extends React.Component {
                     <div className='t-s-q-question'>
                         <h2>{this.state.question.title}</h2>
                         <p>{this.state.question.createdDate}</p>
-                        <p>{this.state.question.content}</p>
+                        <p id='t-single-p'>{this.state.question.content}</p>
                     </div>
                     
 

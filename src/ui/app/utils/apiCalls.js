@@ -14,4 +14,17 @@ const getObjectData = function(endpoint) {
         })
 }
 
-export { getArrayData, getObjectData }
+const postObjectData = function(endpoint, data) {
+    return fetch(endpoint, {
+        method: 'post',
+        headers: {
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify(data)
+    })
+        .then(response => {
+            return response
+        })
+}
+
+export { getArrayData, getObjectData, postObjectData }

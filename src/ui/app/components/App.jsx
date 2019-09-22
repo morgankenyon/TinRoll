@@ -4,6 +4,7 @@ import Nav from './nav/Nav'
 import Landing from './landing/Landing'
 import Question from './question/Question'
 import SingleQuestion from './question/singleQuestion/SingleQuestion'
+import Profile from './profile/Profile'
 import Footer from './footer/Footer'
 
 import './app.css'
@@ -32,6 +33,7 @@ class App extends React.Component {
                         <Route exact path='/' component={Landing} />
                         <Route exact path='/question' component={Question} />
                         <Route path='/question/:id' component={SingleQuestion} />
+                        <Route path='/profile' component={Profile} />
 
                     </div>
 

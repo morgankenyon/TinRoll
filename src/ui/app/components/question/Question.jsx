@@ -31,6 +31,10 @@ export default class Question extends React.Component {
         })
     }
 
+    componentDidUpdate() {
+        console.log('update question')
+    }
+
     componentWillUnmount() {
         console.log('unmount question')
     }
