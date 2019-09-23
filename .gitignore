@@ -39,3 +39,6 @@ tinroll.api/tin.db
 
 # React Frontend
 node_modules/
+
+#config files
+appsettings.Development.json

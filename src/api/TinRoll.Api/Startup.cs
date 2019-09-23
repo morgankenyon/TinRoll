@@ -20,8 +20,6 @@ namespace TinRoll.Api
             Configuration = configuration;
         }
 
-        readonly string SpecificOrigins = "_specificOrigins";
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -29,7 +27,7 @@ namespace TinRoll.Api
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<TinRollContext>(
-                options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TinRollDb;Trusted_Connection=True;MultipleActiveResultSets=true"));
+                options => options.UseSqlServer(Configuration["TinRoll:SqlServer"]));
 
             services.AddSwaggerGen(c =>
             {
