@@ -1,1 +1,0 @@
- options => options.UseSqlServer(@"Server=DESKTOP-P0PO0N5\MSSQLLOCALDB;Database=TinRollDb;Trusted_Connection=True;MultipleActiveResultSets=true"));
