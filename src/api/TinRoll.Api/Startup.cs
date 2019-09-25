@@ -35,6 +35,7 @@ namespace TinRoll.Api
             });
 
             services.AddCors();
+
             MapDependencyInjection(services);
         }
 
@@ -57,7 +58,7 @@ namespace TinRoll.Api
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "TinRoll API V1");
             });
-            app.UseCors(builder => builder.WithOrigins("http://localhost:8080"));
+            app.UseCors(builder => builder.WithOrigins(Configuration["TinRoll:UIUrl"]).AllowAnyHeader().AllowAnyMethod());
             app.UseMvc();
 
         }

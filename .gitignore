@@ -36,6 +36,7 @@ msbuild.wrn
 # Project Specific
 tinroll.api/tin.db
 .ionide/
+src/api/TinRoll.Api/stefanDB.txt
 
 # React Frontend
 node_modules/

@@ -1,11 +1,30 @@
-const axios = require('axios')
+import axios from 'axios'
 
-const getDataObject = function(endpoint) {
+const getArrayData = function(endpoint) {
     return axios.get(endpoint)
         .then(response => {
-            console.log(response)
+            return response.data
+        })
+}
+
+const getObjectData = function(endpoint) {
+    return axios.get(endpoint)
+        .then(response => {
             return response
         })
 }
 
-export { getDataObject }
+const postObjectData = function(endpoint, data) {
+    return fetch(endpoint, {
+        method: 'post',
+        headers: {
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify(data)
+    })
+        .then(response => {
+            return response
+        })
+}
+
+export { getArrayData, getObjectData, postObjectData }

@@ -1,14 +1,7 @@
-#tinAppGrid {
-    display:grid;
-    grid-template-rows: auto;
-    grid-template-columns:1fr 4fr;
+.tin-app {
+  padding:15px;
 }
 
-#tinAppFirst {
-    padding:5px;
-}
-
-#tinAppSecond {
-    padding:5px;
-
+.tin-content {
+  padding:10px 25px;
 }

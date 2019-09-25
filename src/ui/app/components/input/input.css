@@ -1,0 +1,29 @@
+.t-form {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    border:1px solid black;
+}
+
+.t-form > * {
+    margin:4px;
+}
+
+textarea {
+    height:175px;
+}
+
+.t-form-input {
+    width:400px;
+}
+
+.border-black {
+}
+
+#tags {
+    background-color:white;
+    border:0.5px solid gray;
+    padding:3px;
+    font-family:monospace;
+  }
