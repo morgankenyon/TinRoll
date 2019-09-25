@@ -9,7 +9,9 @@ namespace TinRoll.Data.Entities
         public int Id { get; set; }
         public string Email { get; set; }
         public string Username { get; set; }
-        public List<Question> Questions { get; set; }
-        public List<Answer> Answers { get; set; }
+        public ICollection<Question> Questions { get; set; }
+        public ICollection<Answer> Answers { get; set; }
+        public ICollection<QuestionTag> QuestionTags { get; set; }
+        public ICollection<Tag> Tags { get; set; }
     }
 }

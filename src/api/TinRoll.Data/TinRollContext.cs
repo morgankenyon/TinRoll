@@ -50,6 +50,36 @@ namespace TinRoll.Data
                 .WithMany(u => u.Answers)
                 .HasForeignKey(a => a.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<QuestionTag>()
+                .HasKey(qt => new {
+                    qt.QuestionId,
+                    qt.TagId
+                });
+
+            //modelBuilder.Entity<QuestionTag>()
+            //    .HasOne(qt => qt.Question)
+            //    .WithMany()
+            //    .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<QuestionTag>()
+                .HasOne(qt => qt.Tag)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<QuestionTag>()
+                .HasOne(qt => qt.User)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<User>()
+                .HasMany(c => c.QuestionTags)
+                .WithOne(e => e.User);
+
+            //modelBuilder.Entity<QuestionTag>()
+            //    .HasOne(qt => qt.User)
+            //    .WithMany()
+            //    .OnDelete(DeleteBehavior.Restrict);
         }
 
         public DbSet<User> Users { get; set; }
