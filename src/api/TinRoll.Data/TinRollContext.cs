@@ -59,12 +59,14 @@ namespace TinRoll.Data
 
             modelBuilder.Entity<QuestionTag>()
                 .HasOne(qt => qt.Tag)
-                .WithOne()
+                .WithMany(qt => qt.QuestionTags)
+                .HasForeignKey(qt => qt.TagId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<QuestionTag>()
                 .HasOne(qt => qt.User)
-                .WithOne()
+                .WithMany(qt => qt.QuestionTags)
+                .HasForeignKey(qt => qt.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<User>()

@@ -9,7 +9,7 @@ namespace TinRoll.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Tag",
+                name: "Tags",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -21,9 +21,9 @@ namespace TinRoll.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tag", x => x.Id);
+                    table.PrimaryKey("PK_Tags", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tag_Users_UserId",
+                        name: "FK_Tags_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -31,7 +31,7 @@ namespace TinRoll.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "QuestionTag",
+                name: "QuestionTags",
                 columns: table => new
                 {
                     QuestionId = table.Column<int>(nullable: false),
@@ -42,21 +42,21 @@ namespace TinRoll.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_QuestionTag", x => new { x.QuestionId, x.TagId });
+                    table.PrimaryKey("PK_QuestionTags", x => new { x.QuestionId, x.TagId });
                     table.ForeignKey(
-                        name: "FK_QuestionTag_Questions_QuestionId",
+                        name: "FK_QuestionTags_Questions_QuestionId",
                         column: x => x.QuestionId,
                         principalTable: "Questions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_QuestionTag_Tag_TagId",
+                        name: "FK_QuestionTags_Tags_TagId",
                         column: x => x.TagId,
-                        principalTable: "Tag",
+                        principalTable: "Tags",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_QuestionTag_Users_UserId",
+                        name: "FK_QuestionTags_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -64,29 +64,28 @@ namespace TinRoll.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_QuestionTag_TagId",
-                table: "QuestionTag",
-                column: "TagId",
-                unique: true);
+                name: "IX_QuestionTags_TagId",
+                table: "QuestionTags",
+                column: "TagId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_QuestionTag_UserId",
-                table: "QuestionTag",
+                name: "IX_QuestionTags_UserId",
+                table: "QuestionTags",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tag_UserId",
-                table: "Tag",
+                name: "IX_Tags_UserId",
+                table: "Tags",
                 column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "QuestionTag");
+                name: "QuestionTags");
 
             migrationBuilder.DropTable(
-                name: "Tag");
+                name: "Tags");
         }
     }
 }

@@ -28,9 +28,7 @@ namespace TinRoll.Logic.Managers
             var dbQuestionTags = new List<QuestionTag>();
             await _createQuestionRepo.CreateQuestionAsync(dbQuestion, question.TagIds);
 
-            var createdQuestion = await _questionRepo.CreateQuestionAsync(dbQuestion);
-
-            return QuestionMapper.ToDto(createdQuestion);
+            return QuestionMapper.ToDto(dbQuestion);
         }
 
         public async Task<QuestionDto> GetQuestionAsync(int id)

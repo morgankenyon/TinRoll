@@ -16,25 +16,23 @@ namespace TinRoll.Data.Repositories
             this.context = context;
         }
 
-        public async Task CreateQuestionAsync(Question question, IEnumerable<int> TagIds)
+        public async Task<Question> CreateQuestionAsync(Question question, IEnumerable<int> TagIds)
         {
-            using (var transaction = await context.Database.BeginTransactionAsync())
+            context.Questions.Add(question);
+
+            foreach (var tagId in TagIds)
             {
-                context.Questions.Add(question);
-
-                foreach (var tagId in TagIds)
+                context.QuestionTags.Add(new QuestionTag()
                 {
-                    context.QuestionTags.Add(new QuestionTag()
-                    {
-                        TagId = tagId,
-                        Question = question,
-                        UserId = question.UserId
-                    });
-                }
-
-                await context.SaveChangesAsync();
-                transaction.Commit();
+                    TagId = tagId,
+                    Question = question,
+                    UserId = question.UserId
+                });
             }
+
+            await context.SaveChangesAsync();
+
+            return question;
         }
     }
 }

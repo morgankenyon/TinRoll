@@ -10,7 +10,7 @@ using TinRoll.Data;
 namespace TinRoll.Data.Migrations
 {
     [DbContext(typeof(TinRollContext))]
-    [Migration("20190925111150_AddingTags")]
+    [Migration("20191009102914_AddingTags")]
     partial class AddingTags
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,12 +83,11 @@ namespace TinRoll.Data.Migrations
 
                     b.HasKey("QuestionId", "TagId");
 
-                    b.HasIndex("TagId")
-                        .IsUnique();
+                    b.HasIndex("TagId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("QuestionTag");
+                    b.ToTable("QuestionTags");
                 });
 
             modelBuilder.Entity("TinRoll.Data.Entities.Tag", b =>
@@ -109,7 +108,7 @@ namespace TinRoll.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Tag");
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("TinRoll.Data.Entities.User", b =>
@@ -160,8 +159,8 @@ namespace TinRoll.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("TinRoll.Data.Entities.Tag", "Tag")
-                        .WithOne()
-                        .HasForeignKey("TinRoll.Data.Entities.QuestionTag", "TagId")
+                        .WithMany("QuestionTags")
+                        .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("TinRoll.Data.Entities.User", "User")

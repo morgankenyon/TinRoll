@@ -8,6 +8,6 @@ namespace TinRoll.Data.Repositories.Interfaces
 {
     public interface ICreateQuestionRepository
     {
-        Task CreateQuestionAsync(Question question, IEnumerable<int> TagIds);
+        Task<Question> CreateQuestionAsync(Question question, IEnumerable<int> TagIds);
     }
 }
