@@ -9,7 +9,7 @@ namespace TinRoll.Data.Repositories.Interfaces
     public interface ITagRepository
     {
         Task<Tag> CreateTagAsync(Tag tag);
-        Task<Tag> FindTagAsync(string tagText);
+        Task<IEnumerable<Tag>> FindTagsAsync(string tagText);
         Task<Tag> GetTagAsync(int id);
         Task<IEnumerable<Tag>> GetTagsAsync();
         Task<QuestionTag> CreateQuestionTagAsync(QuestionTag questionTag);

@@ -30,5 +30,15 @@ namespace TinRoll.Logic.Mappers
                 UserId = questionDto.UserId
             };
         }
+
+        public static Question ToDb(CreateQuestionDto questionDto)
+        {
+            return new Question
+            {
+                Title = questionDto.Title,
+                Content = questionDto.Content,
+                UserId = questionDto.UserId
+            };
+        }
     }
 }

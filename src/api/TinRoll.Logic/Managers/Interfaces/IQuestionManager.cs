@@ -7,7 +7,7 @@ namespace TinRoll.Logic.Managers.Interfaces
 {
     public interface IQuestionManager
     {
-        Task<QuestionDto> CreateQuestionAsync(QuestionDto question);
+        Task<QuestionDto> CreateQuestionAsync(CreateQuestionDto question);
         Task<QuestionDto> GetQuestionAsync(int id);
         Task<IEnumerable<QuestionDto>> GetQuestionsAsync();
     }

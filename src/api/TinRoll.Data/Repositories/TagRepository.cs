@@ -31,19 +31,11 @@ namespace TinRoll.Data.Repositories
             return await _tagRepo.CreateAsync(tag);
         }
 
-        public async Task<Tag> FindTagAsync(string tagText)
+        public async Task<IEnumerable<Tag>> FindTagsAsync(string tagText)
         {
-            Expression<Func<Tag, bool>> findByText = (t) => t.TagText == tagText;
+            Expression<Func<Tag, bool>> findByText = (t) => t.TagText.StartsWith(tagText);
             var tagsByName = await _tagRepo.GetAsync(filter: findByText);
-
-            if (tagsByName.Count() >= 2)
-            {
-                //searching by text to know whether a tag exists or not
-                //is definitely not a good solution long term
-                //between this search and tag creation the tag could be created
-            }
-
-            return tagsByName.FirstOrDefault();
+            return tagsByName;
         }
 
         public async Task<QuestionTag> GetQuestionTagAsync(int id)

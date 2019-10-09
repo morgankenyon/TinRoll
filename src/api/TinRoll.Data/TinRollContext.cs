@@ -57,11 +57,6 @@ namespace TinRoll.Data
                     qt.TagId
                 });
 
-            //modelBuilder.Entity<QuestionTag>()
-            //    .HasOne(qt => qt.Question)
-            //    .WithMany()
-            //    .OnDelete(DeleteBehavior.Restrict);
-
             modelBuilder.Entity<QuestionTag>()
                 .HasOne(qt => qt.Tag)
                 .WithOne()
@@ -75,15 +70,12 @@ namespace TinRoll.Data
             modelBuilder.Entity<User>()
                 .HasMany(c => c.QuestionTags)
                 .WithOne(e => e.User);
-
-            //modelBuilder.Entity<QuestionTag>()
-            //    .HasOne(qt => qt.User)
-            //    .WithMany()
-            //    .OnDelete(DeleteBehavior.Restrict);
         }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<QuestionTag> QuestionTags { get; set; }
     }
 }
