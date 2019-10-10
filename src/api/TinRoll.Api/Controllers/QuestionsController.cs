@@ -35,7 +35,7 @@ namespace TinRoll.Api.Controllers
 
 
         [HttpPost]
-        public async Task<QuestionDto> CreateQuestion(QuestionDto question)
+        public async Task<QuestionDto> CreateQuestion(CreateQuestionDto question)
         {
             var newQuestion = await _questionManager.CreateQuestionAsync(question);
             return newQuestion;

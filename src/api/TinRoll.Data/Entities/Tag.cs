@@ -6,16 +6,15 @@ using System.Text;
 
 namespace TinRoll.Data.Entities
 {
-    public class Question : BaseEntity
+    public class Tag : BaseEntity
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Title { get; set; }
-        public string Content { get; set; }
+        public string DisplayText { get; set; }
+        public string SearchText { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
-        public ICollection<Answer> Answers { get; set; }
         public ICollection<QuestionTag> QuestionTags { get; set; }
     }
 }

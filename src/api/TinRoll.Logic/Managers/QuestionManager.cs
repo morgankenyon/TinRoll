@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TinRoll.Data.Entities;
 using TinRoll.Data.Repositories.Interfaces;
 using TinRoll.Logic.Managers.Interfaces;
 using TinRoll.Logic.Mappers;
@@ -13,17 +14,20 @@ namespace TinRoll.Logic.Managers
     public class QuestionManager : IQuestionManager
     {
         private readonly IQuestionRepository _questionRepo;
+        private readonly ICreateQuestionRepository _createQuestionRepo;
 
-        public QuestionManager(IQuestionRepository questionRepo)
+        public QuestionManager(IQuestionRepository questionRepo, ICreateQuestionRepository createQuestionRepo)
         {
             _questionRepo = questionRepo;
+            _createQuestionRepo = createQuestionRepo;
         }
 
-        public async Task<QuestionDto> CreateQuestionAsync(QuestionDto question)
+        public async Task<QuestionDto> CreateQuestionAsync(CreateQuestionDto question)
         {
             var dbQuestion = QuestionMapper.ToDb(question);
-            var createdQuestion = await _questionRepo.CreateQuestionAsync(dbQuestion);
-            return QuestionMapper.ToDto(createdQuestion);
+            await _createQuestionRepo.CreateQuestionAsync(dbQuestion, question.TagIds);
+
+            return QuestionMapper.ToDto(dbQuestion);
         }
 
         public async Task<QuestionDto> GetQuestionAsync(int id)

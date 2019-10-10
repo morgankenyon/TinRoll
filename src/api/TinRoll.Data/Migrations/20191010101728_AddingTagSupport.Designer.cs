@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TinRoll.Data;
 
 namespace TinRoll.Data.Migrations
 {
     [DbContext(typeof(TinRollContext))]
-    partial class TinRollContextModelSnapshot : ModelSnapshot
+    [Migration("20191010101728_AddingTagSupport")]
+    partial class AddingTagSupport
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

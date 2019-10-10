@@ -27,10 +27,10 @@ namespace TinRoll.Api.Controllers
             return answers;
         }
 
-        [HttpGet("{Id}")]
-        public async Task<AnswerDto> GetAnswer(int Id)
+        [HttpGet("{id}")]
+        public async Task<AnswerDto> GetAnswer(int id)
         {
-            var answer = await _answerManager.GetAnswerAsync(Id);
+            var answer = await _answerManager.GetAnswerAsync(id);
             return answer;
         }
 
