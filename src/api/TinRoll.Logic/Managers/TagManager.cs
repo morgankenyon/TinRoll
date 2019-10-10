@@ -45,5 +45,12 @@ namespace TinRoll.Logic.Managers
             var tags = dbTags.Select(t => TagMapper.ToDto(t));
             return tags;
         }
+
+        public async Task<IEnumerable<TagDto>> GetTagsAsync(int questionId)
+        {
+            var tagsForQuestion = await _tagRepo.GetTagsAsync(questionId);
+            var tags = tagsForQuestion.Select(t => TagMapper.ToDto(t));
+            return tags;
+        }
     }
 }

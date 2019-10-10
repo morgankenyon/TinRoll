@@ -12,5 +12,6 @@ namespace TinRoll.Logic.Managers.Interfaces
         Task<TagDto> GetTagAsync(int id);
         Task<IEnumerable<TagDto>> GetTagsAsync(string searchText);
         Task<IEnumerable<TagDto>> GetTagsAsync();
+        Task<IEnumerable<TagDto>> GetTagsAsync(int questionId);
     }
 }

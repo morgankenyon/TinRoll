@@ -47,5 +47,12 @@ namespace TinRoll.Api.Controllers
             var tags = await _tagManager.GetTagsAsync(searchText);
             return tags;
         }
+
+        [HttpGet("question/{questionId}")]
+        public async Task<IEnumerable<TagDto>> GetTags(int questionId)
+        {
+            var tags = await _tagManager.GetTagsAsync(questionId);
+            return tags;
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace TinRoll.Data.Repositories.Interfaces
         Task<IEnumerable<Tag>> FindTagsAsync(string tagText);
         Task<Tag> GetTagAsync(int id);
         Task<IEnumerable<Tag>> GetTagsAsync();
+        Task<IEnumerable<Tag>> GetTagsAsync(int questionId);
         Task<QuestionTag> CreateQuestionTagAsync(QuestionTag questionTag);
         Task<QuestionTag> GetQuestionTagAsync(int id);
         Task<IEnumerable<QuestionTag>> GetQuestionTagsAsync();

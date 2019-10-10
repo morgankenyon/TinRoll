@@ -57,5 +57,12 @@ namespace TinRoll.Data.Repositories
         {
             return await _tagRepo.GetAsync();
         }
+
+        public async Task<IEnumerable<Tag>> GetTagsAsync(int questionId)
+        {
+            Expression<Func<QuestionTag, bool>> findByQuestionId = (qt) => qt.QuestionId == questionId;
+            var questionTags = await _questionTagRepo.GetAsync(filter: findByQuestionId, includeProperties: "Tag");
+            return questionTags.Select(qt => qt.Tag);
+        }
     }
 }
