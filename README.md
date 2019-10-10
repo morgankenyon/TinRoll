@@ -41,17 +41,17 @@ Here are the blog posts that have been written over TinRoll as an app.
 
 Things that might get done if time permits. 
 
-* Answers
-* User accounts (some type of basic authentication)
-* Stats (voting, accepted answers, reputation)
-* Comments
-* Admin Features (Flagging
-* Editing Posts
-* Notifications
-* Tags
-* Badges
-* Search
-* wysiwyg editor
-* user profile
-* Multi Tenant
+- [x] Answers
+- [x] Tags
+- [ ] User accounts (some type of basic authentication)
+- [ ] Stats (voting, accepted answers, reputation)
+- [ ] Comments
+- [ ] Admin Features (Flagging, removing question, etc)
+- [ ] Editing Posts
+- [ ] Notifications
+- [ ] Badges
+- [ ] Search
+- [ ] wysiwyg editor
+- [ ] user profile
+- [ ] Multi Tenant
 * ???
