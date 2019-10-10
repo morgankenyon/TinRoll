@@ -13,7 +13,7 @@ namespace TinRoll.Logic.Mappers
             return new TagDto
             {
                 Id = tag.Id,
-                TagText = tag.TagText,
+                TagText = tag.DisplayText,
                 CreatedDate = tag.CreatedDate,
                 UpdatedDate = tag.UpdatedDate,
                 UserId = tag.UserId
@@ -25,7 +25,8 @@ namespace TinRoll.Logic.Mappers
             return new Tag
             {
                 Id = tagDto.Id,
-                TagText = tagDto.TagText,
+                DisplayText = tagDto.TagText,
+                SearchText = tagDto.TagText.ToLower(),
                 CreatedDate = tagDto.CreatedDate,
                 UpdatedDate = tagDto.UpdatedDate,
                 UserId = tagDto.UserId

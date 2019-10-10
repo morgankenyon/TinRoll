@@ -33,7 +33,7 @@ namespace TinRoll.Data.Repositories
 
         public async Task<IEnumerable<Tag>> FindTagsAsync(string tagText)
         {
-            Expression<Func<Tag, bool>> findByText = (t) => t.TagText.StartsWith(tagText);
+            Expression<Func<Tag, bool>> findByText = (t) => t.SearchText.StartsWith(tagText.ToLower());
             var tagsByName = await _tagRepo.GetAsync(filter: findByText);
             return tagsByName;
         }

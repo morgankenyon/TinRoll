@@ -96,7 +96,9 @@ namespace TinRoll.Data.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<string>("TagText");
+                    b.Property<string>("DisplayText");
+
+                    b.Property<string>("SearchText");
 
                     b.Property<DateTime>("UpdatedDate");
 

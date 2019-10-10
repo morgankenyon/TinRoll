@@ -10,8 +10,8 @@ using TinRoll.Data;
 namespace TinRoll.Data.Migrations
 {
     [DbContext(typeof(TinRollContext))]
-    [Migration("20191009102914_AddingTags")]
-    partial class AddingTags
+    [Migration("20191010101728_AddingTagSupport")]
+    partial class AddingTagSupport
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -98,7 +98,9 @@ namespace TinRoll.Data.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<string>("TagText");
+                    b.Property<string>("DisplayText");
+
+                    b.Property<string>("SearchText");
 
                     b.Property<DateTime>("UpdatedDate");
 
