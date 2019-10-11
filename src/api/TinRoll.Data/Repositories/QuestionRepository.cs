@@ -19,11 +19,6 @@ namespace TinRoll.Data.Repositories
             _baseRepo = baseRepo;
         }
 
-        public async Task<Question> CreateQuestionAsync(Question question)
-        {
-            return await _baseRepo.CreateAsync(question);
-        }
-
         public async Task<Question> GetQuestionAsync(int id)
         {
             return await _baseRepo.GetAsync(id);

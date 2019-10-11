@@ -60,5 +60,29 @@ namespace TinRoll.Test.Logic.MapperTests
             question.User.Should().BeNull();
             question.QuestionTags.Should().BeNull();
         }
+
+        [Fact]
+        public void Test_CreateQuestionDto_To_Question()
+        {
+            var cdto = new CreateQuestionDto()
+            {
+                Content = "thie",
+                Title = "title",
+                UserId = 23
+            };
+
+            var q = QuestionMapper.ToDb(cdto);
+
+            q.Content.Should().Be(cdto.Content);
+            q.Title.Should().Be(cdto.Title);
+            q.UserId.Should().Be(cdto.UserId);
+
+            q.Id.Should().Be(0);
+            q.QuestionTags.Should().BeNull();
+            q.UpdatedDate.Should().Be(DateTime.MinValue);
+            q.CreatedDate.Should().Be(DateTime.MinValue);
+            q.User.Should().BeNull();
+            q.Answers.Should().BeNull();
+        }
     }
 }
