@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using FluentAssertions;
 using TinRoll.Data.Entities;
 using TinRoll.Logic.Mappers;
 using TinRoll.Shared.Dtos;
@@ -25,13 +26,13 @@ namespace TinRoll.Test.Logic.MapperTests
 
             var questionDto = QuestionMapper.ToDto(question);
 
-            Assert.NotNull(questionDto);
-            Assert.Equal(question.Id, questionDto.Id);
-            Assert.Equal(question.Title, questionDto.Title);
-            Assert.Equal(question.Content, questionDto.Content);
-            Assert.Equal(question.CreatedDate, questionDto.CreatedDate);
-            Assert.Equal(question.UpdatedDate, questionDto.UpdatedDate);
-            Assert.Equal(question.UserId, questionDto.UserId);
+            questionDto.Should().NotBeNull();
+            questionDto.Id.Should().Be(question.Id);
+            questionDto.Title.Should().Be(question.Title);
+            questionDto.Content.Should().Be(question.Content);
+            questionDto.CreatedDate.Should().Be(question.CreatedDate);
+            questionDto.UpdatedDate.Should().Be(question.UpdatedDate);
+            questionDto.UserId.Should().Be(question.UserId);
         }
 
         [Fact]
@@ -49,13 +50,15 @@ namespace TinRoll.Test.Logic.MapperTests
 
             var question = QuestionMapper.ToDb(questionDto);
 
-            Assert.NotNull(question);
-            Assert.Equal(questionDto.Id, question.Id);
-            Assert.Equal(questionDto.Title, question.Title);
-            Assert.Equal(questionDto.Content, question.Content);
-            Assert.Equal(questionDto.CreatedDate, question.CreatedDate);
-            Assert.Equal(questionDto.UpdatedDate, question.UpdatedDate);
-            Assert.Equal(questionDto.UserId, question.UserId);
+            question.Should().NotBeNull();
+            question.Id.Should().Be(questionDto.Id);
+            question.Title.Should().Be(questionDto.Title);
+            question.Content.Should().Be(questionDto.Content);
+            question.CreatedDate.Should().Be(questionDto.CreatedDate);
+            question.UpdatedDate.Should().Be(questionDto.UpdatedDate);
+            question.UserId.Should().Be(questionDto.UserId);
+            question.User.Should().BeNull();
+            question.QuestionTags.Should().BeNull();
         }
     }
 }
