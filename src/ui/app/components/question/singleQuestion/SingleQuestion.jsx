@@ -1,59 +1,41 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import '@babel/polyfill'
 
 import './single.css'
 
-import { getObjectData } from '../../../utils/apiCalls'
+const SingleQuestion = (props) => {
+    const [question, setQuestion] = useState({});
 
-export default class SingleQuestion extends React.Component {
-    constructor(props) {
-        super(props) 
-
-        this.state = {
-            question:{}
-        }
-
-        this.getQuestion = this.getQuestion.bind(this)
+    async function fetchQuestion() {
+        let questionId = props.match.params.id;
+        const res = await fetch(`http://localhost:1076/api/questions/${questionId}`); //TODO: extract to some environmental variable
+        res
+            .json()
+            .then(res => setQuestion(res))
     }
 
-    componentDidMount() {
-        console.log('mount single')
-        let paramsId = this.props.match.params.id
-        let intId = parseInt(paramsId, 10)
-        this.getQuestion(intId)
-    }
+    useEffect(() => {
+        fetchQuestion();
+        //TODO: need some cleanup function
+    });
 
-    async getQuestion(id) {
-        let question = await getObjectData(`http://localhost:1076/api/questions/${id}`)
-        this.setState({question:question.data})
-    }
+    return (
+        <div className='t-single-question'>
+            {
+                question.id <= 0 &&
+                <h2>Loading...</h2>
+            }
+            {
+                question.id > 0 &&
+                <div className='t-s-q-question'>
+                    <h2>{question.title}</h2>
+                    <p>{question.createdDate}</p>
+                    <p id='t-single-p'>{question.content}</p>
+                </div>
 
-    componentDidUpdate() {
-        console.log('update single')
-    }
 
-    componentWillUnmount() {
-        console.log('unmount single')
-    }
-
-    render() {
-        return (
-            <div className='t-single-question'>
-                {
-                    this.state.question.id <= 0 &&
-                    <h2>Loading...</h2>
-                }
-                {
-                    this.state.question.id > 0 &&
-                    <div className='t-s-q-question'>
-                        <h2>{this.state.question.title}</h2>
-                        <p>{this.state.question.createdDate}</p>
-                        <p id='t-single-p'>{this.state.question.content}</p>
-                    </div>
-                    
-
-                }
-            </div>
-        )
-    }
-}
+            }
+        </div>
+    )
+};
+export default SingleQuestion;
