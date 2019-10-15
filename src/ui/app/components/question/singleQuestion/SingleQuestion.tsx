@@ -2,22 +2,15 @@ import React, { useState, useEffect } from 'react'
 import '@babel/polyfill'
 
 import './single.css'
+import { RouteComponentProps } from 'react-router';
 
-class QuestionDto {
-    id?: number;
-    title?: string;
-    content?: string;
-    userId?: number;
-    createdDate?: Date;
-    updatedDate?: Date;
-}
-
-const SingleQuestion = () => {
+const SingleQuestion = (props: RouteComponentProps<SingleQuestionoProps>) => {
     const [question, setQuestion] = useState<QuestionDto | null>();
+    const [questionId, _] = useState<string>(props.match.params.id);
+
 
     async function fetchQuestion() {
-        //let questionId = props.match.params.id;
-        const res = await fetch(`http://localhost:1076/api/questions/1`); //TODO: extract to some environmental variable
+        const res = await fetch(`http://localhost:1076/api/questions/${questionId}`); //TODO: extract to some environmental variable
         res
             .json()
             .then(res => setQuestion(res))

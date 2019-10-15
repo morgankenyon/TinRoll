@@ -21,7 +21,7 @@ namespace TinRoll.Data.Repositories
 
         public async Task<T> CreateAsync(T entity)
         {
-            await context.AddAsync<T>(entity);
+            context.Add<T>(entity);
             await context.SaveChangesAsync();
             return entity;
         }
