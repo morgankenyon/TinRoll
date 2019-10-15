@@ -31,18 +31,11 @@ const SingleQuestion = (props: RouteComponentProps<SingleQuestionoProps>) => {
             }
             {
                 question != null &&
-                <div className='t-s-q-question'>
-                    <h2>{question.title}</h2>
-
-                    <TextField
-                        id="outlined-multiline-flexible"
-                        multiline
-                        rowsMax="4"
-                        fullWidth
-                        value={question.content}
-                        margin="normal"
-                        variant="outlined"
-                    />
+                <div id="question-box">
+                    <div className='t-s-q-question'>
+                        <h2>{question.title}</h2>
+                        <p>{question.content}</p>
+                    </div>
                 </div>
             }
         </div>

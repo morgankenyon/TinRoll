@@ -51,6 +51,18 @@ namespace TinRoll.Data
                 .HasForeignKey(a => a.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Answer>()
+                .HasMany(a => a.AnswerPosts)
+                .WithOne(ap => ap.Answer)
+                .HasForeignKey(a => a.AnswerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Question>()
+                .HasMany(q => q.QuestionPosts)
+                .WithOne(qp => qp.Question)
+                .HasForeignKey(q => q.QuestionId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<QuestionTag>()
                 .HasKey(qt => new {
                     qt.QuestionId,
@@ -79,5 +91,7 @@ namespace TinRoll.Data
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<QuestionTag> QuestionTags { get; set; }
+        public DbSet<QuestionPost> QuestionPosts { get; set; }
+        public DbSet<AnswerPost> AnswerPosts { get; set; }
     }
 }

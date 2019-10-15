@@ -14,7 +14,7 @@ namespace TinRoll.Logic.Mappers
             return new AnswerDto
             {
                 Id = answer.Id,
-                Content = answer.Content,
+                //Content = answer.Content,
                 CreatedDate = answer.CreatedDate,
                 UpdatedDate = answer.UpdatedDate,
                 QuestionId = answer.QuestionId,
@@ -27,7 +27,7 @@ namespace TinRoll.Logic.Mappers
             return new Answer
             {
                 Id = answerDto.Id,
-                Content = answerDto.Content,
+                //Content = answerDto.Content,
                 CreatedDate = answerDto.CreatedDate,
                 UpdatedDate = answerDto.UpdatedDate,
                 QuestionId = answerDto.QuestionId,

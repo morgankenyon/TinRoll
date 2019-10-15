@@ -12,10 +12,10 @@ namespace TinRoll.Data.Entities
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Content { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
         public ICollection<Answer> Answers { get; set; }
         public ICollection<QuestionTag> QuestionTags { get; set; }
+        public ICollection<QuestionPost> QuestionPosts { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace TinRoll.Logic.Mappers
             {
                 Id = question.Id,
                 Title = question.Title,
-                Content = question.Content,
+                //Content = question.Content,
                 CreatedDate = question.CreatedDate,
                 UpdatedDate = question.UpdatedDate,
                 UserId = question.UserId
@@ -24,7 +24,7 @@ namespace TinRoll.Logic.Mappers
             {
                 Id = questionDto.Id,
                 Title = questionDto.Title,
-                Content = questionDto.Content,
+                //Content = questionDto.Content,
                 CreatedDate = questionDto.CreatedDate,
                 UpdatedDate = questionDto.UpdatedDate,
                 UserId = questionDto.UserId
@@ -36,7 +36,7 @@ namespace TinRoll.Logic.Mappers
             return new Question
             {
                 Title = questionDto.Title,
-                Content = questionDto.Content,
+                //Content = questionDto.Content,
                 UserId = questionDto.UserId
             };
         }
