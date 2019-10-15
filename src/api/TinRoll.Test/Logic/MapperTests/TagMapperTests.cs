@@ -18,8 +18,7 @@ namespace TinRoll.Test.Logic.MapperTests
             {
                 Id = 1,
                 CreatedDate = DateTime.UtcNow,
-                DisplayText = "C#",
-                SearchText = "c#",
+                Name = "c#",
                 UpdatedDate = DateTime.UtcNow,
                 UserId = 23
             };
@@ -29,7 +28,7 @@ namespace TinRoll.Test.Logic.MapperTests
             tagDto.Should().NotBeNull();
             tagDto.Id.Should().Be(tag.Id);
             tagDto.CreatedDate.Should().Be(tag.CreatedDate);
-            tagDto.TagText.Should().Be(tag.DisplayText);
+            tagDto.Name.Should().Be(tag.Name);
             tagDto.UpdatedDate.Should().Be(tag.UpdatedDate);
             tagDto.UserId.Should().Be(tag.UserId);
         }
@@ -41,7 +40,7 @@ namespace TinRoll.Test.Logic.MapperTests
             {
                 Id = 1,
                 CreatedDate = DateTime.UtcNow,
-                TagText = "C#",
+                Name = "C#",
                 UpdatedDate = DateTime.UtcNow,
                 UserId = 33
             };
@@ -51,8 +50,7 @@ namespace TinRoll.Test.Logic.MapperTests
             tag.Should().NotBeNull();
             tag.Id.Should().Be(tagDto.Id);
             tag.CreatedDate.Should().Be(tagDto.CreatedDate);
-            tag.DisplayText.Should().Be(tagDto.TagText);
-            tag.SearchText.Should().Be(tagDto.TagText.ToLower());
+            tag.Name.Should().Be(tagDto.Name.ToLower());
             tag.UpdatedDate.Should().Be(tagDto.UpdatedDate);
             tag.UserId.Should().Be(tagDto.UserId);
         }

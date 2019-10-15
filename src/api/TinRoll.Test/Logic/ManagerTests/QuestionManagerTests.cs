@@ -46,61 +46,59 @@ namespace TinRoll.Test.Logic.ManagerTests
                 It.IsAny<IEnumerable<int>>()), Times.Once);
         }
 
-        //[Fact]
-        //public async Task Test_Get_Question()
-        //{
-        //    var mockQuestion = new Question
-        //    {
-        //        Id = 1
-        //    };
+        [Fact]
+        public async Task Test_Get_Question()
+        {
+            var mockQuestion = new Question
+            {
+                Id = 1
+            };
 
-        //    var mockQuestionRepo = new Mock<IQuestionRepository>();
+            var mockQuestionRepo = new Mock<IQuestionRepository>();
+            var mockCreateQuestionRepo = new Mock<ICreateQuestionRepository>();
 
-        //    mockQuestionRepo.Setup(u => u.GetQuestionAsync(It.Is<int>(u => u == 1)))
-        //        .ReturnsAsync(mockQuestion);
+            mockQuestionRepo.Setup(u => u.GetQuestionAsync(It.Is<int>(p => p == 1)))
+                .ReturnsAsync(mockQuestion);
 
-        //    var questionManager = new QuestionManager(mockQuestionRepo.Object);
+            var questionManager = new QuestionManager(mockQuestionRepo.Object, mockCreateQuestionRepo.Object);
 
-        //    var question = await questionManager.GetQuestionAsync(1);
+            var question = await questionManager.GetQuestionAsync(1);
 
-        //    Assert.NotNull(question);
-        //    Assert.Equal(1, question.Id);
-        //    mockQuestionRepo.Verify(u => u.GetQuestionAsync(It.Is<int>(u => u == 1)), Times.Once);
-        //}
+            question.Should().NotBeNull();
+            question.Id.Should().Be(1);
+            mockQuestionRepo.Verify(u => u.GetQuestionAsync(It.Is<int>(p => p == 1)), Times.Once);
+        }
 
-        //[Fact]
-        //public async Task Test_Get_Questions()
-        //{
-        //    var mockQuestion1 = new Question
-        //    {
-        //        Id = 1
-        //    };
-        //    var mockQuestion2 = new Question
-        //    {
-        //        Id = 2
-        //    };
+        [Fact]
+        public async Task Test_Get_Questions()
+        {
+            var mockQuestions = new List<Question>
+            {
+                new Question
+                {
+                    Id = 1
+                },
+                new Question
+                {
+                    Id = 2
+                }
+            };
 
-        //    var mockQuestionList = new List<Question>() { mockQuestion1, mockQuestion2 };
+            var mockQuestionRepo = new Mock<IQuestionRepository>();
+            var mockCreateQuestionRepo = new Mock<ICreateQuestionRepository>();
 
-        //    var mockQuestionRepo = new Mock<IQuestionRepository>();
+            mockQuestionRepo.Setup(u => u.GetQuestionsAsync())
+                .ReturnsAsync(mockQuestions);
 
-        //    mockQuestionRepo.Setup(u => u.GetQuestionsAsync())
-        //        .ReturnsAsync(mockQuestionList);
+            var questionManager = new QuestionManager(mockQuestionRepo.Object, mockCreateQuestionRepo.Object);
 
-        //    var questionManager = new QuestionManager(mockQuestionRepo.Object);
+            var questions = await questionManager.GetQuestionsAsync();
 
-        //    var questions = await questionManager.GetQuestionsAsync();
-
-        //    Assert.NotNull(questions);
-        //    Assert.Equal(2, questions.Count());
-
-        //    var firstQuestion = questions.First();
-        //    Assert.NotNull(firstQuestion);
-        //    Assert.Equal(1, firstQuestion.Id);
-
-        //    var secondQuestion = questions.Last();
-        //    Assert.NotNull(secondQuestion);
-        //    Assert.Equal(2, secondQuestion.Id);
-        //}
+           
+            questions.Should().HaveCount(2);
+            questions.First().Id.Should().Be(1);
+            questions.Skip(1).First().Id.Should().Be(2);
+            mockQuestionRepo.Verify(u => u.GetQuestionsAsync(), Times.Once);
+        }
     }
 }

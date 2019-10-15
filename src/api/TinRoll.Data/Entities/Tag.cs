@@ -11,8 +11,7 @@ namespace TinRoll.Data.Entities
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string DisplayText { get; set; }
-        public string SearchText { get; set; }
+        public string Name { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
         public ICollection<QuestionTag> QuestionTags { get; set; }
