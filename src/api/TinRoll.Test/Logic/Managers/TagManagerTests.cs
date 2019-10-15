@@ -12,7 +12,7 @@ using TinRoll.Logic.Managers;
 using TinRoll.Shared.Dtos;
 using Xunit;
 
-namespace TinRoll.Test.Logic.ManagerTests
+namespace TinRoll.Test.Logic.Managers
 {
     public class TagManagerTests
     {

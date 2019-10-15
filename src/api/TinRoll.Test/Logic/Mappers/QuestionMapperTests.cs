@@ -7,7 +7,7 @@ using TinRoll.Logic.Mappers;
 using TinRoll.Shared.Dtos;
 using Xunit;
 
-namespace TinRoll.Test.Logic.MapperTests
+namespace TinRoll.Test.Logic.Mappers
 {
     public class QuestionMapperTests
     {

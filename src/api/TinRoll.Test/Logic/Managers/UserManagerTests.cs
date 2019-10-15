@@ -11,7 +11,7 @@ using TinRoll.Logic.Managers;
 using TinRoll.Shared.Dtos;
 using Xunit;
 
-namespace TinRoll.Test.Logic.ManagerTests
+namespace TinRoll.Test.Logic.Managers
 {
     public class UserManagerTests
     {
@@ -23,9 +23,9 @@ namespace TinRoll.Test.Logic.ManagerTests
                 Id = 1
             };
 
-            var mockUserRepo = new Mock<IUserRepository>();
+            var mockUserRepo = new Mock<IBaseRepository<User>>();
 
-            mockUserRepo.Setup(a => a.CreateUserAsync(It.IsAny<User>()))
+            mockUserRepo.Setup(a => a.CreateAsync(It.IsAny<User>()))
                 .ReturnsAsync(mockUser);
 
             var userManager = new UserManager(mockUserRepo.Object);
@@ -36,7 +36,7 @@ namespace TinRoll.Test.Logic.ManagerTests
 
             createdUser.Should().NotBeNull();
             createdUser.Id.Should().Be(1);
-            mockUserRepo.Verify(u => u.CreateUserAsync(It.IsAny<User>()), Times.Once);
+            mockUserRepo.Verify(u => u.CreateAsync(It.IsAny<User>()), Times.Once);
         }
 
         [Fact]
@@ -47,9 +47,9 @@ namespace TinRoll.Test.Logic.ManagerTests
                 Id = 1
             };
 
-            var mockUserRepo = new Mock<IUserRepository>();
+            var mockUserRepo = new Mock<IBaseRepository<User>>();
 
-            mockUserRepo.Setup(a => a.GetUserAsync(It.IsAny<int>()))
+            mockUserRepo.Setup(a => a.GetAsync(It.IsAny<int>()))
                 .ReturnsAsync(mockUser);
 
             var userManager = new UserManager(mockUserRepo.Object);
@@ -58,7 +58,7 @@ namespace TinRoll.Test.Logic.ManagerTests
 
             user.Should().NotBeNull();
             user.Id.Should().Be(1);
-            mockUserRepo.Verify(u => u.GetUserAsync(It.IsAny<int>()), Times.Once);
+            mockUserRepo.Verify(u => u.GetAsync(It.IsAny<int>()), Times.Once);
         }
 
         [Fact]
@@ -76,9 +76,9 @@ namespace TinRoll.Test.Logic.ManagerTests
                 }
             };
 
-            var mockUserRepo = new Mock<IUserRepository>();
+            var mockUserRepo = new Mock<IBaseRepository<User>>();
 
-            mockUserRepo.Setup(a => a.GetUsersAsync())
+            mockUserRepo.Setup(a => a.GetAsync())
                 .ReturnsAsync(mockUsers);
 
             var userManager = new UserManager(mockUserRepo.Object);
@@ -88,7 +88,7 @@ namespace TinRoll.Test.Logic.ManagerTests
             users.Should().HaveCount(2);
             users.First().Id.Should().Be(1);
             users.Skip(1).First().Id.Should().Be(2);
-            mockUserRepo.Verify(u => u.GetUsersAsync(), Times.Once);
+            mockUserRepo.Verify(u => u.GetAsync(), Times.Once);
         }
     }
 }

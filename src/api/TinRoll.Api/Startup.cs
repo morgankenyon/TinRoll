@@ -72,9 +72,9 @@ namespace TinRoll.Api
             services.AddScoped<ITagManager, TagManager>();
 
             //repos
-            services.AddScoped<IQuestionRepository, QuestionRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IAnswerRepository, AnswerRepository>();
+            //services.AddScoped<IQuestionRepository, QuestionRepository>();
+            //services.AddScoped<IUserRepository, UserRepository>();
+            //services.AddScoped<IAnswerRepository, AnswerRepository>();
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             //services.AddScoped<ITagRepository, TagRepository>();
             services.AddScoped<ICreateQuestionRepository, CreateQuestionRepository>();

@@ -11,7 +11,7 @@ using TinRoll.Logic.Managers;
 using TinRoll.Shared.Dtos;
 using Xunit;
 
-namespace TinRoll.Test.Logic.ManagerTests
+namespace TinRoll.Test.Logic.Managers
 {
     public class QuestionManagerTests
     {
@@ -24,7 +24,7 @@ namespace TinRoll.Test.Logic.ManagerTests
             };
             var mockTagIds = new List<int>() { 1, 2, 3 };
 
-            var mockQuestionRepo = new Mock<IQuestionRepository>();
+            var mockQuestionRepo = new Mock<IBaseRepository<Question>>();
             var mockCreateQuestionRepo = new Mock<ICreateQuestionRepository>();
 
             mockCreateQuestionRepo.Setup(u => u.CreateQuestionAsync(It.IsAny<Question>(),  
@@ -54,10 +54,10 @@ namespace TinRoll.Test.Logic.ManagerTests
                 Id = 1
             };
 
-            var mockQuestionRepo = new Mock<IQuestionRepository>();
+            var mockQuestionRepo = new Mock<IBaseRepository<Question>>();
             var mockCreateQuestionRepo = new Mock<ICreateQuestionRepository>();
 
-            mockQuestionRepo.Setup(u => u.GetQuestionAsync(It.Is<int>(p => p == 1)))
+            mockQuestionRepo.Setup(u => u.GetAsync(It.Is<int>(p => p == 1)))
                 .ReturnsAsync(mockQuestion);
 
             var questionManager = new QuestionManager(mockQuestionRepo.Object, mockCreateQuestionRepo.Object);
@@ -66,7 +66,7 @@ namespace TinRoll.Test.Logic.ManagerTests
 
             question.Should().NotBeNull();
             question.Id.Should().Be(1);
-            mockQuestionRepo.Verify(u => u.GetQuestionAsync(It.Is<int>(p => p == 1)), Times.Once);
+            mockQuestionRepo.Verify(u => u.GetAsync(It.Is<int>(p => p == 1)), Times.Once);
         }
 
         [Fact]
@@ -84,10 +84,10 @@ namespace TinRoll.Test.Logic.ManagerTests
                 }
             };
 
-            var mockQuestionRepo = new Mock<IQuestionRepository>();
+            var mockQuestionRepo = new Mock<IBaseRepository<Question>>();
             var mockCreateQuestionRepo = new Mock<ICreateQuestionRepository>();
 
-            mockQuestionRepo.Setup(u => u.GetQuestionsAsync())
+            mockQuestionRepo.Setup(u => u.GetAsync())
                 .ReturnsAsync(mockQuestions);
 
             var questionManager = new QuestionManager(mockQuestionRepo.Object, mockCreateQuestionRepo.Object);
@@ -98,7 +98,7 @@ namespace TinRoll.Test.Logic.ManagerTests
             questions.Should().HaveCount(2);
             questions.First().Id.Should().Be(1);
             questions.Skip(1).First().Id.Should().Be(2);
-            mockQuestionRepo.Verify(u => u.GetQuestionsAsync(), Times.Once);
+            mockQuestionRepo.Verify(u => u.GetAsync(), Times.Once);
         }
     }
 }
