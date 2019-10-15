@@ -14,7 +14,7 @@ import { HashRouter as Router, Route } from 'react-router-dom'
 
 const App: React.FC = () => {
     return (
-        <Container maxWidth="lg">
+        <Container maxWidth="md">
             <Router>
                 <div className='tin-app'>
                     <Nav />
@@ -22,7 +22,7 @@ const App: React.FC = () => {
                     <div className='tin-content'>
                         <Route exact path='/' component={Landing} />
                         <Route exact path='/question' component={Question} />
-                        <Route path='/questiono/:id' component={SingleQuestion} />
+                        <Route path='/question/:id' component={SingleQuestion} />
                         <Route path='/profile' component={Profile} />
                     </div>
 
