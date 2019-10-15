@@ -25,7 +25,7 @@ class App extends React.Component {
         return (
             <Router>
                 <div className='tin-app'>
-                
+
                     <Nav />
 
                     <div className='tin-content'>
