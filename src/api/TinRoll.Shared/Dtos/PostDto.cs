@@ -4,11 +4,10 @@ using System.Text;
 
 namespace TinRoll.Shared.Dtos
 {
-    public class QuestionDto : BaseDto
+    public class PostDto : BaseDto
     {
         public int Id { get; set; }
-        public string Title { get; set; }
-        public PostDto PostDto { get; set; }
+        public string Content { get; set; }
         public int UserId { get; set; }
     }
 }
