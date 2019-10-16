@@ -76,10 +76,7 @@ namespace TinRoll.Test.Logic.Managers
                 }
             };
 
-            var mockUserRepo = new Mock<IBaseRepository<User>>();
-
-            mockUserRepo.Setup(a => a.GetAsync())
-                .ReturnsAsync(mockUsers);
+            var mockUserRepo = ManagerHelpers.MockRepoGetAsync(mockUsers);
 
             var userManager = new UserManager(mockUserRepo.Object);
 
@@ -88,7 +85,7 @@ namespace TinRoll.Test.Logic.Managers
             users.Should().HaveCount(2);
             users.First().Id.Should().Be(1);
             users.Skip(1).First().Id.Should().Be(2);
-            mockUserRepo.Verify(u => u.GetAsync(), Times.Once);
+            ManagerHelpers.VerifyGetAsync(mockUserRepo, Times.Once());
         }
     }
 }

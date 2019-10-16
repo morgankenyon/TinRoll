@@ -31,22 +31,6 @@ namespace TinRoll.Data.Repositories
             return await context.FindAsync<T>(id);
         }
 
-        public Task<IEnumerable<T>> GetAsync()
-        {
-            return GetAsync(null, null, null);
-        }
-
-        public Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> filter)
-        {
-            return GetAsync(filter, null, null);
-        }
-
-        public Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> filter,
-            string includeProperties)
-        {
-            return GetAsync(filter, null, includeProperties);
-        }
-
         public async Task<IEnumerable<T>> GetAsync(
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,

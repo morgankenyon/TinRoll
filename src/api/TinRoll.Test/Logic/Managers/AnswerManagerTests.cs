@@ -77,10 +77,7 @@ namespace TinRoll.Test.Logic.Managers
                 }
             };
 
-            var mockAnswerRepo = new Mock<IBaseRepository<Answer>>();
-
-            mockAnswerRepo.Setup(a => a.GetAsync())
-                .ReturnsAsync(mockAnswers);
+            var mockAnswerRepo = ManagerHelpers.MockRepoGetAsync(mockAnswers);
 
             var answerManager = new AnswerManager(mockAnswerRepo.Object);
 
@@ -89,7 +86,7 @@ namespace TinRoll.Test.Logic.Managers
             answers.Should().HaveCount(2);
             answers.First().Id.Should().Be(1);
             answers.Skip(1).First().Id.Should().Be(2);
-            mockAnswerRepo.Verify(u => u.GetAsync(), Times.Once);
+            ManagerHelpers.VerifyGetAsync(mockAnswerRepo, Times.Once());
         }
     }
 }

@@ -82,11 +82,8 @@ namespace TinRoll.Test.Logic.Managers
                 }
             };
 
-            var mockTagRepo = new Mock<IBaseRepository<Tag>>();
+            var mockTagRepo = ManagerHelpers.MockRepoGetAsync(mockTags);
             var mockQuestionTagRepo = new Mock<IBaseRepository<QuestionTag>>();
-
-            mockTagRepo.Setup(a => a.GetAsync())
-                .ReturnsAsync(mockTags);
 
             var tagManager = new TagManager(mockTagRepo.Object, mockQuestionTagRepo.Object);
 
@@ -95,7 +92,7 @@ namespace TinRoll.Test.Logic.Managers
             tags.Should().HaveCount(2);
             tags.First().Id.Should().Be(1);
             tags.Skip(1).First().Id.Should().Be(2);
-            mockTagRepo.Verify(u => u.GetAsync(), Times.Once);
+            ManagerHelpers.VerifyGetAsync(mockTagRepo, Times.Once());
         }
 
         [Fact]
@@ -115,11 +112,8 @@ namespace TinRoll.Test.Logic.Managers
                 }
             };
 
-            var mockTagRepo = new Mock<IBaseRepository<Tag>>();
+            var mockTagRepo = ManagerHelpers.MockRepoGetAsync(mockTags);
             var mockQuestionTagRepo = new Mock<IBaseRepository<QuestionTag>>();
-
-            mockTagRepo.Setup(a => a.GetAsync(It.IsAny<Expression<Func<Tag, bool>>>()))
-                .ReturnsAsync(mockTags);
 
             var tagManager = new TagManager(mockTagRepo.Object, mockQuestionTagRepo.Object);
 
@@ -130,6 +124,7 @@ namespace TinRoll.Test.Logic.Managers
             tags.First().Name.Should().Be("c#");
             tags.Skip(1).First().Id.Should().Be(2);
             tags.Skip(1).First().Name.Should().Be("c");
+            ManagerHelpers.VerifyGetAsync(mockTagRepo, Times.Once());
         }
 
         [Fact]
@@ -158,10 +153,7 @@ namespace TinRoll.Test.Logic.Managers
             };
 
             var mockTagRepo = new Mock<IBaseRepository<Tag>>();
-            var mockQuestionTagRepo = new Mock<IBaseRepository<QuestionTag>>();
-
-            mockQuestionTagRepo.Setup(a => a.GetAsync(It.IsAny<Expression<Func<QuestionTag, bool>>>(), It.IsAny<string>()))
-                .ReturnsAsync(mockQuestionTags);
+            var mockQuestionTagRepo = ManagerHelpers.MockRepoGetAsync(mockQuestionTags);
 
             var tagManager = new TagManager(mockTagRepo.Object, mockQuestionTagRepo.Object);
             
@@ -170,6 +162,7 @@ namespace TinRoll.Test.Logic.Managers
             tags.Should().HaveCount(2);
             tags.First().Id.Should().Be(1);
             tags.Skip(1).First().Id.Should().Be(2);
+            ManagerHelpers.VerifyGetAsync(mockQuestionTagRepo, Times.Once());
         }
     }
 }

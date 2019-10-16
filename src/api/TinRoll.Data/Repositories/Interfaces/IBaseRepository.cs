@@ -13,13 +13,6 @@ namespace TinRoll.Data.Repositories.Interfaces
 
         Task<T> GetAsync(int id);
 
-        Task<IEnumerable<T>> GetAsync();
-
-        Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> filter);
-
-        Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> filter,
-            string includeProperties);
-
         Task<IEnumerable<T>> GetAsync(
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,

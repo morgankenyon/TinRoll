@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -84,21 +85,17 @@ namespace TinRoll.Test.Logic.Managers
                 }
             };
 
-            var mockQuestionRepo = new Mock<IBaseRepository<Question>>();
+            var mockQuestionRepo = ManagerHelpers.MockRepoGetAsync(mockQuestions);
             var mockCreateQuestionRepo = new Mock<ICreateQuestionRepository>();
-
-            mockQuestionRepo.Setup(u => u.GetAsync())
-                .ReturnsAsync(mockQuestions);
 
             var questionManager = new QuestionManager(mockQuestionRepo.Object, mockCreateQuestionRepo.Object);
 
             var questions = await questionManager.GetQuestionsAsync();
-
            
             questions.Should().HaveCount(2);
             questions.First().Id.Should().Be(1);
             questions.Skip(1).First().Id.Should().Be(2);
-            mockQuestionRepo.Verify(u => u.GetAsync(), Times.Once);
+            ManagerHelpers.VerifyGetAsync(mockQuestionRepo, Times.Once());
         }
     }
 }
