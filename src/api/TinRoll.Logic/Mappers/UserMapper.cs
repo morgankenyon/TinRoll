@@ -8,9 +8,8 @@ namespace TinRoll.Logic.Mappers
 {
     public static class UserMapper
     {
-        public static UserDto ToDto(User user)
-        {
-            return new UserDto
+        public static UserDto ToDto(User user) => user == null ? null : 
+            new UserDto
             {
                 Id = user.Id,
                 Email = user.Email,
@@ -18,10 +17,9 @@ namespace TinRoll.Logic.Mappers
                 CreatedDate = user.CreatedDate,
                 UpdatedDate = user.UpdatedDate
             };
-        }
-        public static User ToDb(UserDto userDto)
-        {
-            return new User
+
+        public static User ToDb(UserDto userDto) => userDto == null ? null :
+            new User
             {
                 Id = userDto.Id,
                 Email = userDto.Email,
@@ -29,6 +27,5 @@ namespace TinRoll.Logic.Mappers
                 CreatedDate = userDto.CreatedDate,
                 UpdatedDate = userDto.UpdatedDate
             };
-        }
     }
 }

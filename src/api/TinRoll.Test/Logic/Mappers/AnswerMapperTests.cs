@@ -36,6 +36,16 @@ namespace TinRoll.Test.Logic.Mappers
         }
 
         [Fact]
+        public void Test_NullDbToDto()
+        {
+            Answer answer = null;
+
+            var answerDto = AnswerMapper.ToDto(answer);
+
+            answerDto.Should().BeNull();
+        }
+
+        [Fact]
         public void Test_AnswerDto_To_Answer()
         {
             var answerDto = new AnswerDto
@@ -60,6 +70,17 @@ namespace TinRoll.Test.Logic.Mappers
             answer.User.Should().BeNull();
             answer.Question.Should().BeNull();
 
+        }
+
+        [Fact]
+        public void Test_NullDtoToDb()
+        {
+
+            AnswerDto answerDto = null;
+
+            var answer = AnswerMapper.ToDb(answerDto);
+
+            answer.Should().BeNull();
         }
     }
 }

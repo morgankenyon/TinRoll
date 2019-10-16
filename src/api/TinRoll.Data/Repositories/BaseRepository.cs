@@ -54,11 +54,11 @@ namespace TinRoll.Data.Repositories
 
             if (orderBy != null)
             {
-                return await orderBy(query).ToAsyncEnumerable().ToList();
+                return await orderBy(query).ToListAsync();
             }
             else
             {
-                return await query.ToAsyncEnumerable().ToList();
+                return await query.ToListAsync();
             }
         }
     }

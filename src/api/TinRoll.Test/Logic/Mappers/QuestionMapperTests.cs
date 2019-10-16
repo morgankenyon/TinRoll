@@ -36,6 +36,16 @@ namespace TinRoll.Test.Logic.Mappers
         }
 
         [Fact]
+        public void Test_NullDbToDto()
+        {
+            Question question = null;
+
+            var questionDto = QuestionMapper.ToDto(question);
+
+            questionDto.Should().BeNull();
+        }
+
+        [Fact]
         public void Test_QuestionDto_To_Question()
         {
             var questionDto = new QuestionDto
@@ -62,6 +72,16 @@ namespace TinRoll.Test.Logic.Mappers
         }
 
         [Fact]
+        public void Test_NullDtoToDb()
+        {
+            QuestionDto qd = null;
+
+            var q = QuestionMapper.ToDb(qd);
+
+            q.Should().BeNull();
+        }
+
+        [Fact]
         public void Test_CreateQuestionDto_To_Question()
         {
             var cdto = new CreateQuestionDto()
@@ -83,6 +103,16 @@ namespace TinRoll.Test.Logic.Mappers
             q.CreatedDate.Should().Be(DateTime.MinValue);
             q.User.Should().BeNull();
             q.Answers.Should().BeNull();
+        }
+
+        [Fact]
+        public void Test_NullCreateQuestionDtoToDb()
+        {
+            CreateQuestionDto cdto = null;
+
+            var q = QuestionMapper.ToDb(cdto);
+
+            q.Should().BeNull();
         }
     }
 }

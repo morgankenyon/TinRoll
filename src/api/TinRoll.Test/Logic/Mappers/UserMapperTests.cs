@@ -37,6 +37,16 @@ namespace TinRoll.Test.Logic.Mappers
         }
 
         [Fact]
+        public void Test_NullDbToDto()
+        {
+            User user = null;
+
+            var dto = UserMapper.ToDto(user);
+
+            dto.Should().BeNull();
+        }
+
+        [Fact]
         public void Test_UserDto_To_User()
         {
             //arrange
@@ -63,6 +73,16 @@ namespace TinRoll.Test.Logic.Mappers
             user.Questions.Should().BeNull();
             user.Answers.Should().BeNull();
             user.Tags.Should().BeNull();
+        }
+
+        [Fact]
+        public void Test_NullDtoToDb()
+        {
+            UserDto dto = null;
+
+            var user = UserMapper.ToDb(dto);
+
+            user.Should().BeNull();
         }
     }
 }

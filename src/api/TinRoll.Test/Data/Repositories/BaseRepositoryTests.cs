@@ -115,6 +115,16 @@ namespace TinRoll.Test.Data.Repositories
                 context.Questions.AddRange(questions);
                 context.SaveChanges();
             }
+
+            Question dbQuestion = null;
+            using (var context = new TinRollContext(options))
+            {
+                var baseRepo = new BaseRepository<Question>(context);
+                dbQuestion = await baseRepo.GetAsync(2);
+            }
+
+            dbQuestion.Should().NotBeNull();
+            dbQuestion.Id.Should().Be(2);
         }
     }
 }

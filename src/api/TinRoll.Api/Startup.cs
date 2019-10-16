@@ -25,7 +25,7 @@ namespace TinRoll.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllers();
             services.AddDbContext<TinRollContext>(
                 options => options.UseSqlServer(Configuration["TinRoll:SqlServer"]));
 
@@ -53,13 +53,18 @@ namespace TinRoll.Api
             }
 
             //app.UseHttpsRedirection();
+            app.UseRouting();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "TinRoll API V1");
+                c.RoutePrefix = "";
             });
             app.UseCors(builder => builder.WithOrigins(Configuration["TinRoll:UIUrl"]).AllowAnyHeader().AllowAnyMethod());
-            app.UseMvc();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
         }
 

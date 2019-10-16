@@ -34,6 +34,16 @@ namespace TinRoll.Test.Logic.Mappers
         }
 
         [Fact]
+        public void Test_NullDbToDto()
+        {
+            Tag tag = null;
+
+            var dto = TagMapper.ToDto(tag);
+
+            dto.Should().BeNull();
+        }
+
+        [Fact]
         public void Test_TagDto_To_Tag()
         {
             var tagDto = new TagDto
@@ -53,6 +63,16 @@ namespace TinRoll.Test.Logic.Mappers
             tag.Name.Should().Be(tagDto.Name.ToLower());
             tag.UpdatedDate.Should().Be(tagDto.UpdatedDate);
             tag.UserId.Should().Be(tagDto.UserId);
+        }
+
+        [Fact]
+        public void Test_NullDtoToDb()
+        {
+            TagDto dto = null;
+
+            var tag = TagMapper.ToDb(dto);
+
+            tag.Should().BeNull();
         }
     }
 }
