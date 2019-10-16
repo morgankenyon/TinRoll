@@ -8,6 +8,7 @@ namespace TinRoll.Api.ApiErrors
 {
     public class ApiError
     {
+        //https://medium.com/@matteocontrini/consistent-error-responses-in-asp-net-core-web-apis-bb70b435d1f8
         public int StatusCode { get; private set; }
 
         public string StatusDescription { get; private set; }

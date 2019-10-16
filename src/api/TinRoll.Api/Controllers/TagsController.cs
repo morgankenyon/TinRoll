@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TinRoll.Api.ApiErrors;
 using TinRoll.Logic.Managers.Interfaces;
 using TinRoll.Shared.Dtos;
 
@@ -28,10 +29,18 @@ namespace TinRoll.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<TagDto> GetTag(int id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> GetTag(int id)
         {
             var tag = await _tagManager.GetTagAsync(id);
-            return tag;
+
+            if (tag == null)
+            {
+                return NotFound(new NotFoundError("The tag was not found"));
+            }
+
+            return Ok(tag);
         }
 
         [HttpPost]

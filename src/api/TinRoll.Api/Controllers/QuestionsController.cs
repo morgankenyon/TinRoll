@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TinRoll.Api.ApiErrors;
 using TinRoll.Logic.Managers.Interfaces;
@@ -27,6 +27,8 @@ namespace TinRoll.Api.Controllers
         }
 
         [HttpGet("{Id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> GetQuestion(int Id)
         {
             var question = await _questionManager.GetQuestionAsync(Id);

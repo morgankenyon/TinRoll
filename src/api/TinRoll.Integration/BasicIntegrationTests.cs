@@ -42,7 +42,7 @@ namespace TinRoll.Integration
         [InlineData("/api/answers/1")]
         [InlineData("/api/questions/1")]
         [InlineData("/api/tags/1")]
-        [InlineData("/api/tags/question/1")]
+        [InlineData("/api/users/1")]
         public async Task Test_GetResourceNotFound(string url)
         {
             var client = _factory.CreateClient();
