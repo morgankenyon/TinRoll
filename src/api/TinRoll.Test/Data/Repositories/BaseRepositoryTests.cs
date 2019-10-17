@@ -45,7 +45,7 @@ namespace TinRoll.Test.Data.Repositories
             {
                 Title = "Unit Test Question",
                 UserId = 1,
-                Content = "Question Text"
+                //Content = "Question Text"
             };
 
             Question dbQuestion = null;
@@ -73,13 +73,13 @@ namespace TinRoll.Test.Data.Repositories
             {
                 Title = "Question 1",
                 UserId = 1,
-                Content = "Question One"
+                //Content = "Question One"
             };
             var questionTwo = new Question
             {
                 Title = "Question 2",
                 UserId = 2,
-                Content = "Question Two"
+                //Content = "Question Two"
             };
 
             using (var context = new TinRollContext(options))

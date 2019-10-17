@@ -18,7 +18,7 @@ namespace TinRoll.Test.Logic.Mappers
             {
                 Id = 1,
                 CreatedDate = DateTime.UtcNow,
-                Content = "This is content",
+                //Content = "This is content",
                 UpdatedDate = DateTime.UtcNow,
                 UserId = 10,
                 QuestionId = 10
@@ -29,7 +29,7 @@ namespace TinRoll.Test.Logic.Mappers
             answerDto.Should().NotBeNull();
             answerDto.Id.Should().Be(answer.Id);
             answerDto.CreatedDate.Should().Be(answer.CreatedDate);
-            answerDto.Content.Should().Be(answer.Content);
+            //answerDto.Content.Should().Be(answer.Content);
             answerDto.UpdatedDate.Should().Be(answer.UpdatedDate);
             answerDto.UserId.Should().Be(answer.UserId);
             answerDto.QuestionId.Should().Be(answer.QuestionId);
@@ -52,7 +52,7 @@ namespace TinRoll.Test.Logic.Mappers
             {
                 Id = 1,
                 CreatedDate = DateTime.UtcNow,
-                Content = "This is content",
+                //Content = "This is content",
                 UpdatedDate = DateTime.UtcNow,
                 UserId = 10,
                 QuestionId = 10
@@ -63,7 +63,7 @@ namespace TinRoll.Test.Logic.Mappers
             answer.Should().NotBeNull();
             answer.Id.Should().Be(answerDto.Id);
             answer.CreatedDate.Should().Be(answerDto.CreatedDate);
-            answer.Content.Should().Be(answerDto.Content);
+            //answer.Content.Should().Be(answerDto.Content);
             answer.UpdatedDate.Should().Be(answerDto.UpdatedDate);
             answer.UserId.Should().Be(answerDto.UserId);
             answer.QuestionId.Should().Be(answerDto.QuestionId);
