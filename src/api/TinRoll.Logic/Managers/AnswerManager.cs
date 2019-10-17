@@ -22,21 +22,21 @@ namespace TinRoll.Logic.Managers
 
         public async Task<AnswerDto> CreateAnswerAsync(AnswerDto answer)
         {
-            var dbAnswer = AnswerMapper.ToDb(answer);
+            var dbAnswer = answer.ToDb();
             var createdAnswer = await _answerRepo.CreateAsync(dbAnswer);
-            return AnswerMapper.ToDto(createdAnswer);
+            return createdAnswer.ToDto();
         }
 
         public async Task<AnswerDto> GetAnswerAsync(int id)
         {
             var dbAnswer = await _answerRepo.GetAsync(id);
-            return AnswerMapper.ToDto(dbAnswer);
+            return dbAnswer.ToDto();
         }
 
         public async Task<IEnumerable<AnswerDto>> GetAnswersAsync()
         {
             var dbAnswers = await _answerRepo.GetAsync();
-            var answers = dbAnswers.Select(a => AnswerMapper.ToDto(a));
+            var answers = dbAnswers.Select(a => a.ToDto());
             return answers;
         }
     }

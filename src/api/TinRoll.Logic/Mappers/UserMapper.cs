@@ -8,7 +8,7 @@ namespace TinRoll.Logic.Mappers
 {
     public static class UserMapper
     {
-        public static UserDto ToDto(User user) => user == null ? null : 
+        public static UserDto ToDto(this User user) => user == null ? null : 
             new UserDto
             {
                 Id = user.Id,
@@ -18,7 +18,7 @@ namespace TinRoll.Logic.Mappers
                 UpdatedDate = user.UpdatedDate
             };
 
-        public static User ToDb(UserDto userDto) => userDto == null ? null :
+        public static User ToDb(this UserDto userDto) => userDto == null ? null :
             new User
             {
                 Id = userDto.Id,

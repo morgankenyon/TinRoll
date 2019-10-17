@@ -5,7 +5,7 @@ namespace TinRoll.Logic.Mappers
 {
     public static class QuestionMapper
     {
-        public static QuestionDto ToDto(Question question) => question == null ? null :
+        public static QuestionDto ToDto(this Question question) => question == null ? null :
             new QuestionDto
             {
                 Id = question.Id,
@@ -16,7 +16,7 @@ namespace TinRoll.Logic.Mappers
                 UserId = question.UserId
             };
 
-        public static Question ToDb(QuestionDto questionDto) => questionDto == null ? null :
+        public static Question ToDb(this QuestionDto questionDto) => questionDto == null ? null :
             new Question
             {
                 Id = questionDto.Id,
@@ -27,7 +27,7 @@ namespace TinRoll.Logic.Mappers
                 UserId = questionDto.UserId
             };
 
-        public static Question ToDb(CreateQuestionDto questionDto) => questionDto == null ? null : new Question
+        public static Question ToDb(this CreateQuestionDto questionDto) => questionDto == null ? null : new Question
             {
                 Title = questionDto.Title,
                 //Content = questionDto.Content,

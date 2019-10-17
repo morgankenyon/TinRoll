@@ -9,7 +9,7 @@ namespace TinRoll.Logic.Mappers
     public static class AnswerMapper
     {
 
-        public static AnswerDto ToDto(Answer answer) => answer == null ? null :
+        public static AnswerDto ToDto(this Answer answer) => answer == null ? null :
             new AnswerDto
             {
                 Id = answer.Id,
@@ -20,7 +20,7 @@ namespace TinRoll.Logic.Mappers
                 UserId = answer.UserId
             };
 
-        public static Answer ToDb(AnswerDto answerDto) => answerDto == null ? null :
+        public static Answer ToDb(this AnswerDto answerDto) => answerDto == null ? null :
             new Answer
             {
                 Id = answerDto.Id,

@@ -8,7 +8,7 @@ namespace TinRoll.Logic.Mappers
 {
     public static class TagMapper
     {
-        public static TagDto ToDto(Tag tag) => tag == null ? null : 
+        public static TagDto ToDto(this Tag tag) => tag == null ? null : 
             new TagDto
             {
                 Id = tag.Id,
@@ -18,7 +18,7 @@ namespace TinRoll.Logic.Mappers
                 UserId = tag.UserId
             };
 
-        public static Tag ToDb(TagDto tagDto) => tagDto == null ? null :
+        public static Tag ToDb(this TagDto tagDto) => tagDto == null ? null :
             new Tag
             {
                 Id = tagDto.Id,

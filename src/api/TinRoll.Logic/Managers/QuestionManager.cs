@@ -24,22 +24,22 @@ namespace TinRoll.Logic.Managers
 
         public async Task<QuestionDto> CreateQuestionAsync(CreateQuestionDto question)
         {
-            var dbQuestion = QuestionMapper.ToDb(question);
+            var dbQuestion = question.ToDb();
             var dbCreatedQuestion = await _createQuestionRepo.CreateQuestionAsync(dbQuestion, question.TagIds);
 
-            return QuestionMapper.ToDto(dbCreatedQuestion);
+            return dbCreatedQuestion.ToDto();
         }
 
         public async Task<QuestionDto> GetQuestionAsync(int id)
         {
             var dbQuestion = await _questionRepo.GetAsync(id);
-            return QuestionMapper.ToDto(dbQuestion);
+            return dbQuestion.ToDto();
         }
 
         public async Task<IEnumerable<QuestionDto>> GetQuestionsAsync()
         {
             var dbQuestions = await _questionRepo.GetAsync();
-            var questions = dbQuestions.Select(q => QuestionMapper.ToDto(q));
+            var questions = dbQuestions.Select(q => q.ToDto());
             return questions;
         }
     }

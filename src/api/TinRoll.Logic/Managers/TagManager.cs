@@ -24,31 +24,31 @@ namespace TinRoll.Logic.Managers
             _questionTagRepo = questionTagRepo;
         }
 
-        public async Task<TagDto> CreateTagAsync(TagDto Tag)
+        public async Task<TagDto> CreateTagAsync(TagDto tag)
         {
-            var dbTag = TagMapper.ToDb(Tag);
+            var dbTag = tag.ToDb();
             var createdTag = await _tagRepo.CreateAsync(dbTag);
-            return TagMapper.ToDto(createdTag);
+            return createdTag.ToDto();
         }
 
         public async Task<TagDto> GetTagAsync(int id)
         {
             var dbTag = await _tagRepo.GetAsync(id);
-            return TagMapper.ToDto(dbTag);
+            return dbTag.ToDto();
         }
 
         public async Task<IEnumerable<TagDto>> GetTagsAsync(string searchText)
         {
             Expression<Func<Tag, bool>> findByText = (t) => t.Name.StartsWith(searchText.ToLower());
             var dbTags = await _tagRepo.GetAsync(filter: findByText);
-            var tags = dbTags.Select(t => TagMapper.ToDto(t));
+            var tags = dbTags.Select(t => t.ToDto());
             return tags;
         }
 
         public async Task<IEnumerable<TagDto>> GetTagsAsync()
         {
             var dbTags = await _tagRepo.GetAsync();
-            var tags = dbTags.Select(t => TagMapper.ToDto(t));
+            var tags = dbTags.Select(t => t.ToDto());
             return tags;
         }
 
@@ -56,7 +56,7 @@ namespace TinRoll.Logic.Managers
         {
             Expression<Func<QuestionTag, bool>> findByQuestionId = (qt) => qt.QuestionId == questionId;
             var questionTags = await _questionTagRepo.GetAsync(filter: findByQuestionId, includeProperties: "Tag");
-            var tags = questionTags.Select(t => TagMapper.ToDto(t.Tag));
+            var tags = questionTags.Select(t => t.Tag.ToDto());
             return tags;
         }
     }
