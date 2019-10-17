@@ -50,7 +50,7 @@ namespace TinRoll.Test.Logic.Managers
 
             var mockAnswerRepo = new Mock<IBaseRepository<Answer>>();
 
-            mockAnswerRepo.Setup(a => a.GetAsync(It.IsAny<int>()))
+            mockAnswerRepo.Setup(a => a.GetAsync(It.IsAny<int>(), It.IsAny<string>()))
                 .ReturnsAsync(mockAnswer);
 
             var answerManager = new AnswerManager(mockAnswerRepo.Object);
@@ -59,7 +59,7 @@ namespace TinRoll.Test.Logic.Managers
 
             answer.Should().NotBeNull();
             answer.Id.Should().Be(1);
-            mockAnswerRepo.Verify(u => u.GetAsync(It.IsAny<int>()), Times.Once);
+            mockAnswerRepo.Verify(u => u.GetAsync(It.IsAny<int>(), It.IsAny<string>()), Times.Once);
         }
 
         [Fact]

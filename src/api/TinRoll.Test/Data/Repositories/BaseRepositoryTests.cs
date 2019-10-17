@@ -114,6 +114,30 @@ namespace TinRoll.Test.Data.Repositories
         }
 
         [Fact]
+        public async Task Test_GetAsyncByIdInclude()
+        {
+            var options = RepositoryHelpers.BuildInMemoryDatabaseOptions("Base.GetAsyncByIdInclude");
+            var questions = GetQuestions();
+
+            using (var context = new TinRollContext(options))
+            {
+                context.Questions.AddRange(questions);
+                context.SaveChanges();
+            }
+
+            Question dbQuestion = null;
+            using (var context = new TinRollContext(options))
+            {
+                var baseRepo = new BaseRepository<Question>(context);
+                dbQuestion = await baseRepo.GetAsync(2, "QuestionPosts");
+            }
+
+            dbQuestion.Should().NotBeNull();
+            dbQuestion.QuestionPosts.Should().NotBeNull();
+            dbQuestion.QuestionPosts.Count().Should().Be(1);
+        }
+        
+        [Fact]
         public async Task Test_GetAsync()
         {
             var options = RepositoryHelpers.BuildInMemoryDatabaseOptions("Base.GetAsync");
@@ -134,6 +158,31 @@ namespace TinRoll.Test.Data.Repositories
 
             dbQuestions.Should().NotBeNull();
             dbQuestions.Count().Should().Be(3);
+        }
+
+        [Fact]
+        public async Task Test_GetAsyncInclude()
+        {
+            var options = RepositoryHelpers.BuildInMemoryDatabaseOptions("Base.GetAsyncInclude");
+            var questions = GetQuestions();
+
+            using (var context = new TinRollContext(options))
+            {
+                context.Questions.AddRange(questions);
+                context.SaveChanges();
+            }
+
+            IEnumerable<Question> dbQuestions = null;
+            using (var context = new TinRollContext(options))
+            {
+                var baseRepo = new BaseRepository<Question>(context);
+                dbQuestions = await baseRepo.GetAsync(includeProperties: "QuestionPosts");
+            }
+
+            dbQuestions.Should().NotBeNull();
+            dbQuestions.Count().Should().Be(3);
+            dbQuestions.All(dq => dq.QuestionPosts.Count == 1).Should().BeTrue();
+
         }
     }
 }

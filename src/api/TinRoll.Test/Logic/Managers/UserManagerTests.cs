@@ -49,7 +49,7 @@ namespace TinRoll.Test.Logic.Managers
 
             var mockUserRepo = new Mock<IBaseRepository<User>>();
 
-            mockUserRepo.Setup(a => a.GetAsync(It.IsAny<int>()))
+            mockUserRepo.Setup(a => a.GetAsync(It.IsAny<int>(), It.IsAny<string>()))
                 .ReturnsAsync(mockUser);
 
             var userManager = new UserManager(mockUserRepo.Object);
@@ -58,7 +58,7 @@ namespace TinRoll.Test.Logic.Managers
 
             user.Should().NotBeNull();
             user.Id.Should().Be(1);
-            mockUserRepo.Verify(u => u.GetAsync(It.IsAny<int>()), Times.Once);
+            mockUserRepo.Verify(u => u.GetAsync(It.IsAny<int>(), It.IsAny<string>()), Times.Once);
         }
 
         [Fact]

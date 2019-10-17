@@ -55,7 +55,7 @@ namespace TinRoll.Test.Logic.Managers
             var mockTagRepo = new Mock<IBaseRepository<Tag>>();
             var mockQuestionTagRepo = new Mock<IBaseRepository<QuestionTag>>();
 
-            mockTagRepo.Setup(a => a.GetAsync(It.IsAny<int>()))
+            mockTagRepo.Setup(a => a.GetAsync(It.IsAny<int>(), It.IsAny<string>()))
                 .ReturnsAsync(mockTag);
 
             var tagManager = new TagManager(mockTagRepo.Object, mockQuestionTagRepo.Object);
@@ -64,7 +64,7 @@ namespace TinRoll.Test.Logic.Managers
 
             tag.Should().NotBeNull();
             tag.Id.Should().Be(1);
-            mockTagRepo.Verify(u => u.GetAsync(It.IsAny<int>()), Times.Once);
+            mockTagRepo.Verify(u => u.GetAsync(It.IsAny<int>(), It.IsAny<string>()), Times.Once);
         }
 
         [Fact]

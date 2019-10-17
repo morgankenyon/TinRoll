@@ -26,9 +26,25 @@ namespace TinRoll.Data.Repositories
             return entity;
         }
 
-        public async Task<T> GetAsync(int id)
+        //public async Task<T> GetAsync(int id)
+        //{
+        //    return await context.FindAsync<T>(id);
+        //}
+
+        public async Task<T> GetAsync(int id, string includeProperties = null)
         {
-            return await context.FindAsync<T>(id);
+            IQueryable<T> query = context.Set<T>();
+
+            if (includeProperties != null)
+            {
+                foreach (var includeProperty in includeProperties
+                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+
+            return await query.FirstOrDefaultAsync(q => q.Id == id);
         }
 
         public async Task<IEnumerable<T>> GetAsync(
