@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -36,8 +37,6 @@ namespace TinRoll.Integration
                 // Build the service provider.
                 var sp = services.BuildServiceProvider();
 
-                // Create a scope to obtain a reference to the database
-                // context (ApplicationDbContext).
                 using (var scope = sp.CreateScope())
                 {
                     var scopedServices = scope.ServiceProvider;
@@ -45,19 +44,10 @@ namespace TinRoll.Integration
 
                     // Ensure the database is created.
                     db.Database.EnsureCreated();
-
-                    //try
-                    //{
-                    //    // Seed the database with test data.
-                    //    Utilities.InitializeDbForTests(db);
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    logger.LogError(ex, "An error occurred seeding the " +
-                    //        "database with test messages. Error: {Message}", ex.Message);
-                    //}
                 }
             });
+
+            builder.UseSetting("TinRoll:UIUrl", "http://localhost:8080");
         }
     }
 }
