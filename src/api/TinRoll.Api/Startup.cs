@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using TinRoll.Data;
 using TinRoll.Data.Repositories;
@@ -25,7 +26,7 @@ namespace TinRoll.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllers();
             services.AddDbContext<TinRollContext>(
                 options => options.UseSqlServer(Configuration["TinRoll:SqlServer"]));
 
@@ -40,7 +41,7 @@ namespace TinRoll.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -53,13 +54,18 @@ namespace TinRoll.Api
             }
 
             //app.UseHttpsRedirection();
+            app.UseRouting();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "TinRoll API V1");
+                c.RoutePrefix = "";
             });
             app.UseCors(builder => builder.WithOrigins(Configuration["TinRoll:UIUrl"]).AllowAnyHeader().AllowAnyMethod());
-            app.UseMvc();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
         }
 
@@ -72,11 +78,7 @@ namespace TinRoll.Api
             services.AddScoped<ITagManager, TagManager>();
 
             //repos
-            services.AddScoped<IQuestionRepository, QuestionRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IAnswerRepository, AnswerRepository>();
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-            services.AddScoped<ITagRepository, TagRepository>();
             services.AddScoped<ICreateQuestionRepository, CreateQuestionRepository>();
         }
     }

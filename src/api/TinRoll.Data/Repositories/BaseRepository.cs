@@ -10,7 +10,7 @@ using TinRoll.Data.Repositories.Interfaces;
 
 namespace TinRoll.Data.Repositories
 {
-    internal class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
+    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
         internal readonly TinRollContext context;
 
@@ -54,11 +54,11 @@ namespace TinRoll.Data.Repositories
 
             if (orderBy != null)
             {
-                return await orderBy(query).ToAsyncEnumerable().ToList();
+                return await orderBy(query).ToListAsync();
             }
             else
             {
-                return await query.ToAsyncEnumerable().ToList();
+                return await query.ToListAsync();
             }
         }
     }

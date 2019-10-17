@@ -13,10 +13,10 @@ namespace TinRoll.Logic.Managers
 {
     public class QuestionManager : IQuestionManager
     {
-        private readonly IQuestionRepository _questionRepo;
+        private readonly IBaseRepository<Question> _questionRepo;
         private readonly ICreateQuestionRepository _createQuestionRepo;
 
-        public QuestionManager(IQuestionRepository questionRepo, ICreateQuestionRepository createQuestionRepo)
+        public QuestionManager(IBaseRepository<Question> questionRepo, ICreateQuestionRepository createQuestionRepo)
         {
             _questionRepo = questionRepo;
             _createQuestionRepo = createQuestionRepo;
@@ -25,20 +25,20 @@ namespace TinRoll.Logic.Managers
         public async Task<QuestionDto> CreateQuestionAsync(CreateQuestionDto question)
         {
             var dbQuestion = QuestionMapper.ToDb(question);
-            await _createQuestionRepo.CreateQuestionAsync(dbQuestion, question.TagIds);
+            var dbCreatedQuestion = await _createQuestionRepo.CreateQuestionAsync(dbQuestion, question.TagIds);
 
-            return QuestionMapper.ToDto(dbQuestion);
+            return QuestionMapper.ToDto(dbCreatedQuestion);
         }
 
         public async Task<QuestionDto> GetQuestionAsync(int id)
         {
-            var dbQuestion = await _questionRepo.GetQuestionAsync(id);
+            var dbQuestion = await _questionRepo.GetAsync(id);
             return QuestionMapper.ToDto(dbQuestion);
         }
 
         public async Task<IEnumerable<QuestionDto>> GetQuestionsAsync()
         {
-            var dbQuestions = await _questionRepo.GetQuestionsAsync();
+            var dbQuestions = await _questionRepo.GetAsync();
             var questions = dbQuestions.Select(q => QuestionMapper.ToDto(q));
             return questions;
         }

@@ -5,9 +5,8 @@ namespace TinRoll.Logic.Mappers
 {
     public static class QuestionMapper
     {
-        public static QuestionDto ToDto(Question question)
-        {
-            return new QuestionDto
+        public static QuestionDto ToDto(Question question) => question == null ? null :
+            new QuestionDto
             {
                 Id = question.Id,
                 Title = question.Title,
@@ -16,11 +15,9 @@ namespace TinRoll.Logic.Mappers
                 UpdatedDate = question.UpdatedDate,
                 UserId = question.UserId
             };
-        }
 
-        public static Question ToDb(QuestionDto questionDto)
-        {
-            return new Question
+        public static Question ToDb(QuestionDto questionDto) => questionDto == null ? null :
+            new Question
             {
                 Id = questionDto.Id,
                 Title = questionDto.Title,
@@ -29,16 +26,12 @@ namespace TinRoll.Logic.Mappers
                 UpdatedDate = questionDto.UpdatedDate,
                 UserId = questionDto.UserId
             };
-        }
 
-        public static Question ToDb(CreateQuestionDto questionDto)
-        {
-            return new Question
+        public static Question ToDb(CreateQuestionDto questionDto) => questionDto == null ? null : new Question
             {
                 Title = questionDto.Title,
                 Content = questionDto.Content,
                 UserId = questionDto.UserId
             };
-        }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TinRoll.Api.ApiErrors;
 using TinRoll.Logic.Managers.Interfaces;
 using TinRoll.Shared.Dtos;
 
@@ -28,10 +29,18 @@ namespace TinRoll.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<AnswerDto> GetAnswer(int id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> GetAnswer(int id)
         {
             var answer = await _answerManager.GetAnswerAsync(id);
-            return answer;
+
+            if (answer == null)
+            {
+                return NotFound(new NotFoundError("The answer was not found"));
+            }
+
+            return Ok(answer);
         }
 
 

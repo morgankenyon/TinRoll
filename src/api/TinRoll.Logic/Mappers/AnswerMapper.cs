@@ -9,9 +9,8 @@ namespace TinRoll.Logic.Mappers
     public static class AnswerMapper
     {
 
-        public static AnswerDto ToDto(Answer answer)
-        {
-            return new AnswerDto
+        public static AnswerDto ToDto(Answer answer) => answer == null ? null :
+            new AnswerDto
             {
                 Id = answer.Id,
                 Content = answer.Content,
@@ -20,11 +19,9 @@ namespace TinRoll.Logic.Mappers
                 QuestionId = answer.QuestionId,
                 UserId = answer.UserId
             };
-        }
 
-        public static Answer ToDb(AnswerDto answerDto)
-        {
-            return new Answer
+        public static Answer ToDb(AnswerDto answerDto) => answerDto == null ? null :
+            new Answer
             {
                 Id = answerDto.Id,
                 Content = answerDto.Content,
@@ -33,6 +30,5 @@ namespace TinRoll.Logic.Mappers
                 QuestionId = answerDto.QuestionId,
                 UserId = answerDto.UserId
             };
-        }
     }
 }

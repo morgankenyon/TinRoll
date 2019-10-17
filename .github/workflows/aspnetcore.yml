@@ -20,10 +20,10 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 2.2.401
-    - name: Build with dotnet
+        dotnet-version: 3.0.100
+    - name: Build
       run: dotnet build --configuration Release
       working-directory: ./src/api
-    - name: Unit Tests
+    - name: Tests
       run: dotnet test
       working-directory: ./src/api
