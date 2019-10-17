@@ -1,0 +1,29 @@
+name: ASP.NET Core CI
+
+on:
+  push:
+    branches: 
+      - master
+      - dev
+  pull_request:
+    branches: 
+      - master
+      - dev
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.401
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+      working-directory: ./src/api
+    - name: Unit Tests
+      run: dotnet test
+      working-directory: ./src/api

@@ -1,0 +1,1 @@
+type SingleQuestionoProps = { id: string };
