@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TinRoll.Data;
 
 namespace TinRoll.Data.Migrations
 {
     [DbContext(typeof(TinRollContext))]
-    partial class TinRollContextModelSnapshot : ModelSnapshot
+    [Migration("20191016222039_UpdatingTags")]
+    partial class UpdatingTags
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,7 +52,7 @@ namespace TinRoll.Data.Migrations
                     b.ToTable("Answers");
                 });
 
-            modelBuilder.Entity("TinRoll.Data.Entities.AnswerPost", b =>
+            modelBuilder.Entity("TinRoll.Data.Entities.Question", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,32 +65,8 @@ namespace TinRoll.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("UpdatedDate");
-
-                    b.Property<int>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AnswerId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AnswerPosts");
-                });
-
-            modelBuilder.Entity("TinRoll.Data.Entities.Question", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<string>("Title");
-=======
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
->>>>>>> dev
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
@@ -101,31 +79,6 @@ namespace TinRoll.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Questions");
-                });
-
-            modelBuilder.Entity("TinRoll.Data.Entities.QuestionPost", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Content");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<int>("QuestionId");
-
-                    b.Property<DateTime>("UpdatedDate");
-
-                    b.Property<int>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuestionId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("QuestionPosts");
                 });
 
             modelBuilder.Entity("TinRoll.Data.Entities.QuestionTag", b =>
@@ -219,19 +172,6 @@ namespace TinRoll.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TinRoll.Data.Entities.AnswerPost", b =>
-                {
-                    b.HasOne("TinRoll.Data.Entities.Answer", "Answer")
-                        .WithMany("AnswerPosts")
-                        .HasForeignKey("AnswerId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("TinRoll.Data.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("TinRoll.Data.Entities.Question", b =>
                 {
                     b.HasOne("TinRoll.Data.Entities.User", "User")
@@ -239,19 +179,6 @@ namespace TinRoll.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("TinRoll.Data.Entities.QuestionPost", b =>
-                {
-                    b.HasOne("TinRoll.Data.Entities.Question", "Question")
-                        .WithMany("QuestionPosts")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("TinRoll.Data.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("TinRoll.Data.Entities.QuestionTag", b =>

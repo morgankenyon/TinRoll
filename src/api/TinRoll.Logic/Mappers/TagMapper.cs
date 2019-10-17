@@ -8,29 +8,24 @@ namespace TinRoll.Logic.Mappers
 {
     public static class TagMapper
     {
-        public static TagDto ToDto(Tag tag)
-        {
-            return new TagDto
+        public static TagDto ToDto(Tag tag) => tag == null ? null : 
+            new TagDto
             {
                 Id = tag.Id,
-                TagText = tag.DisplayText,
+                Name = tag.Name,
                 CreatedDate = tag.CreatedDate,
                 UpdatedDate = tag.UpdatedDate,
                 UserId = tag.UserId
             };
-        }
 
-        public static Tag ToDb(TagDto tagDto)
-        {
-            return new Tag
+        public static Tag ToDb(TagDto tagDto) => tagDto == null ? null :
+            new Tag
             {
                 Id = tagDto.Id,
-                DisplayText = tagDto.TagText,
-                SearchText = tagDto.TagText.ToLower(),
+                Name = tagDto.Name.ToLower(),
                 CreatedDate = tagDto.CreatedDate,
                 UpdatedDate = tagDto.UpdatedDate,
                 UserId = tagDto.UserId
             };
-        }
     }
 }

@@ -4,7 +4,7 @@ import '@babel/polyfill'
 import Input from '../input/Input'
 import './question.css'
 
-import { getArrayData } from '../../utils/apiCalls' 
+import { getArrayData } from '../../utils/apiCalls'
 import { Link, Route } from 'react-router-dom'
 
 export default class Question extends React.Component {
@@ -12,7 +12,7 @@ export default class Question extends React.Component {
         super(props)
 
         this.state = {
-            questions:[]
+            questions: []
         }
 
         this.getQuestions = this.getQuestions.bind(this)
@@ -21,11 +21,11 @@ export default class Question extends React.Component {
     componentDidMount() {
         console.log('mount question')
         this.getQuestions()
-        
+
     }
 
     async getQuestions() {
-        let questions = await getArrayData('http://localhost:1076/api/questions')
+        let questions = await getArrayData('http://localhost:5000/api/questions')
         this.setState({
             questions
         })
@@ -42,7 +42,7 @@ export default class Question extends React.Component {
     render() {
         return (
             <div className='t-question'>
-                
+
                 <div className='t-q-discover'>
                     <h2>Discover</h2>
                     <div className='t-q-d-questions'>
@@ -61,7 +61,7 @@ export default class Question extends React.Component {
                         <h2>Ask</h2>
                     </Input>
                 </div>
-            
+
             </div>
         )
     }

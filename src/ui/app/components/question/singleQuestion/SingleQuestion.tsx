@@ -12,7 +12,7 @@ const SingleQuestion = (props: RouteComponentProps<SingleQuestionoProps>) => {
 
 
     async function fetchQuestion() {
-        const res = await fetch(`http://localhost:1076/api/questions/${questionId}`); //TODO: extract to some environmental variable
+        const res = await fetch(`http://localhost:5000/api/questions/${questionId}`); //TODO: extract to some environmental variable
         res
             .json()
             .then(res => setQuestion(res))
