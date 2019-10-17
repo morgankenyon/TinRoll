@@ -58,7 +58,7 @@ const CreateInput = withFormik({
     async handleSubmit(values) {
         values.UserId = 1
         console.log(values)
-        let status = await postObjectData('http://localhost:1076/api/questions', values)
+        let status = await postObjectData('http://localhost:5000/api/questions', values)
     }
 })(Input)
 
