@@ -58,7 +58,7 @@ namespace TinRoll.Test.Logic.Mappers
                 QuestionId = 10
             };
 
-            var answer = AnswerMapper.ToDb(answerDto);
+            var (answer, _) = AnswerMapper.ToDb(answerDto);
 
             answer.Should().NotBeNull();
             answer.Id.Should().Be(answerDto.Id);

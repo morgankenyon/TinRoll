@@ -22,7 +22,7 @@ namespace TinRoll.Logic.Managers
 
         public async Task<AnswerDto> CreateAnswerAsync(AnswerDto answer)
         {
-            var dbAnswer = answer.ToDb();
+            var (dbAnswer, _) = answer.ToDb();
             var createdAnswer = await _answerRepo.CreateAsync(dbAnswer);
             return createdAnswer.ToDto();
         }
