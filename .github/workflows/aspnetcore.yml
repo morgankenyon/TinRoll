@@ -1,4 +1,4 @@
-name: ASP.NET Core CI
+name: NET_Core_CI
 
 on:
   push:
@@ -12,8 +12,11 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [unbuntu-latest, windows-latest, macOS-latest]
     
     steps:
     - uses: actions/checkout@v1
