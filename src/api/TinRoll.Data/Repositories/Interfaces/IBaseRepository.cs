@@ -11,7 +11,10 @@ namespace TinRoll.Data.Repositories.Interfaces
     {
         Task<T> CreateAsync(T entity);
 
-        Task<T> GetAsync(int id, string includeProperties = null);
+        Task<T> FindAsync(Expression<Func<T, bool>> filter,
+            string includeProperties = null);
+
+        Task<T> GetAsync(int id);
 
         Task<IEnumerable<T>> GetAsync(
             Expression<Func<T, bool>> filter = null,

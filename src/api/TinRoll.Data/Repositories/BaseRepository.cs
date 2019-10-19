@@ -26,14 +26,14 @@ namespace TinRoll.Data.Repositories
             return entity;
         }
 
-        //public async Task<T> GetAsync(int id)
-        //{
-        //    return await context.FindAsync<T>(id);
-        //}
-
-        public async Task<T> GetAsync(int id, string includeProperties = null)
+        public async Task<T> FindAsync(Expression<Func<T, bool>> filter, string includeProperties = null)
         {
             IQueryable<T> query = context.Set<T>();
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
 
             if (includeProperties != null)
             {
@@ -44,7 +44,12 @@ namespace TinRoll.Data.Repositories
                 }
             }
 
-            return await query.FirstOrDefaultAsync(q => q.Id == id);
+            return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<T> GetAsync(int id)
+        {
+            return await context.FindAsync<T>(id);
         }
 
         public async Task<IEnumerable<T>> GetAsync(

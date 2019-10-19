@@ -8,9 +8,9 @@ namespace TinRoll.Data.Entities
 {
     public class Answer : BaseEntity
     {
-        [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public AnswerPost LatestAnswerPost { get; set; }
+        public int LatestAnswerPostId { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
         public int QuestionId { get; set; }

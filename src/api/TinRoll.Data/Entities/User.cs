@@ -8,8 +8,6 @@ namespace TinRoll.Data.Entities
 {
     public class User : BaseEntity
     {
-        [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Email { get; set; }
         public string Username { get; set; }
