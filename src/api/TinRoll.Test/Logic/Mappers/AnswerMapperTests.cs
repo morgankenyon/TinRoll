@@ -33,7 +33,6 @@ namespace TinRoll.Test.Logic.Mappers
             answerDto.Should().NotBeNull();
             answerDto.Id.Should().Be(answer.Id);
             answerDto.CreatedDate.Should().Be(answer.CreatedDate);
-            //answerDto.Content.Should().Be(answer.Content);
             answerDto.UpdatedDate.Should().Be(answer.UpdatedDate);
             answerDto.UserId.Should().Be(answer.UserId);
             answerDto.QuestionId.Should().Be(answer.QuestionId);
@@ -81,6 +80,7 @@ namespace TinRoll.Test.Logic.Mappers
             answer.Question.Should().BeNull();
 
             answer.LatestAnswerPost.Should().NotBeNull();
+            answer.LatestAnswerPost.Answer.Should().NotBeNull();
             answer.LatestAnswerPost.Content.Should().Be("AnswerContent");
         }
 
