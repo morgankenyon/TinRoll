@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TinRoll.Data.Entities;
@@ -32,7 +33,8 @@ namespace TinRoll.Logic.Managers
 
         public async Task<QuestionDto> GetQuestionAsync(int id)
         {
-            var dbQuestion = await _questionRepo.GetAsync(id);
+            Expression<Func<Question, bool>> findById = (q) => q.Id == id;
+            var dbQuestion = await _questionRepo.FindAsync(findById, "LatestQuestionPost");
             return dbQuestion.ToDto();
         }
 

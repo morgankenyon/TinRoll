@@ -14,14 +14,18 @@ namespace TinRoll.Test.Logic.Mappers
         [Fact]
         public void Test_Answer_To_AnswerDto()
         {
+            var dateTime = DateTime.UtcNow;
             var answer = new Answer
             {
                 Id = 1,
-                CreatedDate = DateTime.UtcNow,
-                //Content = "This is content",
-                UpdatedDate = DateTime.UtcNow,
+                CreatedDate = dateTime,
+                UpdatedDate = dateTime,
                 UserId = 10,
-                QuestionId = 10
+                QuestionId = 10,
+                LatestAnswerPost = new AnswerPost
+                {
+                    Content = "AnswerContent"
+                }
             };
 
             var answerDto = AnswerMapper.ToDto(answer);
@@ -33,6 +37,10 @@ namespace TinRoll.Test.Logic.Mappers
             answerDto.UpdatedDate.Should().Be(answer.UpdatedDate);
             answerDto.UserId.Should().Be(answer.UserId);
             answerDto.QuestionId.Should().Be(answer.QuestionId);
+
+            var postDto = answerDto.PostDto;
+            postDto.Should().NotBeNull();
+            postDto.Content.Should().Be("AnswerContent");
         }
 
         [Fact]
@@ -58,12 +66,11 @@ namespace TinRoll.Test.Logic.Mappers
                 QuestionId = 10
             };
 
-            var (answer, _) = AnswerMapper.ToDb(answerDto);
+            var (answer, _) = answerDto.ToDb();
 
             answer.Should().NotBeNull();
             answer.Id.Should().Be(answerDto.Id);
             answer.CreatedDate.Should().Be(answerDto.CreatedDate);
-            //answer.Content.Should().Be(answerDto.Content);
             answer.UpdatedDate.Should().Be(answerDto.UpdatedDate);
             answer.UserId.Should().Be(answerDto.UserId);
             answer.QuestionId.Should().Be(answerDto.QuestionId);
@@ -78,9 +85,10 @@ namespace TinRoll.Test.Logic.Mappers
 
             AnswerDto answerDto = null;
 
-            var answer = AnswerMapper.ToDb(answerDto);
+            var (answer, answerPost) = AnswerMapper.ToDb(answerDto);
 
             answer.Should().BeNull();
+            answerPost.Should().BeNull();
         }
     }
 }

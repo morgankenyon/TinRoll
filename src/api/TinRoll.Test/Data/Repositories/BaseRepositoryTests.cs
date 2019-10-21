@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -17,6 +18,18 @@ namespace TinRoll.Test.Data.Repositories
 
         private List<Question> GetQuestions()
         {
+            var questionPost1 = new QuestionPost
+            {
+                Content = "Content1"
+            };
+            var questionPost2 = new QuestionPost
+            {
+                Content = "Content2"
+            };
+            var questionPost3 = new QuestionPost
+            {
+                Content = "Content3"
+            };
             return new List<Question>
             {
                 new Question
@@ -25,11 +38,9 @@ namespace TinRoll.Test.Data.Repositories
                     Title = "Question1",
                     QuestionPosts = new List<QuestionPost>
                     {
-                        new QuestionPost
-                        {
-                            Content = "Content1"
-                        }
-                    }
+                        questionPost1
+                    },
+                    LatestQuestionPost = questionPost1
                 },
                 new Question
                 {
@@ -37,11 +48,9 @@ namespace TinRoll.Test.Data.Repositories
                     Title = "Question2",
                     QuestionPosts = new List<QuestionPost>
                     {
-                        new QuestionPost
-                        {
-                            Content = "Content2"
-                        }
-                    }
+                        questionPost2
+                    },
+                    LatestQuestionPost = questionPost2
                 },
                 new Question
                 {
@@ -49,11 +58,9 @@ namespace TinRoll.Test.Data.Repositories
                     Title = "Question3",
                     QuestionPosts = new List<QuestionPost>
                     {
-                        new QuestionPost
-                        {
-                            Content = "Content3"
-                        }
-                    }
+                        questionPost3
+                    },
+                    LatestQuestionPost = questionPost3
                 }
             };
         }
@@ -126,15 +133,15 @@ namespace TinRoll.Test.Data.Repositories
             }
 
             Question dbQuestion = null;
+            Expression<Func<Question, bool>> findById = (q) => q.Id == 2;
             using (var context = new TinRollContext(options))
             {
                 var baseRepo = new BaseRepository<Question>(context);
-                dbQuestion = await baseRepo.GetAsync(2, "QuestionPosts");
+                dbQuestion = await baseRepo.FindAsync(findById, "QuestionPosts");
             }
 
             dbQuestion.Should().NotBeNull();
-            dbQuestion.QuestionPosts.Should().NotBeNull();
-            dbQuestion.QuestionPosts.Count().Should().Be(1);
+            dbQuestion.LatestQuestionPost.Should().NotBeNull();
         }
         
         [Fact]

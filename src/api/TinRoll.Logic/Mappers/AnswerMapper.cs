@@ -13,11 +13,11 @@ namespace TinRoll.Logic.Mappers
             new AnswerDto
             {
                 Id = answer.Id,
-                //Content = answer.Content,
                 CreatedDate = answer.CreatedDate,
                 UpdatedDate = answer.UpdatedDate,
                 QuestionId = answer.QuestionId,
-                UserId = answer.UserId
+                UserId = answer.UserId,
+                PostDto = PostMapper.ToDto(answer.LatestAnswerPost)
             };
 
         public static (Answer, AnswerPost) ToDb(this AnswerDto answerDto) => answerDto == null ? (null,null) :
@@ -29,17 +29,14 @@ namespace TinRoll.Logic.Mappers
                 QuestionId = answerDto.QuestionId,
                 UserId = answerDto.UserId
             },
-            answerDto.PostDto.ToDb(answerDto.Id));
+            answerDto.PostDto.ToDb(answerDto));
 
-        private static AnswerPost ToDb(this PostDto postDto, int answerId) => postDto == null ? null :
+        internal static AnswerPost ToDb(this PostDto postDto, AnswerDto answerDto) => postDto == null ? null :
             new AnswerPost
             {
-                Id = postDto.Id,
-                AnswerId = answerId,
+                AnswerId = answerDto.Id,
                 Content =  postDto.Content,
-                CreatedDate = postDto.CreatedDate, //should I remove these fields so they never get updated?
-                UpdatedDate = postDto.UpdatedDate,
-                UserId = postDto.UserId
+                UserId = answerDto.UserId
             };
     }
 }

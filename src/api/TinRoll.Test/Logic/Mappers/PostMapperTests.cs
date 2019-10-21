@@ -28,11 +28,7 @@ namespace TinRoll.Test.Logic.Mappers
 
             var dto = questionPost.ToDto();
 
-            dto.Id.Should().Be(1);
             dto.Content.Should().Be("This is the content");
-            dto.CreatedDate.Should().Be(testDate);
-            dto.UpdatedDate.Should().Be(testDate);
-            dto.UserId.Should().Be(1);
         }
 
         [Fact]
@@ -52,11 +48,7 @@ namespace TinRoll.Test.Logic.Mappers
 
             var dto = answerPost.ToDto();
 
-            dto.Id.Should().Be(1);
             dto.Content.Should().Be("This is the content");
-            dto.CreatedDate.Should().Be(testDate);
-            dto.UpdatedDate.Should().Be(testDate);
-            dto.UserId.Should().Be(1);
         }
     }
 }

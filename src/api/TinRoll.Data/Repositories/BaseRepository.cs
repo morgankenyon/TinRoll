@@ -44,7 +44,14 @@ namespace TinRoll.Data.Repositories
                 }
             }
 
-            return await query.FirstOrDefaultAsync();
+            try
+            {
+                return await query.FirstOrDefaultAsync();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         public async Task<T> GetAsync(int id)
