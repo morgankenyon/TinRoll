@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using TinRoll.Data.Enums;
 
 namespace TinRoll.Data.Entities
 {

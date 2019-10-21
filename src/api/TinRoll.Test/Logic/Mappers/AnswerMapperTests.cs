@@ -60,13 +60,16 @@ namespace TinRoll.Test.Logic.Mappers
             {
                 Id = 1,
                 CreatedDate = DateTime.UtcNow,
-                //Content = "This is content",
                 UpdatedDate = DateTime.UtcNow,
                 UserId = 10,
-                QuestionId = 10
+                QuestionId = 10,
+                PostDto = new PostDto
+                {
+                    Content = "AnswerContent"
+                }
             };
 
-            var (answer, _) = answerDto.ToDb();
+            var answer = answerDto.ToDb();
 
             answer.Should().NotBeNull();
             answer.Id.Should().Be(answerDto.Id);
@@ -77,6 +80,8 @@ namespace TinRoll.Test.Logic.Mappers
             answer.User.Should().BeNull();
             answer.Question.Should().BeNull();
 
+            answer.LatestAnswerPost.Should().NotBeNull();
+            answer.LatestAnswerPost.Content.Should().Be("AnswerContent");
         }
 
         [Fact]
@@ -85,10 +90,9 @@ namespace TinRoll.Test.Logic.Mappers
 
             AnswerDto answerDto = null;
 
-            var (answer, answerPost) = AnswerMapper.ToDb(answerDto);
+            var answer = AnswerMapper.ToDb(answerDto);
 
             answer.Should().BeNull();
-            answerPost.Should().BeNull();
         }
     }
 }

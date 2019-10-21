@@ -10,10 +10,10 @@ namespace TinRoll.Logic.Mappers
             {
                 Id = question.Id,
                 Title = question.Title,
-                //Content = question.Content,
                 CreatedDate = question.CreatedDate,
                 UpdatedDate = question.UpdatedDate,
-                UserId = question.UserId
+                UserId = question.UserId,
+                PostDto = question.LatestQuestionPost.ToDto()
             };
 
         public static Question ToDb(this QuestionDto questionDto) => questionDto == null ? null :
@@ -21,17 +21,37 @@ namespace TinRoll.Logic.Mappers
             {
                 Id = questionDto.Id,
                 Title = questionDto.Title,
-                //Content = questionDto.Content,
                 CreatedDate = questionDto.CreatedDate,
                 UpdatedDate = questionDto.UpdatedDate,
                 UserId = questionDto.UserId
             };
 
-        public static Question ToDb(this CreateQuestionDto questionDto) => questionDto == null ? null : new Question
+        public static Question ToDb(this CreateQuestionDto questionDto)
+        {
+            if (questionDto == null)
+            {
+                return null;
+            }
+
+            var newQuestion = new Question
             {
                 Title = questionDto.Title,
-                //Content = questionDto.Content,
-                UserId = questionDto.UserId
+                UserId = questionDto.UserId,                
+            };
+
+            var newQuestionPost = ToDb(questionDto.Content, newQuestion);
+
+            newQuestion.LatestQuestionPost = newQuestionPost;
+
+            return newQuestion;
+        }
+
+        internal static QuestionPost ToDb(string content, Question question) => content == null ? null :
+            new QuestionPost
+            {
+                Question = question,
+                Content = content,
+                UserId = question.UserId
             };
     }
 }

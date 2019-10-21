@@ -20,16 +20,16 @@ namespace TinRoll.Logic.Mappers
                 PostDto = PostMapper.ToDto(answer.LatestAnswerPost)
             };
 
-        public static (Answer, AnswerPost) ToDb(this AnswerDto answerDto) => answerDto == null ? (null,null) :
-            (new Answer
+        public static Answer ToDb(this AnswerDto answerDto) => answerDto == null ? null :
+            new Answer
             {
                 Id = answerDto.Id,
                 CreatedDate = answerDto.CreatedDate,
                 UpdatedDate = answerDto.UpdatedDate,
                 QuestionId = answerDto.QuestionId,
-                UserId = answerDto.UserId
-            },
-            answerDto.PostDto.ToDb(answerDto));
+                UserId = answerDto.UserId,
+                LatestAnswerPost = answerDto.PostDto.ToDb(answerDto)
+            };
 
         internal static AnswerPost ToDb(this PostDto postDto, AnswerDto answerDto) => postDto == null ? null :
             new AnswerPost
