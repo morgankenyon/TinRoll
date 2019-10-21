@@ -29,12 +29,6 @@ namespace TinRoll.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("LatestAnswerPostId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LatestAnswerPostId1")
-                        .HasColumnType("int");
-
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
@@ -45,8 +39,6 @@ namespace TinRoll.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LatestAnswerPostId1");
 
                     b.HasIndex("QuestionId");
 
@@ -96,12 +88,6 @@ namespace TinRoll.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("LatestQuestionPostId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LatestQuestionPostId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
@@ -112,8 +98,6 @@ namespace TinRoll.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LatestQuestionPostId1");
 
                     b.HasIndex("UserId");
 
@@ -229,10 +213,6 @@ namespace TinRoll.Data.Migrations
 
             modelBuilder.Entity("TinRoll.Data.Entities.Answer", b =>
                 {
-                    b.HasOne("TinRoll.Data.Entities.AnswerPost", "LatestAnswerPost")
-                        .WithMany()
-                        .HasForeignKey("LatestAnswerPostId1");
-
                     b.HasOne("TinRoll.Data.Entities.Question", "Question")
                         .WithMany("Answers")
                         .HasForeignKey("QuestionId")
@@ -263,10 +243,6 @@ namespace TinRoll.Data.Migrations
 
             modelBuilder.Entity("TinRoll.Data.Entities.Question", b =>
                 {
-                    b.HasOne("TinRoll.Data.Entities.QuestionPost", "LatestQuestionPost")
-                        .WithMany()
-                        .HasForeignKey("LatestQuestionPostId1");
-
                     b.HasOne("TinRoll.Data.Entities.User", "User")
                         .WithMany("Questions")
                         .HasForeignKey("UserId")
