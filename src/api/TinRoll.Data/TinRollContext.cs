@@ -39,27 +39,6 @@ namespace TinRoll.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-            //modelBuilder.Entity<Question>()
-            //    .HasOne(q => q.LatestQuestionPost)
-            //    .WithOne(qp => qp.Question)
-            //    .HasForeignKey<Question>(q => q.LatestQuestionPostId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Question>()
-                .HasMany(q => q.QuestionPosts)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<QuestionPost>()
-                .HasOne(qp => qp.Question);
-
-            //modelBuilder.Entity<Answer>()
-            //    .HasOne(a => a.LatestAnswerPost)
-            //    .WithOne(ap => ap.Answer)
-            //    .HasForeignKey<Answer>(q => q.LatestAnswerPostId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
             modelBuilder.Entity<Answer>()
                 .HasOne(a => a.Question)
                 .WithMany(q => q.Answers)
@@ -71,26 +50,6 @@ namespace TinRoll.Data
                 .WithMany(u => u.Answers)
                 .HasForeignKey(a => a.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Answer>()
-                .HasMany(a => a.AnswerPosts)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<AnswerPost>()
-                .HasOne(ap => ap.Answer);
-
-            //modelBuilder.Entity<Answer>()
-            //    .HasMany(a => a.AnswerPosts)
-            //    .WithOne(ap => ap.Answer)
-            //    .HasForeignKey(a => a.AnswerId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-            //modelBuilder.Entity<Question>()
-            //    .HasMany(q => q.QuestionPosts)
-            //    .WithOne(qp => qp.Question)
-            //    .HasForeignKey(q => q.QuestionId)
-            //    .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<QuestionTag>()
                 .HasKey(qt => new {
@@ -120,7 +79,5 @@ namespace TinRoll.Data
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<QuestionTag> QuestionTags { get; set; }
-        public DbSet<QuestionPost> QuestionPosts { get; set; }
-        public DbSet<AnswerPost> AnswerPosts { get; set; }
     }
 }

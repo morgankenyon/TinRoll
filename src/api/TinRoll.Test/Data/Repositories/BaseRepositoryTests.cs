@@ -18,49 +18,44 @@ namespace TinRoll.Test.Data.Repositories
 
         private List<Question> GetQuestions()
         {
-            var questionPost1 = new QuestionPost
-            {
-                Content = "Content1"
-            };
-            var questionPost2 = new QuestionPost
-            {
-                Content = "Content2"
-            };
-            var questionPost3 = new QuestionPost
-            {
-                Content = "Content3"
-            };
             return new List<Question>
             {
                 new Question
                 {
                     UserId = 1,
                     Title = "Question1",
-                    QuestionPosts = new List<QuestionPost>
-                    {
-                        questionPost1
-                    },
-                    LatestQuestionPost = questionPost1
+                    Content = "Content1"
                 },
                 new Question
                 {
                     UserId = 2,
                     Title = "Question2",
-                    QuestionPosts = new List<QuestionPost>
-                    {
-                        questionPost2
-                    },
-                    LatestQuestionPost = questionPost2
+                    Content = "Content2"
                 },
                 new Question
                 {
                     UserId = 3,
                     Title = "Question3",
-                    QuestionPosts = new List<QuestionPost>
-                    {
-                        questionPost3
-                    },
-                    LatestQuestionPost = questionPost3
+                    Content = "Content3"
+                }
+            };
+        }
+
+        private List<User> GetUsers()
+        {
+            return new List<User>
+            {
+                new User
+                {
+                    Email = "user1Email"
+                },
+                new User
+                {
+                    Email = "user2Email"
+                },
+                new User
+                {
+                    Email = "user3Email"
                 }
             };
         }
@@ -81,15 +76,11 @@ namespace TinRoll.Test.Data.Repositories
             dbQuestion.Should().NotBeNull();
             dbQuestion.Id.Should().Be(1);
             dbQuestion.UserId.Should().Be(1);
-            dbQuestion.QuestionPosts.Should().NotBeEmpty();
-            dbQuestion.QuestionPosts.First().Id.Should().Be(1);
+            dbQuestion.Content.Should().Be("Content1");
             using (var context = new TinRollContext(options))
             {
                 var questionCount = await context.Questions.CountAsync();
                 questionCount.Should().Be(1);
-
-                var questionPostsCount = await context.QuestionPosts.CountAsync();
-                questionPostsCount.Should().Be(1);
             }
         }
 
@@ -125,10 +116,12 @@ namespace TinRoll.Test.Data.Repositories
         {
             var options = RepositoryHelpers.BuildInMemoryDatabaseOptions("Base.GetAsyncByIdInclude");
             var questions = GetQuestions();
+            var users = GetUsers();
 
             using (var context = new TinRollContext(options))
             {
                 context.Questions.AddRange(questions);
+                context.Users.AddRange(users);
                 context.SaveChanges();
             }
 
@@ -137,11 +130,11 @@ namespace TinRoll.Test.Data.Repositories
             using (var context = new TinRollContext(options))
             {
                 var baseRepo = new BaseRepository<Question>(context);
-                dbQuestion = await baseRepo.FindAsync(findById, "QuestionPosts");
+                dbQuestion = await baseRepo.FindAsync(findById, "User");
             }
 
             dbQuestion.Should().NotBeNull();
-            dbQuestion.LatestQuestionPost.Should().NotBeNull();
+            dbQuestion.User.Should().NotBeNull();
         }
         
         [Fact]
@@ -172,10 +165,12 @@ namespace TinRoll.Test.Data.Repositories
         {
             var options = RepositoryHelpers.BuildInMemoryDatabaseOptions("Base.GetAsyncInclude");
             var questions = GetQuestions();
+            var users = GetUsers();
 
             using (var context = new TinRollContext(options))
             {
                 context.Questions.AddRange(questions);
+                context.Users.AddRange(users);
                 context.SaveChanges();
             }
 
@@ -183,12 +178,12 @@ namespace TinRoll.Test.Data.Repositories
             using (var context = new TinRollContext(options))
             {
                 var baseRepo = new BaseRepository<Question>(context);
-                dbQuestions = await baseRepo.GetAsync(includeProperties: "QuestionPosts");
+                dbQuestions = await baseRepo.GetAsync(includeProperties: "User");
             }
 
             dbQuestions.Should().NotBeNull();
             dbQuestions.Count().Should().Be(3);
-            dbQuestions.All(dq => dq.QuestionPosts.Count == 1).Should().BeTrue();
+            dbQuestions.All(q => q.User != null).Should().BeTrue();
 
         }
     }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -46,17 +45,12 @@ namespace TinRoll.Test.Logic.Managers
         {
             var mockAnswer = new Answer
             {
-                Id = 1,
-                LatestAnswerPost = new AnswerPost
-                {
-                    Content = "Cool content"
-                }
+                Id = 1
             };
 
             var mockAnswerRepo = new Mock<IBaseRepository<Answer>>();
 
-            mockAnswerRepo.Setup(a => a.FindAsync(
-                It.IsAny<Expression<Func<Answer, bool>>>(), It.IsAny<string>()))
+            mockAnswerRepo.Setup(a => a.GetAsync(It.IsAny<int>()))
                 .ReturnsAsync(mockAnswer);
 
             var answerManager = new AnswerManager(mockAnswerRepo.Object);
@@ -65,9 +59,7 @@ namespace TinRoll.Test.Logic.Managers
 
             answer.Should().NotBeNull();
             answer.Id.Should().Be(1);
-            answer.PostDto.Should().NotBeNull();
-            mockAnswerRepo.Verify(u => u.FindAsync(
-                It.IsAny<Expression<Func<Answer, bool>>>(), It.IsAny<string>()), Times.Once);
+            mockAnswerRepo.Verify(u => u.GetAsync(It.IsAny<int>()), Times.Once);
         }
 
         [Fact]

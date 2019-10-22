@@ -58,8 +58,7 @@ namespace TinRoll.Test.Logic.Managers
             var mockQuestionRepo = new Mock<IBaseRepository<Question>>();
             var mockCreateQuestionRepo = new Mock<ICreateQuestionRepository>();
 
-            mockQuestionRepo.Setup(u => u.FindAsync(
-                It.IsAny<Expression<Func<Question, bool>>>(), It.IsAny<string>()))
+            mockQuestionRepo.Setup(u => u.GetAsync(It.Is<int>(p => p == 1)))
                 .ReturnsAsync(mockQuestion);
 
             var questionManager = new QuestionManager(mockQuestionRepo.Object, mockCreateQuestionRepo.Object);
@@ -68,8 +67,7 @@ namespace TinRoll.Test.Logic.Managers
 
             question.Should().NotBeNull();
             question.Id.Should().Be(1);
-            mockQuestionRepo.Verify(u => u.FindAsync(It.IsAny<Expression<Func<Question, bool>>>(), 
-                It.IsAny<string>()), Times.Once);
+            mockQuestionRepo.Verify(u => u.GetAsync(It.Is<int>(p => p == 1)), Times.Once);
         }
 
         [Fact]

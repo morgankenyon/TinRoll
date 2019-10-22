@@ -30,8 +30,7 @@ namespace TinRoll.Logic.Managers
 
         public async Task<AnswerDto> GetAnswerAsync(int id)
         {
-            Expression<Func<Answer, bool>> findById = (a) => a.Id == id;
-            var dbAnswer = await _answerRepo.FindAsync(findById, "LatestAnswerPost");
+            var dbAnswer = await _answerRepo.GetAsync(id);
             return dbAnswer.ToDto();
         }
 

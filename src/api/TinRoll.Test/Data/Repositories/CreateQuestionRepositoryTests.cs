@@ -21,7 +21,7 @@ namespace TinRoll.Test.Data.Repositories
             {
                 Title = "Unit Test Question",
                 UserId = 1,
-                //Content = "Question Text"
+                Content = "Question Text"
             };
             var tag = new Tag
             {
@@ -52,7 +52,7 @@ namespace TinRoll.Test.Data.Repositories
 
             questions.Should().HaveCount(1);
             questions.First().Id.Should().Be(1);
-            //questions.First().Content.Should().Be("Question Text");
+            questions.First().Content.Should().Be("Question Text");
 
             questionTags.Should().HaveCount(1);
             questionTags.First().TagId.Should().Be(1);

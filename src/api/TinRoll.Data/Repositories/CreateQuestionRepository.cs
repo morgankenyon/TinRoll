@@ -16,7 +16,7 @@ namespace TinRoll.Data.Repositories
             this.context = context;
         }
 
-        public async Task<Question> CreateQuestionAsync(Question question, QuestionPost questionPost, IEnumerable<int> TagIds)
+        public async Task<Question> CreateQuestionAsync(Question question, IEnumerable<int> TagIds)
         {
             context.Questions.Add(question);
 
@@ -29,8 +29,6 @@ namespace TinRoll.Data.Repositories
                     UserId = question.UserId
                 });
             }
-
-            context.QuestionPosts.Add(questionPost);
 
             await context.SaveChangesAsync();
 

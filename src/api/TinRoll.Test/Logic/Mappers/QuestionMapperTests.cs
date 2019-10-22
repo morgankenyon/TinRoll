@@ -18,13 +18,10 @@ namespace TinRoll.Test.Logic.Mappers
             {
                 Id = 1,
                 Title = "Question Title",
+                Content = "Question Text",
                 CreatedDate = DateTime.UtcNow,
                 UpdatedDate = DateTime.UtcNow,
-                UserId = 1,
-                LatestQuestionPost = new QuestionPost
-                {
-                    Content = "Hello"
-                }
+                UserId = 1
             };
 
             var questionDto = QuestionMapper.ToDto(question);
@@ -32,12 +29,10 @@ namespace TinRoll.Test.Logic.Mappers
             questionDto.Should().NotBeNull();
             questionDto.Id.Should().Be(question.Id);
             questionDto.Title.Should().Be(question.Title);
+            questionDto.Content.Should().Be(question.Content);
             questionDto.CreatedDate.Should().Be(question.CreatedDate);
             questionDto.UpdatedDate.Should().Be(question.UpdatedDate);
             questionDto.UserId.Should().Be(question.UserId);
-
-            questionDto.PostDto.Should().NotBeNull();
-            questionDto.PostDto.Content.Should().Be("Hello");
         }
 
         [Fact]
@@ -57,6 +52,7 @@ namespace TinRoll.Test.Logic.Mappers
             {
                 Id = 1,
                 Title = "Question Title",
+                Content = "Question Text",
                 CreatedDate = DateTime.UtcNow,
                 UpdatedDate = DateTime.UtcNow,
                 UserId = 1
@@ -67,6 +63,7 @@ namespace TinRoll.Test.Logic.Mappers
             question.Should().NotBeNull();
             question.Id.Should().Be(questionDto.Id);
             question.Title.Should().Be(questionDto.Title);
+            question.Content.Should().Be(questionDto.Content);
             question.CreatedDate.Should().Be(questionDto.CreatedDate);
             question.UpdatedDate.Should().Be(questionDto.UpdatedDate);
             question.UserId.Should().Be(questionDto.UserId);
@@ -96,6 +93,7 @@ namespace TinRoll.Test.Logic.Mappers
 
             var q = QuestionMapper.ToDb(cdto);
 
+            q.Content.Should().Be(cdto.Content);
             q.Title.Should().Be(cdto.Title);
             q.UserId.Should().Be(cdto.UserId);
 
@@ -105,8 +103,6 @@ namespace TinRoll.Test.Logic.Mappers
             q.CreatedDate.Should().Be(DateTime.MinValue);
             q.User.Should().BeNull();
             q.Answers.Should().BeNull();
-            q.LatestQuestionPost.Should().NotBeNull();
-            q.LatestQuestionPost.Content.Should().Be("thie");
         }
 
         [Fact]

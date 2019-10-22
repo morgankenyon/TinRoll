@@ -14,18 +14,14 @@ namespace TinRoll.Test.Logic.Mappers
         [Fact]
         public void Test_Answer_To_AnswerDto()
         {
-            var dateTime = DateTime.UtcNow;
             var answer = new Answer
             {
                 Id = 1,
-                CreatedDate = dateTime,
-                UpdatedDate = dateTime,
+                CreatedDate = DateTime.UtcNow,
+                Content = "This is content",
+                UpdatedDate = DateTime.UtcNow,
                 UserId = 10,
-                QuestionId = 10,
-                LatestAnswerPost = new AnswerPost
-                {
-                    Content = "AnswerContent"
-                }
+                QuestionId = 10
             };
 
             var answerDto = AnswerMapper.ToDto(answer);
@@ -33,13 +29,10 @@ namespace TinRoll.Test.Logic.Mappers
             answerDto.Should().NotBeNull();
             answerDto.Id.Should().Be(answer.Id);
             answerDto.CreatedDate.Should().Be(answer.CreatedDate);
+            answerDto.Content.Should().Be(answer.Content);
             answerDto.UpdatedDate.Should().Be(answer.UpdatedDate);
             answerDto.UserId.Should().Be(answer.UserId);
             answerDto.QuestionId.Should().Be(answer.QuestionId);
-
-            var postDto = answerDto.PostDto;
-            postDto.Should().NotBeNull();
-            postDto.Content.Should().Be("AnswerContent");
         }
 
         [Fact]
@@ -59,29 +52,24 @@ namespace TinRoll.Test.Logic.Mappers
             {
                 Id = 1,
                 CreatedDate = DateTime.UtcNow,
+                Content = "This is content",
                 UpdatedDate = DateTime.UtcNow,
                 UserId = 10,
-                QuestionId = 10,
-                PostDto = new PostDto
-                {
-                    Content = "AnswerContent"
-                }
+                QuestionId = 10
             };
 
-            var answer = answerDto.ToDb();
+            var answer = AnswerMapper.ToDb(answerDto);
 
             answer.Should().NotBeNull();
             answer.Id.Should().Be(answerDto.Id);
             answer.CreatedDate.Should().Be(answerDto.CreatedDate);
+            answer.Content.Should().Be(answerDto.Content);
             answer.UpdatedDate.Should().Be(answerDto.UpdatedDate);
             answer.UserId.Should().Be(answerDto.UserId);
             answer.QuestionId.Should().Be(answerDto.QuestionId);
             answer.User.Should().BeNull();
             answer.Question.Should().BeNull();
 
-            answer.LatestAnswerPost.Should().NotBeNull();
-            answer.LatestAnswerPost.Answer.Should().NotBeNull();
-            answer.LatestAnswerPost.Content.Should().Be("AnswerContent");
         }
 
         [Fact]

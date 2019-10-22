@@ -9,12 +9,10 @@ namespace TinRoll.Data.Entities
     public class Answer : BaseEntity
     {
         public int Id { get; set; }
-        //public AnswerPost LatestAnswerPost { get; set; }
-        //public int LatestAnswerPostId { get; set; }
+        public string Content { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
         public int QuestionId { get; set; }
         public Question Question { get; set; }
-        public ICollection<AnswerPost> AnswerPosts { get; set; }
     }
 }
