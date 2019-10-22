@@ -59,7 +59,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Question",
@@ -98,15 +99,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"Title\": \"How does this tutorial work again?\",\n\t\"Content\": \"Can you explain everything again? It was confusing the first time.\",\n\t\"UserId\": 1\n}"
+							"raw": "{\n\t\"Title\": \"How does this tutorial work again?\",\n\t\"Content\": \"Can you explain everything again? It was confusing the first time.\",\n\t\"UserId\": 1,\n\t\"TagIds\": [1,2,3]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:1076/api/questions",
+							"raw": "http://localhost:5000/api/questions",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "1076",
+							"port": "5000",
 							"path": [
 								"api",
 								"questions"
@@ -136,7 +137,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Answer",
@@ -158,12 +160,12 @@
 							"raw": "{\n\t\"Content\": \"This is the body of the answer\",\n\t\"QuestionId\": 1,\n\t\"UserId\": 1\n}"
 						},
 						"url": {
-							"raw": "http://localhost:1076/api/answers",
+							"raw": "http://localhost:5000/api/answers",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "1076",
+							"port": "5000",
 							"path": [
 								"api",
 								"answers"
@@ -199,7 +201,45 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Tag",
+			"item": [
+				{
+					"name": "Create Tag",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"c\",\r\n  \"userId\": 1\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/tags",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"tags"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -223,5 +263,6 @@
 				]
 			}
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }
