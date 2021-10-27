@@ -1,5 +1,0 @@
-//Add Migration
-Add-Migration Initial -Context TinRoll.Data.TinRollContext
-
-//Update Database
-Update-Database -Context TinRoll.Data.TinRollContext

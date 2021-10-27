@@ -1,1 +1,0 @@
-dotnet run --project .\TinRoll.Api\TinRoll.Api.csproj
