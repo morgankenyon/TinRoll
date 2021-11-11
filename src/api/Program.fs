@@ -1,4 +1,3 @@
-open System
 open FSharp.Control.Tasks
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Hosting
@@ -6,27 +5,22 @@ open Microsoft.AspNetCore.Http
 open Microsoft.Extensions.Hosting
 open Microsoft.Extensions.DependencyInjection
 open Giraffe
-
-type Model =
-    { Message : string }
-
-type User = 
-    { Id : Guid; FirstName : string; LastName : string; UserName : string }
-
-
-let someHandler =
-    fun (next : HttpFunc) (ctx : HttpContext) ->
-        task {
-            let thisisaname = { Message = "hello from Giraffe" }
-            return! ctx.WriteJsonAsync thisisaname
-        }
+open Db
+open Shared
 
 let getUsersHandler =
     fun (next : HttpFunc) (ctx : HttpContext) ->
         task {
-            let user = { Id = Guid.NewGuid(); UserName = "morgankenyon"; FirstName = "Morgan"; LastName = "Kenyon" }
-            let users = [user]
-            return! ctx.WriteJsonAsync users            
+            let! users = getUsers
+            return! ctx.WriteJsonAsync users
+        }
+
+let addUserHandler = 
+    fun (next : HttpFunc) (ctx : HttpContext) ->
+        task {
+            let! newPerson = ctx.BindJsonAsync<NewPersonRequest>()
+            let! createdUser = insertUser newPerson
+            return! ctx.WriteJsonAsync createdUser
         }
 
 let usersRoutes = 
@@ -35,6 +29,10 @@ let usersRoutes =
             choose [
                 route "" >=> getUsersHandler
             ]
+        POST >=>
+            choose [
+                route "" >=> addUserHandler
+            ]
     ]
 
 
@@ -42,7 +40,6 @@ let webApp =
     choose [
         subRoute "/users" usersRoutes
         route "/ping"   >=> text "pong"
-        route "/message" >=> someHandler 
         route "/"       >=> text "root of project" 
     ]
 
