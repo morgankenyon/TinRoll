@@ -1,10 +1,8 @@
-﻿namespace Shared
+﻿module Shared
+    open System
 
-type NewPersonRequest = 
-    { FirstName : string; LastName : string; UserName : string }
+    type NewUserRequest = 
+        { FirstName : string; LastName : string; Username : string; Password : string }
 
-type NewPerson = 
-    { firstname : string; lastname : string; username : string }
-
-type Person = 
-    { id : int; firstname : string; lastname : string; username : string }
+    type User = 
+        { id : int; FirstName : string; LastName : string; Username : string; CreatedDate : DateTime; UpdateDate : DateTime }

@@ -5,29 +5,45 @@ open Microsoft.AspNetCore.Http
 open Microsoft.Extensions.Hosting
 open Microsoft.Extensions.DependencyInjection
 open Giraffe
-open Db
 open Shared
+open Microsoft.Extensions.Logging
+open Models
 
 let getUsersHandler =
     fun (next : HttpFunc) (ctx : HttpContext) ->
         task {
-            let! users = getUsers
-            return! ctx.WriteJsonAsync users
+            let logger = ctx.GetService<ILogger<User>>()
+            
+            let! userResult = Db.getUsers logger
+
+            return! 
+                match userResult with
+                | Ok users -> ctx.WriteJsonAsync users
+                | Error errMsg -> ctx.WriteJsonAsync { Error = errMsg }
         }
 
 let addUserHandler = 
     fun (next : HttpFunc) (ctx : HttpContext) ->
         task {
-            let! newPerson = ctx.BindJsonAsync<NewPersonRequest>()
-            let! createdUser = insertUser newPerson
-            return! ctx.WriteJsonAsync createdUser
+            let! newUserRequest = ctx.BindJsonAsync<NewUserRequest>()
+
+            let newUser = Mapper.toNewUser newUserRequest
+
+            let logger = ctx.GetService<ILogger<User>>();
+
+            let! createUserResult = Db.insertUser logger newUser
+
+            return
+                match createUserResult with
+                | Ok obj -> Successful.CREATED obj
+                | Error errMsg -> setStatusCode 500
         }
 
 let usersRoutes = 
     choose [
         GET >=> 
             choose [
-                route "" >=> getUsersHandler
+                route "" >=> warbler (fun _ -> getUsersHandler)
             ]
         POST >=>
             choose [
@@ -35,12 +51,15 @@ let usersRoutes =
             ]
     ]
 
+let time() = System.DateTime.Now.ToString()
 
 let webApp =
     choose [
         subRoute "/users" usersRoutes
         route "/ping"   >=> text "pong"
-        route "/"       >=> text "root of project" 
+        route "/"       >=> text "root of project"
+        route "/normal"  >=> text (time())
+        route "/warbler" >=> warbler (fun _ -> text (time()))
     ]
 
 
@@ -51,6 +70,19 @@ let configureApp (app : IApplicationBuilder) =
 let configureServices (services : IServiceCollection) =
     // Add Giraffe dependencies
     services.AddGiraffe() |> ignore
+    services.AddLogging() |> ignore
+
+let configureLogging (builder : ILoggingBuilder) =
+    // Set a logging filter (optional)
+    //let filter (l : LogLevel) = l.Equals LogLevel.Error
+
+    // Configure the logging factory
+    builder.ClearProviders()
+           .AddConsole()      
+           .AddDebug()        
+
+           // Add additional loggers if wanted...
+    |> ignore
 
 [<EntryPoint>]
 let main _ =
@@ -60,6 +92,7 @@ let main _ =
                 webHostBuilder
                     .Configure(configureApp)
                     .ConfigureServices(configureServices)
+                    .ConfigureLogging(configureLogging)
                     |> ignore)
         .Build()
         .Run()
